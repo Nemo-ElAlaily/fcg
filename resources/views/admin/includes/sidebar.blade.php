@@ -1,0 +1,134 @@
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="#" class="brand-link text-center">
+        <img class="w-50" src="{{ $site_settings->logo_path }}" alt="Company Logo">
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="{{ Auth::user() -> avatar_path }}" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block">{{ Auth::user() -> full_name }}</a>
+            </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
+                    with font-awesome or any other icon font library -->
+                <li class="nav-item">
+                    <a href="{{ route('admin.index')}}" class="nav-link {{ Route::currentRouteName() == 'admin.index' ? 'active' : '' }}">
+                        <i class="fas fa-tachometer-alt nav-icon"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.settings.site.show', 1) }}"
+                        class="nav-link {{ Route::currentRouteName() == 'admin.settings.site.show' ? 'active' : '' }}">
+                        <i class="fas fa-cogs nav-icon"></i>
+                        <p>Site Settings</p>
+                    </a>
+                </li>
+
+                <!-- <li class="nav-item">
+                    <a href="{{ route('admin.pages.index') }}"
+                        class="nav-link {{ Route::currentRouteName() == 'admin.pages.index' ? 'active' : '' }}">
+                        <i class="fa fa-newspaper nav-icon"></i>
+                        <p>Pages</p>
+                    </a>
+                </li> -->
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.branches.index') }}"
+                        class="nav-link {{ Route::currentRouteName() == 'admin.branches.index' ? 'active' : '' }}">
+                        <i class="fa fa-code-branch nav-icon"></i>
+                        <p>Branches</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.categories.index') }}"
+                        class="nav-link {{ Route::currentRouteName() == 'admin.categories.index' ? 'active' : '' }}">
+                        <i class="fa fa-hashtag nav-icon"></i>
+                        <p>Categories</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.certificates.index') }}"
+                        class="nav-link {{ Route::currentRouteName() == 'admin.certificates.index' ? 'active' : '' }}">
+                        <i class="fa fa-certificate nav-icon"></i>
+                        <p>Certificates</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.clients.index') }}"
+                        class="nav-link {{ Route::currentRouteName() == 'admin.clients.index' ? 'active' : '' }}">
+                        <i class="fa fa-mug-hot nav-icon"></i>
+                        <p>Clients</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.featured_images.index') }}"
+                        class="nav-link {{ Route::currentRouteName() == 'admin.featured_images.index' ? 'active' : '' }}">
+                        <i class="fa fa-images nav-icon"></i>
+                        <p>Featured Images</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.partners.index') }}"
+                        class="nav-link {{ Route::currentRouteName() == 'admin.partners.index' ? 'active' : '' }}">
+                        <i class="fa fa-handshake nav-icon"></i>
+                        <p>Partners</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.offices.index') }}"
+                        class="nav-link {{ Route::currentRouteName() == 'admin.offices.index' ? 'active' : '' }}">
+                        <i class="fa fa-briefcase nav-icon"></i>
+                        <p>PM Offices</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.projects.index') }}"
+                        class="nav-link {{ Route::currentRouteName() == 'admin.projects.index' ? 'active' : '' }}">
+                        <i class="fa fa-project-diagram nav-icon"></i>
+                        <p>Projects</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.services.index') }}"
+                        class="nav-link {{ Route::currentRouteName() == 'admin.services.index' ? 'active' : '' }}">
+                        <i class="fa fa-bell nav-icon"></i>
+                        <p>Services</p>
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>
+
+
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
