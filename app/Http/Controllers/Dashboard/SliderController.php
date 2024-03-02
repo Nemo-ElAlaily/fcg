@@ -174,7 +174,7 @@ class SliderController extends Controller
      * @param  \App\Models\Slider  $slider
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Slider $slider)
+    public function destroy($id)
     {
         $slider = Slider::find($id);
         if (!$slider) {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Service;
+use App\Models\Slider;
 use App\Models\Project;
 use App\Models\Category;
 use App\Models\Client;
@@ -19,7 +20,8 @@ class FrontController extends Controller
         $awarded_projects = Project::where([['is_awarded', '1'], ['is_active', '1'] ])->limit(3)->latest()->get();
         $projects = Project::where([['add_to_home', '1'], ['is_active', '1'] ])->limit(6)->latest()->get();
         $clients = Client::where('is_active', '1')->get();
-        return view('front.index', compact('services', 'awarded_projects', 'projects', 'clients'));
+        $sliders = Slider::where('is_active', '1')->get();
+        return view('front.index', compact('services', 'awarded_projects', 'projects', 'clients', 'sliders'));
     } // end of index
 
     public function about()
