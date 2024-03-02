@@ -65,4 +65,8 @@ Route::prefix('dashboard')->name('dashboard.')->group(function () {
     Route::resource('contact', 'ContactController');
     /* end of contact-forms Routes */
 
+    /* sliders Routes */
+    Route::resource('sliders', 'SliderController');
+    /* end of sliders Routes */
+
 });

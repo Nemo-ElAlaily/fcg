@@ -112,6 +112,14 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{ route('dashboard.sliders.index') }}"
+                        class="nav-link {{ Route::currentRouteName() == 'admin.sliders.index' ? 'active' : '' }}">
+                        <i class="fa fa-image nav-icon"></i>
+                        <p>Sliders</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{ route('dashboard.contact.index') }}"
                         class="nav-link {{ Route::currentRouteName() == 'admin.contact.index' ? 'active' : '' }}">
                         <i class="fa fa-phone nav-icon"></i>
