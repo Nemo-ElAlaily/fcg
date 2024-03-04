@@ -58,7 +58,7 @@
 				<div class="col-lg-7">
 					<a href="https://www.youtube.com/watch?v=mwtbEGNABWU" class="glightbox">
 						<!-- <span class="icon-play"></span> -->
-						<img src="{{ asset('uploads/site/D.E.C.gif') }}" alt="Image" class="img-fluid w-100">
+						<img src="{{ $site_settings -> mission_image_path }}" alt="Image" class="img-fluid w-100">
 					</a>
 				</div>
                 <div class="col-lg-4 align-self-center mb-5">

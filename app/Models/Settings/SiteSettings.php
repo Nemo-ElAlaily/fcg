@@ -26,7 +26,7 @@ class SiteSettings extends Model
         'mission',
         'vision',
         'story_image',
-        'mision_image',
+        'mission_image',
         'vision_image',
         'favicon',
         'google_analytics',
