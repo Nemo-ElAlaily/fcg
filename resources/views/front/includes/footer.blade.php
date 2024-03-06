@@ -5,7 +5,9 @@
 				<div class="col-lg-4">
 					<div class="widget">
 						<h3 class="line-top">About</h3>
-						<p class="mb-5">Delectus voluptatum distinctio quos eius excepturi sunt pariatur, aut, doloribus officia ea molestias beatae laudantium, quam odio ipsum veritatis est maiores velit quasi blanditiis et natus accusamus itaque. Veniam quidem debitis odio amet voluptas distinctio dicta placeat! Et pariatur doloremque ea veniam. Separated they live.</p>
+						<p class="mb-5">We're Architecture and Engineering Consultants, offering design and construction services across diverse projects. With a skilled team of architects, engineers, and project managers, we tackle challenges and deliver top-notch results. Whether it's new construction, renovations, or feasibility studies, we're here to help you reach your goals within your budget and timeframe.
+                            Committed to excellence, innovation, and customer satisfaction, we have the expertise and vision to make your project a success.
+                            Reach out today to explore how we can collaborate.</p>
 					</div>
 				</div>
 				<div class="col-lg-6">

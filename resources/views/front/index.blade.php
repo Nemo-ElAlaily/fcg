@@ -53,12 +53,9 @@
         <div class="row g-0">
             <div class="col-lg-3">
                 <h2 class="heading">We create architectural designs</h2>
-                <p>Delectus voluptatum distinctio quos eius excepturi sunt pariatur, aut, doloribus officia ea molestias
-                    beatae laudantium, quam odio ipsum veritatis est maiores velit quasi blanditiis et natus accusamus
-                    itaque. Veniam quidem debitis odio amet voluptas distinctio dicta placeat! Et pariatur doloremque ea
-                    veniam.</p>
+                <p>We envision crafting unique spaces that foster a sense of community and individuality. By creating landmark destinations and interconnected buildings that blend with the local environment and embrace technology, we aim to lead future developments while ensuring comfort, safety, and environmental sustainability. Our designs meet regulatory standards and reflect our clients' aspirations for growth.</p>
 
-                <p><a href="#" class="more-2">Learn more <span class="icon-arrow_forward"></span></a></p>
+                <!-- <p><a href="#" class="more-2">Learn more <span class="icon-arrow_forward"></span></a></p> -->
             </div>
             <div class="col-lg-7 ms-auto">
                 <img src="{{ asset('front')}}/images/we-create.png" alt="Image" class="img-fluid img-r">
@@ -75,11 +72,8 @@
             </div>
             <div class="col-lg-3 ms-auto">
                 <h2 class="heading">Modern Architecture</h2>
-                <p>Delectus voluptatum distinctio quos eius excepturi sunt pariatur, aut, doloribus officia ea molestias
-                    beatae laudantium, quam odio ipsum veritatis est maiores velit quasi blanditiis et natus accusamus
-                    itaque. Veniam quidem debitis odio amet voluptas distinctio dicta placeat! Et pariatur doloremque ea
-                    veniam.</p>
-                <p><a href="#" class="more-2">Learn more <span class="icon-arrow_forward"></span></a></p>
+                <p>We ensure our designs align with our clients' needs and aspirations. We view design as more than just aesthetics; it's about functionality, sustainability, and innovation. By blending cutting-edge technology with timeless design principles, we craft buildings that are both visually stunning and highly functional. Whether it's residential, commercial, or public projects, we tailor solutions to suit the context and users' needs. Our portfolio showcases some of the region's most outstanding examples of modern architecture, earning us numerous awards and accolades for our work.</p>
+                <!-- <p><a href="#" class="more-2">Learn more <span class="icon-arrow_forward"></span></a></p> -->
             </div>
         </div>
     </div>
@@ -91,10 +85,7 @@
         <div class="row">
             <div class="col-lg-3">
                 <h2 class="heading">Services</h2>
-                <p>Delectus voluptatum distinctio quos eius excepturi sunt pariatur, aut, doloribus officia ea molestias
-                    beatae laudantium, quam odio ipsum veritatis est maiores velit quasi blanditiis et natus accusamus
-                    itaque. Veniam quidem debitis odio amet voluptas distinctio dicta placeat! Et pariatur doloremque ea
-                    veniam.</p>
+                <p>Our team of professional architects and engineers is dedicated to delivering client-centered service through our responsible architectural practice across KSA and the Middle East. Our commitment to excellence, professionalism, and exceptional service reflects our mission as we work diligently to bring our clients' ideas and needs to fruition.</p>
             </div>
 
             <div class="col-lg-6 ms-auto">
@@ -144,15 +135,13 @@
                 <h2 class="heading">Awarded Projects</h2>
             </div>
             <div class="col-lg-6">
-                <p>Delectus voluptatum distinctio quos eius excepturi sunt pariatur, aut, doloribus officia ea molestias
-                    beatae laudantium, quam odio ipsum veritatis est maiores velit quasi blanditiis et natus accusamus
-                    itaque.</p>
+                <p>DEC projects have gained recognition from top trackers, magazines, and events as a result of our pursuit of excellence and commitment to delivering only the finest to our clients. At DEC, we recognize a group of forward-thinking designers who are determined to tackle the critical challenges of our time. We are passionate about improving people's lives and serving our clients. Together, we foster a culture of design excellence that combines the power of creative expression with a clear sense of purpose, at the intersection of art and science.</p>
             </div>
         </div>
 
         <div class="row">
             @foreach ($awarded_projects as $index => $project)
-            <div class="col-lg-4 col-md-6 mb-4">
+            <div class="col-lg-6 col-md-6 mb-4">
                 <div class="post-entry-1 h-100">
                     <a href="{{ route('single.project', $project->slug) }}">
                         <img src="{{ $project -> image_path }}" alt="Image" class="img-fluid">
@@ -182,9 +171,7 @@
                 <h2 class="heading">Porjects</h2>
             </div>
             <div class="col-lg-6">
-                <p>Delectus voluptatum distinctio quos eius excepturi sunt pariatur, aut, doloribus officia ea molestias
-                    beatae laudantium, quam odio ipsum veritatis est maiores velit quasi blanditiis et natus accusamus
-                    itaque.</p>
+                <p>We aim to design an architecture that captures and reflects the essence of the site, evoking the desired feelings, sounds, and atmosphere.</p>
             </div>
         </div>
 
@@ -202,6 +189,9 @@
                 </div>
             </div>
             @endforeach
+            <div class="col-md-12">
+                <a href="{{ route('projects')}}" class="more-2">All Projects <span class="icon-arrow_forward"></span></a>
+            </div>
         </div>
     </div>
 </div>

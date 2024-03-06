@@ -9,12 +9,6 @@
         <div class="row align-items-center">
             <div class="col-lg-5 mx-auto ">
                 <h1 class="mb-5 text-center"><span>Our Projects</span></h1>
-
-
-                <div class="intro-desc text-left">
-                    <div class="line"></div>
-                    <p>Delectus voluptatum distinctio quos eius excepturi sunt pariatur, aut, doloribus officia ea molestias beatae laudantium, quam odio ipsum veritatis est maiores velit quasi blanditiis et natus accusamus itaque.</p>
-                </div>
             </div>
         </div>
     </div>
@@ -29,7 +23,8 @@
         <div class="row mb-5">
 
             <div class="col-lg-6 ms-auto">
-                <p>Delectus voluptatum distinctio quos eius excepturi sunt pariatur, aut, doloribus officia ea molestias beatae laudantium, quam odio ipsum veritatis est maiores velit quasi blanditiis et natus accusamus itaque.</p>
+                <p>Architecture is the bridge that connects people and places.
+                    <br /> We believe quality and enduring design can transform a place and elevate the human experience.</p>
             </div>
         </div>
 
@@ -80,10 +75,10 @@
                     </div>
                     <div class="text">
                         <h3 class="h6 fw-bold text-black">We provide best services</h3>
-                        <p class="text-black-50">Delectus voluptatum distinctio quos eius excepturi sunt pariatur, aut, doloribus officia ea molestias beatae laudantium.</p>
-                        <p>
+                        <p class="text-black-50">Our experienced team delivers exceptional services tailored to your unique needs. We pride ourselves on attention to detail and exceeding expectations. Let us help you with your next project.</p>
+                        <!-- <p>
                             <a href="#" class="more-2">Learn more <span class="icon-arrow_forward"></span></a>
-                        </p>
+                        </p> -->
                     </div>
                 </div>
             </div>
@@ -93,11 +88,17 @@
                         <i class="flaticon-plan"></i>
                     </div>
                     <div class="text">
-                        <h3 class="h6 fw-bold text-black">We provide best services</h3>
-                        <p class="text-black-50">Delectus voluptatum distinctio quos eius excepturi sunt pariatur, aut, doloribus officia ea molestias beatae laudantium.</p>
-                        <p>
-                            <a href="#" class="more-2">Learn more <span class="icon-arrow_forward"></span></a>
+                        <h3 class="h6 fw-bold text-black">We Transform</h3>
+                        <p class="text-black-50">Beginning with an investigation of various physical, historical, and institutional circumstances, we study places in dialogue with their communities – to design environments that offer:
+                            <ul>
+                                <li>Enduring Architecture</li>
+                                <li>Campus Destinations</li>
+                                <li>Flexibility for the Future</li>
+                            </ul>
                         </p>
+                        <!-- <p>
+                            <a href="#" class="more-2">Learn more <span class="icon-arrow_forward"></span></a>
+                        </p> -->
                     </div>
                 </div>
             </div>
@@ -107,11 +108,11 @@
                         <i class="flaticon-architect"></i>
                     </div>
                     <div class="text">
-                        <h3 class="h6 fw-bold text-black">We provide best services</h3>
-                        <p class="text-black-50">Delectus voluptatum distinctio quos eius excepturi sunt pariatur, aut, doloribus officia ea molestias beatae laudantium.</p>
-                        <p>
+                        <h3 class="h6 fw-bold text-black">We Believe</h3>
+                        <p class="text-black-50">We believe that every project is an opportunity to address global challenges</p>
+                        <!-- <p>
                             <a href="#" class="more-2">Learn more <span class="icon-arrow_forward"></span></a>
-                        </p>
+                        </p> -->
                     </div>
                 </div>
             </div>

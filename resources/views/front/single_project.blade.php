@@ -13,7 +13,9 @@
 
                 <div class="intro-desc text-left">
                     <div class="line"></div>
-                    <p>Delectus voluptatum distinctio quos eius excepturi sunt pariatur, aut, doloribus officia ea molestias beatae laudantium, quam odio ipsum veritatis est maiores velit quasi blanditiis et natus accusamus itaque.</p>
+                    <p>Delectus voluptatum distinctio quos eius excepturi sunt pariatur, aut, doloribus officia ea
+                        molestias beatae laudantium, quam odio ipsum veritatis est maiores velit quasi blanditiis et
+                        natus accusamus itaque.</p>
                 </div>
             </div>
         </div>
@@ -27,35 +29,43 @@
     <div class="container">
 
         <div class="row mb-5 justify-content-between">
-            <div class="col-lg-7 mb-lg-0 mb-4">
+            <div class="col-lg-5 mb-lg-0 mb-4">
                 <img src="{{ $project -> image_path }}" alt="Image" class="img-fluid">
             </div>
-            <div class="col-lg-5">
-                <div class="heading">Description</div>
-                <p>{!! $project -> description !!}</a></p>
-            </div>
-        </div>
+            <div class="col-lg-7">
+                <!-- <div class="heading">Description</div>
+                <p>{!! $project -> description !!}</a></p> -->
+                <div class="row justify-content-between">
+                    <div class="col-sm-6">
+                        <span class="text-black-50 d-block">Scope of Services:</span>
+                        <ul>
+                            @foreach($project -> services as $index => $service)
+                            <span class="text-black-50 d-block"> {{ $service -> name }} </span>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <div class="col-sm-6 border-left">
+                        <span class="text-black-50 d-block">Area:</span>
+                        <ul>
+                            <span class="text-black-50 d-block"> {{ $project -> area }} </span>
+                        </ul>
+                        <span class="text-black-50 d-block">Client:</span>
+                        <ul>
+                            <span class="text-black-50 d-block"> {{ $project -> client -> name }} </span>
+                        </ul>
+                        <span class="text-black-50 d-block">Location:</span>
+                        <ul>
+                            <span class="text-black-50 d-block"> {{ $project -> location }} </span>
+                        </ul>
+                        <span class="text-black-50 d-block">Category:</span>
+                        <ul>
+                            <a
+                            href="{{route('category.projects', $project -> category -> slug)}}">{{ $project -> category
+                            -> name}}</a>
+                        </ul>
 
-        <div class="row mb-5 justify-content-between">
-            <div class="col-sm-2 border-left">
-                <span class="text-black-50 d-block">Scope of Services:</span>
-                <ul>
-                    @foreach($project -> services as $index => $service)
-                    <span class="text-black-50 d-block"> {{ $service -> name }} </span>
-                    @endforeach
-                </ul>
-            </div>
-            <div class="col-sm-2 border-left">
-                <span class="text-black-50 d-block">Area:</span>  {{ $project -> area }}
-            </div>
-            <div class="col-sm-2 border-left">
-                <span class="text-black-50 d-block">Client:</span> {{ $project -> client -> name}}
-            </div>
-            <div class="col-sm-2 border-left">
-                <span class="text-black-50 d-block">Location:</span> {{ $project  -> location }}
-            </div>
-            <div class="col-sm-2 border-left">
-                <span class="text-black-50 d-block">Category:</span> <a href="{{route('category.projects', $project -> category -> slug)}}">{{ $project -> category -> name}}</a>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -91,7 +101,8 @@
             @foreach(json_decode( $project -> gallery, true) as $index => $item)
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                 <div class="py-2">
-                    <img src="{{ asset('uploads/projects/gallery/') . '/'. $item}}" alt="{{$project->title . $index }}" class="img-fluid">
+                    <img src="{{ asset('uploads/projects/gallery/') . '/'. $item}}" alt="{{$project->title . $index }}"
+                        class="img-fluid">
                 </div>
             </div>
             @endforeach
@@ -99,4 +110,3 @@
     </div>
 </div>
 @endsection
-

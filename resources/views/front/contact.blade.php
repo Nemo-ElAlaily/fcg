@@ -28,8 +28,8 @@
 		<div class="container">
 			<div class="row mb-5 justify-content-center text-center">
 				<div class="col-lg-5">
-					<h2 class="heading">Get in touch</h2>
-					<p class="text-black-50">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+					<h2 class="heading">Reach Out</h2>
+					<p class="text-black-50">We dedicate 100% effort to every project, regardless of size. Our team is devoted to achieving outstanding results and is deeply passionate about our work.</p>
 				</div>
 			</div>
 
