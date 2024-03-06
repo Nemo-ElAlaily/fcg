@@ -11,7 +11,6 @@
 		<div class="container">
 			<div class="site-navigation">
 				<a href="#" class="logo m-0 float-start">
-                    <img alt="HRTis Logo" src="{{ asset('front/images/HRTis-Logo-Gray.png') }}" style="height: 50px;"/>
                     <img alt="logo" src="{{ $site_settings->logo_path }}" style="height: 50px; margin-left: 10px;"/>
 				</a>
 
@@ -39,8 +38,8 @@
 					<span></span>
 				</a>
                 @if($site_settings -> phone)
-				<ul class="site-menu float-end d-none d-md-block" style="margin-top: 10px;">
-					<li><a href="#" class="d-flex align-items-center text-white h2 fw-bold"><span class="icon-phone me-2"></span> <span>{{ $site_settings -> phone }}</span></a></li>
+				<ul class="site-menu float-end d-none d-md-block">
+					<li><a href="#" class="p-0 pt-2"><img alt="HRTis Logo" src="{{ asset('front/images/HRTis-Logo-Gray.png') }}" style="height: 50px;"/></a></li>
 				</ul>
                 @endif
 
