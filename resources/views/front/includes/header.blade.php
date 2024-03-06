@@ -7,14 +7,15 @@
 		<div class="site-mobile-menu-body"></div>
 	</div>
 
-	<nav class="site-nav">
+	<nav class="site-nav" style="position: fixed; background-color: #000000a0;">
 		<div class="container">
 			<div class="site-navigation">
 				<a href="#" class="logo m-0 float-start">
-                    <img alt="logo" src="{{ $site_settings->logo_path }}"/>
+                    <img alt="HRTis Logo" src="{{ asset('front/images/HRTis-Logo-Gray.png') }}" style="height: 50px;"/>
+                    <img alt="logo" src="{{ $site_settings->logo_path }}" style="height: 50px; margin-left: 10px;"/>
 				</a>
 
-				<ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-start" style="margin-top: 40px;">
+				<ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-start" style="margin-top: 10px;">
 					<li class="active"><a href="{{ route('index')}}">Home</a></li>
 					<li class="has-children">
 						<a href="#">Projects</a>
@@ -38,7 +39,7 @@
 					<span></span>
 				</a>
                 @if($site_settings -> phone)
-				<ul class="site-menu float-end d-none d-md-block" style="margin-top: 45px;">
+				<ul class="site-menu float-end d-none d-md-block" style="margin-top: 10px;">
 					<li><a href="#" class="d-flex align-items-center text-white h2 fw-bold"><span class="icon-phone me-2"></span> <span>{{ $site_settings -> phone }}</span></a></li>
 				</ul>
                 @endif

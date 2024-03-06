@@ -61,7 +61,7 @@
                 <p><a href="#" class="more-2">Learn more <span class="icon-arrow_forward"></span></a></p>
             </div>
             <div class="col-lg-7 ms-auto">
-                <img src="{{ asset('front')}}/images/img_8.jpg" alt="Image" class="img-fluid img-r">
+                <img src="{{ asset('front')}}/images/we-create.png" alt="Image" class="img-fluid img-r">
             </div>
         </div>
     </div>
@@ -71,7 +71,7 @@
     <div class="container">
         <div class="row g-0">
             <div class="col-lg-6 mb-4 mb-lg-0">
-                <img src="{{ asset('front')}}/images/img_4.jpg" alt="IMage" class="img-fluid">
+                <img src="{{ asset('front')}}/images/modern-arch.jpg" alt="IMage" class="img-fluid">
             </div>
             <div class="col-lg-3 ms-auto">
                 <h2 class="heading">Modern Architecture</h2>

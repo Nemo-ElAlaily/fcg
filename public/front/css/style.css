@@ -8647,8 +8647,8 @@ textarea.form-control-lg {
   width: 100%; }
 
 .site-nav {
-  padding-top: 20px;
-  padding-bottom: 20px; }
+  padding-top: 10px;
+  padding-bottom: 10px; }
   .site-nav h1, .site-nav .h1 {
     margin: 0;
     padding: 0;
@@ -9093,7 +9093,7 @@ a {
     right: 0;
     left: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.2);
     z-index: 1; }
   .hero-2 > .container {
     position: relative;
