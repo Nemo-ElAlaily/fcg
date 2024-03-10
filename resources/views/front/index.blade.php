@@ -142,9 +142,9 @@
         <div class="row">
             @foreach ($awarded_projects as $index => $project)
             <div class="col-lg-6 col-md-6 mb-4">
-                <div class="post-entry-1 h-100">
+                <div class="post-entry-1">
                     <a href="{{ route('single.project', $project->slug) }}">
-                        <img src="{{ $project -> image_path }}" alt="Image" class="img-fluid">
+                        <img src="{{ $project -> image_path }}" alt="Image" class="img-fluid w-100" style="height: 420px;">
                     </a>
                     <div class="post-entry-1-contents">
                         <span class="meta d-inline-block mb-0">{{ date("F jS, Y", strtotime($project -> created_at)) }}

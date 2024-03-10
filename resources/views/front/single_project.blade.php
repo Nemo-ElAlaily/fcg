@@ -30,7 +30,7 @@
 
         <div class="row mb-5 justify-content-between">
             <div class="col-lg-5 mb-lg-0 mb-4">
-                <img src="{{ $project -> image_path }}" alt="Image" class="img-fluid">
+                <img src="{{ $project -> image_path }}" alt="Image" class="img-fluid w-100">
             </div>
             <div class="col-lg-7">
                 <!-- <div class="heading">Description</div>
