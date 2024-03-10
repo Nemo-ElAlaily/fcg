@@ -39,7 +39,7 @@
                     <div class="col-sm-6">
                         <span class="text-black-50 d-block">Scope of Services:</span>
                         <ul>
-                            @foreach($project -> services as $index => $service)
+                            @foreach($project -> services ->sortBy('created_at') as $index => $service)
                             <span class="text-black-50 d-block"> {{ $service -> name }} </span>
                             @endforeach
                         </ul>

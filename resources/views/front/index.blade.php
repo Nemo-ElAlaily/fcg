@@ -64,7 +64,7 @@
     </div>
 </div>
 
-<div class="section sec-2">
+<div class="section sec-2 bg-light">
     <div class="container">
         <div class="row g-0">
             <div class="col-lg-6 mb-4 mb-lg-0">
@@ -80,7 +80,7 @@
 </div>
 
 @if(count($services) > 0)
-<div class="sec-3 section bg-light">
+<div class="sec-3 section">
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
@@ -128,7 +128,7 @@
 @endif
 
 @if(count($awarded_projects) > 0)
-<div class="section sec-news">
+<div class="section sec-news bg-light">
     <div class="container">
         <div class="row mb-5">
             <div class="col-lg-6">
