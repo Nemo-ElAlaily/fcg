@@ -4,46 +4,48 @@
 
 @section('hero')
 
-    @if(count($sliders) > 0)
+@if(count($sliders) > 0)
 
-    <div id="sliderIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            @foreach ($sliders as $index => $slider)
-                <li data-target="#sliderIndicators" data-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : ''  }}"></li>
-            @endforeach
-        </ol>
-        <div class="carousel-inner">
-            @foreach ($sliders as $index => $slider)
-            <div class="carousel-item hero-2 overlay {{ $index == 0 ? ' active' : ''  }}" style="background-image: url('{{ $slider -> image_path }}');">
-                <div class="carousel-caption d-none d-md-block col-lg-5 mx-auto">
-                    <h1 class="mb-5"><span class="d-block">{{ $slider -> title }}</span></h1>
-                </div>
-            </div>
-            @endforeach
-        </div>
-        <a class="carousel-control-prev" href="#sliderIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#sliderIndicators" role="button" data-slide="next">
-            <span class="sr-only">Next</span>
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        </a>
-    </div>
-
-    @else
-
-    <div class="hero-2 overlay" style="background-image: url('{{ asset('front/images/img_2.jpg')}}');">'
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-5 mx-auto">
-                    <h1 class="mb-5"><span class="d-block">{{ $site_settings -> welcome_phrase }}</span></h1>
-                </div>
+<div id="sliderIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        @foreach ($sliders as $index => $slider)
+        <li data-target="#sliderIndicators" data-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : ''  }}">
+        </li>
+        @endforeach
+    </ol>
+    <div class="carousel-inner">
+        @foreach ($sliders as $index => $slider)
+        <div class="carousel-item hero-2 overlay {{ $index == 0 ? ' active' : ''  }}"
+            style="background-image: url('{{ $slider -> image_path }}');">
+            <div class="carousel-caption d-none d-md-block col-lg-5 mx-auto">
+                <h1 class="mb-5"><span class="d-block">{{ $slider -> title }}</span></h1>
             </div>
         </div>
+        @endforeach
     </div>
+    <a class="carousel-control-prev" href="#sliderIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#sliderIndicators" role="button" data-slide="next">
+        <span class="sr-only">Next</span>
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </a>
+</div>
 
-    @endif
+@else
+
+<div class="hero-2 overlay" style="background-image: url('{{ asset('front/images/img_2.jpg')}}');">'
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-5 mx-auto">
+                <h1 class="mb-5"><span class="d-block">{{ $site_settings -> welcome_phrase }}</span></h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endif
 
 @endsection
 
@@ -53,7 +55,11 @@
         <div class="row g-0">
             <div class="col-lg-3">
                 <h2 class="heading">We create architectural designs</h2>
-                <p>We envision crafting unique spaces that foster a sense of community and individuality. By creating landmark destinations and interconnected buildings that blend with the local environment and embrace technology, we aim to lead future developments while ensuring comfort, safety, and environmental sustainability. Our designs meet regulatory standards and reflect our clients' aspirations for growth.</p>
+                <p>We envision crafting unique spaces that foster a sense of community and individuality. By creating
+                    landmark destinations and interconnected buildings that blend with the local environment and embrace
+                    technology, we aim to lead future developments while ensuring comfort, safety, and environmental
+                    sustainability. Our designs meet regulatory standards and reflect our clients' aspirations for
+                    growth.</p>
 
                 <!-- <p><a href="#" class="more-2">Learn more <span class="icon-arrow_forward"></span></a></p> -->
             </div>
@@ -72,7 +78,12 @@
             </div>
             <div class="col-lg-3 ms-auto">
                 <h2 class="heading">Modern Architecture</h2>
-                <p>We ensure our designs align with our clients' needs and aspirations. We view design as more than just aesthetics; it's about functionality, sustainability, and innovation. By blending cutting-edge technology with timeless design principles, we craft buildings that are both visually stunning and highly functional. Whether it's residential, commercial, or public projects, we tailor solutions to suit the context and users' needs. Our portfolio showcases some of the region's most outstanding examples of modern architecture, earning us numerous awards and accolades for our work.</p>
+                <p>We ensure our designs align with our clients' needs and aspirations. We view design as more than just
+                    aesthetics; it's about functionality, sustainability, and innovation. By blending cutting-edge
+                    technology with timeless design principles, we craft buildings that are both visually stunning and
+                    highly functional. Whether it's residential, commercial, or public projects, we tailor solutions to
+                    suit the context and users' needs. Our portfolio showcases some of the region's most outstanding
+                    examples of modern architecture, earning us numerous awards and accolades for our work.</p>
                 <!-- <p><a href="#" class="more-2">Learn more <span class="icon-arrow_forward"></span></a></p> -->
             </div>
         </div>
@@ -85,7 +96,10 @@
         <div class="row">
             <div class="col-lg-3">
                 <h2 class="heading">Services</h2>
-                <p>Our team of professional architects and engineers is dedicated to delivering client-centered service through our responsible architectural practice across KSA and the Middle East. Our commitment to excellence, professionalism, and exceptional service reflects our mission as we work diligently to bring our clients' ideas and needs to fruition.</p>
+                <p>Our team of professional architects and engineers is dedicated to delivering client-centered service
+                    through our responsible architectural practice across KSA and the Middle East. Our commitment to
+                    excellence, professionalism, and exceptional service reflects our mission as we work diligently to
+                    bring our clients' ideas and needs to fruition.</p>
             </div>
 
             <div class="col-lg-6 ms-auto">
@@ -135,7 +149,12 @@
                 <h2 class="heading">Awarded Projects</h2>
             </div>
             <div class="col-lg-6">
-                <p>DEC projects have gained recognition from top trackers, magazines, and events as a result of our pursuit of excellence and commitment to delivering only the finest to our clients. At DEC, we recognize a group of forward-thinking designers who are determined to tackle the critical challenges of our time. We are passionate about improving people's lives and serving our clients. Together, we foster a culture of design excellence that combines the power of creative expression with a clear sense of purpose, at the intersection of art and science.</p>
+                <p>DEC projects have gained recognition from top trackers, magazines, and events as a result of our
+                    pursuit of excellence and commitment to delivering only the finest to our clients. At DEC, we
+                    recognize a group of forward-thinking designers who are determined to tackle the critical challenges
+                    of our time. We are passionate about improving people's lives and serving our clients. Together, we
+                    foster a culture of design excellence that combines the power of creative expression with a clear
+                    sense of purpose, at the intersection of art and science.</p>
             </div>
         </div>
 
@@ -144,7 +163,8 @@
             <div class="col-lg-6 col-md-6 mb-4">
                 <div class="post-entry-1">
                     <a href="{{ route('single.project', $project->slug) }}">
-                        <img src="{{ $project -> image_path }}" alt="Image" class="img-fluid w-100" style="height: 420px;">
+                        <img src="{{ $project -> image_path }}" alt="Image" class="img-fluid w-100"
+                            style="height: 420px;">
                     </a>
                     <div class="post-entry-1-contents">
                         <span class="meta d-inline-block mb-0">{{ date("F jS, Y", strtotime($project -> created_at)) }}
@@ -171,7 +191,8 @@
                 <h2 class="heading">Porjects</h2>
             </div>
             <div class="col-lg-6">
-                <p>We aim to design an architecture that captures and reflects the essence of the site, evoking the desired feelings, sounds, and atmosphere.</p>
+                <p>We aim to design an architecture that captures and reflects the essence of the site, evoking the
+                    desired feelings, sounds, and atmosphere.</p>
             </div>
         </div>
 
@@ -190,47 +211,33 @@
             </div>
             @endforeach
             <div class="col-md-12">
-                <a href="{{ route('projects')}}" class="more-2">All Projects <span class="icon-arrow_forward"></span></a>
+                <a href="{{ route('projects')}}" class="more-2">All Projects <span
+                        class="icon-arrow_forward"></span></a>
             </div>
         </div>
     </div>
 </div>
 @endif
+
 
 @if(count($clients) > 0)
 <div class="sec-4 section bg-light">
-
     <div class="text-center mb-5">
         <h2 class="heading mb-5 text-center">Our Clients</h2>
     </div>
-    <div class="testimonial-slide-center-wrap" data-aos="fade-up" data-aos-delay="1">
 
-        <div id="testimonial-nav">
-            <span class="prev" data-controls="prev"><span class="icon-chevron-left"></span></span>
+    <div class="owl-carousel">
+        @foreach($clients as $index => $client)
+        @if($client -> logo && $client -> logo !== 'default.png')
 
-            <span class="next" data-controls="next"><span class="icon-chevron-right"></span></span>
+        <div class="clients-bar">
+            <img src="{{ $client -> logo_path}}" alt="Image" class="img-fluid"
+                style="height: 100px; width: unset; margin: auto;">
         </div>
 
-        <div class="testimonial-slide-center testimonial-center" id="testimonial-center">
-
-            @foreach($clients as $index => $client)
-            @if($client -> logo && $client -> logo !== 'default.png')
-            <div class="item">
-                <div class="testimonial-item">
-                    <div class="testimonial-item-inner">
-                        <div class="testimonial-author">
-                            <img src="{{ $client -> logo_path}}" alt="Image" class="img-fluid">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endif
-            @endforeach
-
-        </div>
-
+        @endif
+        @endforeach
     </div>
 </div>
 @endif
-
 @endsection

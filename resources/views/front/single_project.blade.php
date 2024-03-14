@@ -10,13 +10,6 @@
             <div class="col-lg-5 mx-auto ">
                 <h1 class="mb-5 text-center"><span>{{ $project -> title }}</span></h1>
 
-
-                <div class="intro-desc text-left">
-                    <div class="line"></div>
-                    <p>Delectus voluptatum distinctio quos eius excepturi sunt pariatur, aut, doloribus officia ea
-                        molestias beatae laudantium, quam odio ipsum veritatis est maiores velit quasi blanditiis et
-                        natus accusamus itaque.</p>
-                </div>
             </div>
         </div>
     </div>

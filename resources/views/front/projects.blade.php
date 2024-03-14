@@ -4,7 +4,7 @@
 
 @section('hero')
 
-<div class="hero-2 overlay" style="background-image: url('front/images/img_3.jpg');">
+<div class="hero-2 overlay" style="background-image: url('{{ $projects -> first() -> image_path}}');">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-5 mx-auto ">
@@ -45,10 +45,13 @@
                 @endforeach
             @endif
         </div>
+        <div class="d-flex justify-content-around m-5">
+            {{ $projects->appends(request()->query())->links() }}
+        </div>
     </div>
 </div>
 
-<div class="section bg-light">
+<!-- <div class="section bg-light">
     <div class="container">
         <div class="row mb-5 justify-content-between">
             <div class="col-lg-4 align-self-center mb-5">
@@ -64,8 +67,8 @@
             </div>
         </div>
     </div>
-</div>
-<div class="section">
+</div> -->
+<div class="section pt-0">
     <div class="container">
         <div class="row g-5 bg-white">
             <div class="col-lg-4">

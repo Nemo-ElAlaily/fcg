@@ -72,14 +72,14 @@ class FrontController extends Controller
 
     public function projects()
     {
-        $projects = Project::where('is_active', '1')->latest()->get();
+        $projects = Project::where('is_active', '1')->latest()->paginate(FRONT_PAGINATION_COUNT);
         return view('front.projects', compact('projects'));
     } // end of project
 
     public function categoryProjects($slug)
     {
-        $category = Category::where('slug', $slug)->first();
-        $projects = Project::where('category_id', $category->id)->latest()->get();
+        $category = Category::where([['slug', $slug], ['is_active', '1']])->first();
+        $projects = Project::where([['category_id', $category->id], ['is_active', '1']])->latest()->paginate(FRONT_PAGINATION_COUNT);
         return view('front.projects', compact('projects'));
     } //end of categoryProjects
 
