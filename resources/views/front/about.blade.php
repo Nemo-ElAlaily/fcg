@@ -4,7 +4,7 @@
 
 @section('hero')
 
-    <div class="hero-2 overlay" style="background-image: url('front/images/about.png');">
+    <div class="hero-2 overlay" style="background-image: url('front/images/About.png');">
 		<div class="container">
 			<div class="row align-items-center">
 				<div class="col-lg-5 mx-auto ">
