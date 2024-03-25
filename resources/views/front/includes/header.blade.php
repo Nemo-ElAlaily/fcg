@@ -17,7 +17,7 @@
 				<ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-start" style="margin-top: 10px;">
 					<li class="active"><a href="{{ route('index')}}">Home</a></li>
 					<li class="has-children">
-						<a href="#">Projects</a>
+						<a href="{{ route('projects') }}">Projects</a>
 						<ul class="dropdown">
                             @foreach($project_categories as $index => $category)
                                 @if(count($category->projects) >0 )
@@ -39,7 +39,7 @@
 				</a>
                 @if($site_settings -> phone)
 				<ul class="site-menu float-end d-none d-md-block">
-					<li><a href="#" class="p-0 pt-2"><img alt="HRTis Logo" src="{{ asset('front/images/HRTis-Logo-Gray.png') }}" style="height: 50px;"/></a></li>
+					<li><a href="{{ route('index') }}" class="p-0 pt-2"><img alt="HRTis Logo" src="{{ asset('front/images/HRTis-Logo-Gray.png') }}" style="height: 50px;"/></a></li>
 				</ul>
                 @endif
 

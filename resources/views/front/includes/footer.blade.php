@@ -12,46 +12,40 @@
 				</div>
 				<div class="col-lg-6">
 					<div class="row">
-						<div class="col-12">
+						<div class="col-6">
 							<div class="widget">
 								<h3 class="line-top">Navigations</h3>
 							</div>
+                            <div class="col-12 col-sm-12 col-md-12">
+                                <div class="widget">
+                                    <ul class="links list-unstyled">
+                                        <li><a href="{{route('index')}}">Home</a></li>
+                                        <li><a href="{{route('services')}}">Services</a></li>
+                                        <li><a href="{{ route('projects')}}">Projects</a></li>
+                                        <li><a href="{{ route('contact')}}">Contact Us</a></li>
+                                        <li><a href="{{ route('about')}}">About Us</a></li>
+                                    </ul>
+                                </div>
+                            </div>
 						</div>
-						<div class="col-6 col-sm-6 col-md-4">
+                        <div class="col-6">
 							<div class="widget">
-								<ul class="links list-unstyled">
-									<li><a href="{{route('index')}}">Home</a></li>
-									<li><a href="{{route('services')}}">Services</a></li>
-									<li><a href="{{ route('projects')}}">Projects</a></li>
-									<li><a href="{{ route('contact')}}">Contact Us</a></li>
-									<li><a href="{{ route('about')}}">About Us</a></li>
-								</ul>
+								<h3 class="line-top">Contact Us</h3>
 							</div>
-						</div>
-						<div class="col-6 col-sm-6 col-md-4">
-							<div class="widget">
-								<ul class="links list-unstyled">
-									<li><a href="#">Press</a></li>
-									<li><a href="#">Blog</a></li>
-									<li><a href="#">Contact</a></li>
-									<li><a href="#">Support</a></li>
-									<li><a href="#">Privacy</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-6 col-sm-6 col-md-4">
-							<div class="widget">
-								<ul class="links list-unstyled">
-									<li><a href="#">Privacy</a></li>
-									<li><a href="#">FAQ</a></li>
-									<li><a href="#">Careers</a></li>
-									<li><a href="#">Process</a></li>
-									<li><a href="#">About Us</a></li>
-								</ul>
-							</div>
+                            <div class="col-12 col-sm-12 col-md-12">
+                                <div class="widget">
+                                    <ul class="list-unstyled">
+                                        <li class="my-2">Address: Riyadh, Al Olaya Dist. Shaddad Ibn Aous, 2nd Floor, Office 7, Al Olaya, Riyadh 12611, KSA</li>
+                                        <li class="my-2">E-mail: business@decgrp.net</li>
+                                        <li class="my-2">Telephone: +966 112754079</li>
+                                        <li class="my-2">Mobile: +966 58 031 9349 - +966 594782001</li>
+                                    </ul>
+                                </div>
+                            </div>
 						</div>
 					</div>
 				</div>
+
 			</div>
 
 			<div class="row justify-content-center text-center copyright">

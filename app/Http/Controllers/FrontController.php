@@ -18,7 +18,7 @@ class FrontController extends Controller
     {
         $services = Service::where('is_active', '1')->limit(4)->latest()->get();
         $awarded_projects = Project::where([['is_awarded', '1'], ['is_active', '1'] ])->limit(3)->latest()->get();
-        $projects = Project::where([['add_to_home', '1'], ['is_active', '1'] ])->limit(6)->latest()->get();
+        $projects = Project::where([['add_to_home', '1'], ['is_active', '1'], ['is_awarded', '0'] ])->limit(6)->latest()->get();
         $clients = Client::where('is_active', '1')->get();
         $sliders = Slider::where('is_active', '1')->get();
         return view('front.index', compact('services', 'awarded_projects', 'projects', 'clients', 'sliders'));
@@ -36,6 +36,13 @@ class FrontController extends Controller
         $clients = Client::where('is_active', '1')->get();
         return view('front.services', compact('services', 'latest_projects', 'clients'));
     } // end of services
+
+    public function serviceProjects($slug)
+    {
+        $service = Service::where([['slug', $slug], ['is_active', '1']])->first();
+        $projects = $service->projects()->where([['is_active', '1'], ['image', '!=', 'default.png']])->latest()->paginate(FRONT_PAGINATION_COUNT);
+        return view('front.projects', compact('projects'));
+    } // end of seriveProjects
 
     public function contact()
     {

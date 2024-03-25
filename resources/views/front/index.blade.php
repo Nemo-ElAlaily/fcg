@@ -125,7 +125,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <p>{!! $service -> description !!}</p>
-                                        <a href="#" class="more-2">Service Projects <span
+                                        <a href="{{ $service->projects()->count() > 0 ? route('service.projects', $service->slug) : '#' }}" class="more-2">Service Projects <span
                                                 class="icon-arrow_forward"></span></a>
                                     </div>
                                 </div>
@@ -188,7 +188,7 @@
     <div class="container">
         <div class="row mb-5">
             <div class="col-lg-6">
-                <h2 class="heading">Porjects</h2>
+                <h2 class="heading">Latest Projects</h2>
             </div>
             <div class="col-lg-6">
                 <p>We aim to design an architecture that captures and reflects the essence of the site, evoking the

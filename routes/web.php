@@ -19,6 +19,7 @@ define('FRONT_PAGINATION_COUNT', 12);
 Route::get('/', 'FrontController@index')->name('index');
 Route::get('/about-us', 'FrontController@about')->name('about');
 Route::get('/services', 'FrontController@services')->name('services');
+Route::get('/service-projects/{slug}', 'FrontController@serviceProjects')->name('service.projects');
 Route::get('/contact-us', 'FrontController@contact')->name('contact');
 Route::post('/contact-us', 'FrontController@postContact')->name('post.contact');
 Route::get('/all-projects', 'FrontController@projects')->name('projects');
