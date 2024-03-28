@@ -9852,3 +9852,13 @@ a {
       content: "";
       height: 1px;
       background: #d3d8dc; }
+
+.navbar-main {
+    position: fixed;
+    background-color: #000000a0;
+    transition: all 0.5s;
+}
+.navbar-scrolled {
+    background-color: #000000;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}

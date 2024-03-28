@@ -7,7 +7,7 @@
 		<div class="site-mobile-menu-body"></div>
 	</div>
 
-	<nav class="site-nav" style="position: fixed; background-color: #000000a0;">
+	<nav class="site-nav navbar-main" >
 		<div class="container">
 			<div class="site-navigation">
 				<a href="#" class="logo m-0 float-start">

@@ -55,11 +55,14 @@
         <div class="row g-0">
             <div class="col-lg-3">
                 <h2 class="heading">We create architectural designs</h2>
-                <p>We envision crafting unique spaces that foster a sense of community and individuality. By creating
-                    landmark destinations and interconnected buildings that blend with the local environment and embrace
-                    technology, we aim to lead future developments while ensuring comfort, safety, and environmental
-                    sustainability. Our designs meet regulatory standards and reflect our clients' aspirations for
-                    growth.</p>
+                <p style="text-align: justify;">Distinguished Experts for Architectural Engineering Company was established 43+ years ago in Jeddah.
+                    With a team of premier experts in engineering, project management, and supervision, the company
+                    expanded its reach across KSA and into other Arab countries like Egypt, Lebanon, and Libya. <br /><br />
+                    Over time, DEC has emerged as a leading consultancy firm in Saudi Arabia, boasting four branches in
+                    Riyadh, Jeddah, Abha, and Dammam. Our projects span a wide spectrum, from urban planning to
+                    industrial, encompassing residential, commercial, mixed-use, and healthcare sectors. <br /><br />
+                    Our goal is to meet our client's needs while crafting distinctive spaces that reflect our wealth of
+                    experience and expertise.</p>
 
                 <!-- <p><a href="#" class="more-2">Learn more <span class="icon-arrow_forward"></span></a></p> -->
             </div>
@@ -70,28 +73,8 @@
     </div>
 </div>
 
-<div class="section sec-2 bg-light">
-    <div class="container">
-        <div class="row g-0">
-            <div class="col-lg-6 mb-4 mb-lg-0">
-                <img src="{{ asset('front')}}/images/modern-arch.jpg" alt="IMage" class="img-fluid">
-            </div>
-            <div class="col-lg-3 ms-auto">
-                <h2 class="heading">Modern Architecture</h2>
-                <p>We ensure our designs align with our clients' needs and aspirations. We view design as more than just
-                    aesthetics; it's about functionality, sustainability, and innovation. By blending cutting-edge
-                    technology with timeless design principles, we craft buildings that are both visually stunning and
-                    highly functional. Whether it's residential, commercial, or public projects, we tailor solutions to
-                    suit the context and users' needs. Our portfolio showcases some of the region's most outstanding
-                    examples of modern architecture, earning us numerous awards and accolades for our work.</p>
-                <!-- <p><a href="#" class="more-2">Learn more <span class="icon-arrow_forward"></span></a></p> -->
-            </div>
-        </div>
-    </div>
-</div>
-
 @if(count($services) > 0)
-<div class="sec-3 section">
+<div class="sec-3 section bg-light">
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
@@ -125,8 +108,8 @@
                                     </div>
                                     <div class="col-md-8">
                                         <p>{!! $service -> description !!}</p>
-                                        <a href="{{ $service->projects()->count() > 0 ? route('service.projects', $service->slug) : '#' }}" class="more-2">Service Projects <span
-                                                class="icon-arrow_forward"></span></a>
+                                        <a href="{{ $service->projects()->count() > 0 ? route('service.projects', $service->slug) : '#' }}"
+                                            class="more-2">Service Projects <span class="icon-arrow_forward"></span></a>
                                     </div>
                                 </div>
 
@@ -142,7 +125,7 @@
 @endif
 
 @if(count($awarded_projects) > 0)
-<div class="section sec-news bg-light">
+<div class="section sec-news">
     <div class="container">
         <div class="row mb-5">
             <div class="col-lg-6">
@@ -161,12 +144,12 @@
         <div class="row">
             @foreach ($awarded_projects as $index => $project)
             <div class="col-lg-6 col-md-6 mb-4">
-                <div class="post-entry-1">
+                <div class="post-entry-1 h-50">
                     <a href="{{ route('single.project', $project->slug) }}">
                         <img src="{{ $project -> image_path }}" alt="Image" class="img-fluid w-100"
                             style="height: 420px;">
                     </a>
-                    <div class="post-entry-1-contents">
+                    <div class="post-entry-1-contents bg-light h-100">
                         <span class="meta d-inline-block mb-0">{{ date("F jS, Y", strtotime($project -> created_at)) }}
                             <span class="mx-2"></span>
                             <h2 class="mb-3"><a href="{{ route('single.project', $project->slug) }}">{{ $project ->
@@ -184,7 +167,7 @@
 @endif
 
 @if(count($projects) > 0)
-<div class="section sec-news">
+<div class="section sec-news bg-light">
     <div class="container">
         <div class="row mb-5">
             <div class="col-lg-6">
@@ -221,7 +204,7 @@
 
 
 @if(count($clients) > 0)
-<div class="sec-4 section bg-light">
+<div class="sec-4 section">
     <div class="text-center mb-5">
         <h2 class="heading mb-5 text-center">Our Clients</h2>
     </div>

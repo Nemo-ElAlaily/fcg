@@ -90,6 +90,17 @@
     </script>
     <script src="{{ asset('front/js/owl.carousel.min.js') }}"></script>
 
+    <script>
+        const navEl = document.querySelector('.navbar-main');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY >= 100) {
+                navEl.classList.add('navbar-scrolled');
+            } else if (window.scrollY < 100) {
+                navEl.classList.remove('navbar-scrolled');
+            }
+        })
+    </script>
+
 </body>
 
 </html>

@@ -76,7 +76,7 @@
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label for="address">Branch Slug</label>
+                            <label for="address">Branch Address</label>
                             @error('address')
                             <span class=" text-danger">{{ $message }}</span>
                             @enderror
@@ -119,7 +119,7 @@
                 </div>
 
                 <div class="">
-                    <button type="submit" class="btn btn-primary w-100">Create Branch</button>
+                    <button type="submit" class="btn btn-primary w-100">Update Branch</button>
                 </div>
             </div>
         </form>

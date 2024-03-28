@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 
 use App\Models\Settings\SiteSettings;
 use App\Models\Category;
+use App\Models\Branch;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
 
@@ -31,12 +32,14 @@ class AppServiceProvider extends ServiceProvider
         // Fetch the Site Settings object
         $site_settings = SiteSettings::find(1);
         $project_categories = Category::where('type', '1')->get();
+        $hq = Branch::find(8);
 
         siteSettings();
 
         View::share([
             'site_settings' =>  $site_settings,
             'project_categories' =>  $project_categories,
+            'hq' => $hq,
         ]);
 
         Paginator::useBootstrap();
