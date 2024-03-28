@@ -183,7 +183,7 @@
             @foreach ($projects as $index => $project)
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                 <div class="single-portfolio h-100">
-                    <a href="{{ route('single.project', $project -> slug )}}">
+                    <a href="{{ route('single.project', $project -> slug )}}" class="h-100">
                         <img src="{{ $project -> image_path}}" alt="Image" class="img-fluid h-100">
                         <div class="contents">
                             <h3>{{ $project -> title}}</h3>
