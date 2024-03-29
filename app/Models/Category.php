@@ -37,4 +37,15 @@ class Category extends Model
     {
         return $this -> hasMany(Project::class);
     } // end of projects
+
+    public function getImagePathAttribute()
+    {
+        $project = $this -> projects -> whereNotIn ('image', ['default.png', null]) -> first();
+        if ($project) {
+            return asset('uploads/projects/' . $project -> image );
+        } else {
+            return asset('uploads/projects/default.png');
+        }
+
+    } // end of image path
 }

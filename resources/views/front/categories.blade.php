@@ -1,22 +1,14 @@
 @extends('front.layouts.main')
 
-@section('title', 'Projects')
+@section('title', 'Categories')
 
 @section('hero')
 
-<div class="hero-2 overlay" style="background-image: url('{{ $projects -> first() -> image_path}}');">
+<div class="hero-2 overlay" style="background-image: url('{{ $categories -> first() -> image_path}}');">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-5 mx-auto ">
-                <h1 class="mb-5 text-center"><span>
-                @if (Route::currentRouteName() == 'category.projects')
-                    {{ $projects -> first() ->category->name }} Projects
-                @elseif(Route::currentRouteName() == 'awarded.projects')
-                    Awarded Projects
-                @elseif(Route::currentRouteName() == 'projects')
-                    Our Projects
-                @endif
-                </span></h1>
+                <h1 class="mb-5 text-center"><span>Our Projects</span></h1>
             </div>
         </div>
     </div>
@@ -37,24 +29,22 @@
         </div>
 
         <div class="row g-4">
-            @if(count($projects) > 0)
-                @foreach ($projects as $index => $project)
+            @if(count($categories) > 0)
+                @foreach ($categories as $index => $category)
+                    @if(count($category->projects) > 0)
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                         <div class="single-portfolio">
-                            <a href="{{ route('single.project', $project->slug )}}">
-                                <img src="{{ $project -> image_path}}" alt="Image" class="img-fluid" style="height: 291px;">
+                            <a href="{{ route('category.projects', $category->slug )}}">
+                                <img src="{{ $category -> image_path }}" alt="Image" class="img-fluid" style="height: 291px;">
                                 <div class="contents">
-                                    <h3>{{ $project -> title}}</h3>
-                                    <div class="cat">{{$project -> category ? $project->category->name : '' }}</div>
+                                    <h3>{{ $category -> name}} Projects</h3>
                                 </div>
                             </a>
                         </div>
                     </div>
+                    @endif
                 @endforeach
             @endif
-        </div>
-        <div class="d-flex justify-content-around m-5">
-            {{ $projects->appends(request()->query())->links() }}
         </div>
     </div>
 </div>

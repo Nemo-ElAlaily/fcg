@@ -83,6 +83,18 @@ class FrontController extends Controller
         return view('front.projects', compact('projects'));
     } // end of project
 
+    public function awardedProjects()
+    {
+        $projects = Project::where([['is_active', '1'], ['is_awarded', '1']])->orderBy('category_id')->latest()->paginate(FRONT_PAGINATION_COUNT);
+        return view('front.projects', compact('projects'));
+    } // end of awardedProjects
+
+    public function categories()
+    {
+        $categories = Category::where([['is_active', '1'], ['type', '1']])->latest()->get();
+        return view('front.categories', compact('categories'));
+    } // end of catergories
+
     public function categoryProjects($slug)
     {
         $category = Category::where([['slug', $slug], ['is_active', '1']])->first();
@@ -94,5 +106,5 @@ class FrontController extends Controller
     {
         $project = Project::where('slug', $slug)->first();
         return view('front.single_project', compact('project'));
-    }
+    } // end of singleProject
 }

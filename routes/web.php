@@ -23,6 +23,8 @@ Route::get('/service-projects/{slug}', 'FrontController@serviceProjects')->name(
 Route::get('/contact-us', 'FrontController@contact')->name('contact');
 Route::post('/contact-us', 'FrontController@postContact')->name('post.contact');
 Route::get('/all-projects', 'FrontController@projects')->name('projects');
+Route::get('/awarded-projects', 'FrontController@awardedProjects')->name('awarded.projects');
+Route::get('/all-categories', 'FrontController@categories')->name('categories');
 Route::get('/projects/{slug}', 'FrontController@categoryProjects')->name('category.projects');
 Route::get('/all-projects/{slug}/', 'FrontController@singleProject')->name('single.project');
 

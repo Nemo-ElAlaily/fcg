@@ -17,13 +17,14 @@
 				<ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-start" style="margin-top: 10px;">
 					<li class="active"><a href="{{ route('index')}}">Home</a></li>
 					<li class="has-children">
-						<a href="{{ route('projects') }}">Projects</a>
+						<a href="{{ route('categories') }}">Projects</a>
 						<ul class="dropdown">
                             @foreach($project_categories as $index => $category)
                                 @if(count($category->projects) >0 )
 							    <li><a href="{{ route('category.projects', $category->slug) }}">{{ ucwords($category->name) }}</a></li>
                                 @endif
                             @endforeach
+                            <li><a href="{{ route('awarded.projects') }}">Awarded Projects</a></li>
 						</ul>
 					</li>
 					<li><a href="{{ route('services')}}">Services</a></li>

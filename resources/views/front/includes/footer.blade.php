@@ -46,7 +46,7 @@
                                             @foreach($project_categories as $index => $category)
                                                 @if(count($category->projects) >0 )
                                                 <li><a href="{{ route('category.projects', $category->slug) }}">{{ ucwords($category->name) }}</a></li>
-                                                @if($index == 6)
+                                                @if($index == 7)
                                                     @break
                                                 @endif
                                                 @endif
@@ -58,10 +58,11 @@
                                     <div class="widget">
                                         <ul class="list-unstyled links">
                                             @foreach($project_categories as $index => $category)
-                                                @if(count($category->projects) >0 && $index > 6 )
+                                                @if(count($category->projects) >0 && $index > 7 )
                                                 <li><a href="{{ route('category.projects', $category->slug) }}">{{ ucwords($category->name) }}</a></li>
                                                 @endif
                                             @endforeach
+                                            <li><a href="{{ route('awarded.projects') }}">Awarded Projects</a></li>
                                         </ul>
                                     </div>
                                 </div>
