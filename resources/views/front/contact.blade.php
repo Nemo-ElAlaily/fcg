@@ -112,7 +112,7 @@
                 </form>
             </div>
             <div class="col-6 justify-center">
-                <a href="https://maps.app.goo.gl/nJbScjAffHx7gmaY8"><img src="{{ asset('front/images/Map.png') }}" alt="Branches Map"
+                <a href="https://maps.app.goo.gl/nJbScjAffHx7gmaY8" target="_blank"><img src="{{ asset('front/images/Map.png') }}" alt="Branches Map"
                     class="img-fluid d-flex align-content-center justify-content-center">
                 </a>
             </div>
