@@ -91,7 +91,7 @@ class FrontController extends Controller
 
     public function categories()
     {
-        $categories = Category::where([['is_active', '1'], ['type', '1']])->latest()->get();
+        $categories = Category::where([['is_active', '1'], ['type', '1']])->get();
         return view('front.categories', compact('categories'));
     } // end of catergories
 
