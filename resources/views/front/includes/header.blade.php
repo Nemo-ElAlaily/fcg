@@ -40,7 +40,7 @@
 				</a>
                 @if($site_settings -> phone)
 				<ul class="site-menu float-end d-none d-md-block">
-					<li><a href="{{ route('index') }}" class="p-0 pt-2"><img alt="HRTis Logo" src="{{ asset('front/images/HRTis-Logo-Gray.png') }}" style="height: 50px;"/></a></li>
+					<li><a href="{{ route('index') }}" class="p-0 pt-2"><img alt="HRTis Logo" id="hrtis_logo" src="{{ asset('front/images/HRTis-Logo-Gray.png') }}" style="height: 50px;"/></a></li>
 				</ul>
                 @endif
 

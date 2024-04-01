@@ -95,11 +95,14 @@
     <!-- navbar change color on scroll -->
     <script>
         const navEl = document.querySelector('.navbar-main');
+        const hrtis_logo = document.querySelector('#hrtis_logo')
         window.addEventListener('scroll', () => {
             if (window.scrollY >= 100) {
                 navEl.classList.add('navbar-scrolled');
+                hrtis_logo.src = "{{ asset('front/images/HRTis-Logo-White.png') }}"
             } else if (window.scrollY < 100) {
                 navEl.classList.remove('navbar-scrolled');
+                hrtis_logo.src = "{{ asset('front/images/HRTis-Logo-Gray.png') }}"
             }
         })
     </script>

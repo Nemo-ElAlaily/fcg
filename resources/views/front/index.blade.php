@@ -54,15 +54,10 @@
     <div class="container">
         <div class="row g-0">
             <div class="col-lg-3">
-                <h2 class="heading">We create architectural designs</h2>
-                <p style="text-align: justify;">Distinguished Experts for Architectural Engineering Company was established 43+ years ago in Jeddah.
-                    With a team of premier experts in engineering, project management, and supervision, the company
-                    expanded its reach across KSA and into other Arab countries like Egypt, Lebanon, and Libya. <br /><br />
-                    Over time, DEC has emerged as a leading consultancy firm in Saudi Arabia, boasting four branches in
-                    Riyadh, Jeddah, Abha, and Dammam. Our projects span a wide spectrum, from urban planning to
-                    industrial, encompassing residential, commercial, mixed-use, and healthcare sectors. <br /><br />
-                    Our goal is to meet our client's needs while crafting distinctive spaces that reflect our wealth of
-                    experience and expertise.</p>
+                <h2 class="heading">Who We Are </h2>
+                <p style="text-align: justify;">Distinguished Experts for Architectural Engineering Company was established 43+ years ago in Jeddah. With a team of premier experts in engineering, project management, and supervision, the company expanded its reach across KSA and into other Arab countries like Egypt, Lebanon, and Libya.<br /><br />
+                    Over time, DEC has emerged as a leading consultancy firm in Saudi Arabia, boasting four branches in Riyadh, Jeddah, Abha, and Dammam. Our projects span a wide spectrum, Architecture & Engineering, Design, Supervision, Project Management, and Facility management.<br /><br />
+                    Our goal is to meet our client's needs while crafting distinctive spaces that reflect our wealth of experience and expertise.</p>
 
                 <!-- <p><a href="#" class="more-2">Learn more <span class="icon-arrow_forward"></span></a></p> -->
             </div>
