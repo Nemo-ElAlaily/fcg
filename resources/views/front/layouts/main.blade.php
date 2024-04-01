@@ -15,6 +15,8 @@
     <link rel="icon" href="{{ asset('uploads/site/favicon.png') }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ $site_settings->favicon_path }}" type="image/x-icon">
 
+    @yield('style')
+
     <meta name="description" content="" />
     <meta name="keywords" content="bootstrap, bootstrap5" />
 
@@ -90,6 +92,7 @@
     </script>
     <script src="{{ asset('front/js/owl.carousel.min.js') }}"></script>
 
+    <!-- navbar change color on scroll -->
     <script>
         const navEl = document.querySelector('.navbar-main');
         window.addEventListener('scroll', () => {
@@ -101,6 +104,8 @@
         })
     </script>
 
+
+    @yield('script')
 </body>
 
 </html>

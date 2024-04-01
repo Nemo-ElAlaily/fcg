@@ -17,9 +17,9 @@
                         </div>
                     </div>
                 </div>
-				<div class="col-lg-6">
+				<div class="col-lg-6 col-sm-12">
 					<div class="row">
-						<div class="col-6">
+						<div class="col-lg-6 col-sm-12">
 							<div class="widget">
 								<h3 class="line-top">Navigations</h3>
 							</div>
@@ -35,7 +35,7 @@
                                 </div>
                             </div>
 						</div>
-                        <div class="col-6">
+                        <div class="col-lg-6 col-sm-12">
 							<div class="row">
                                 <div class="widget">
                                     <h3 class="line-top m-0">Categories</h3>

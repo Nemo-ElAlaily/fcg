@@ -46,7 +46,44 @@ class FrontController extends Controller
 
     public function contact()
     {
-        return view('front.contact');
+        // contact us map leaflet markers
+        $initialMarkers = [
+            [
+                'position' => [
+                    'lat' => 24.831633091238768,
+                    'lng' => 46.67522527099766
+                ],
+                'draggable' => false,
+                'name' => 'Riyadh, HQ',
+            ],
+            [
+                'position' => [
+                    'lat' => 21.515651811291555,
+                    'lng' => 39.167971995730014
+                ],
+                'draggable' => false,
+                'name' => 'Jeddah',
+
+            ],
+            [
+                'position' => [
+                    'lat' => 18.240928214658666,
+                    'lng' => 42.5605524
+                ],
+                'draggable' => false,
+                'name' => 'Abha',
+            ],
+            [
+                'position' => [
+                    'lat' => 29.992976563119143,
+                    'lng' => 30.984755887419173
+                ],
+                'draggable' => false,
+                'name' => 'Egypt',
+            ]
+        ];
+
+        return view('front.contact', compact('initialMarkers'));
     } //end of contact
 
     public function postContact(Request $request)

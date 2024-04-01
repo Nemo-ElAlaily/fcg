@@ -2,6 +2,10 @@
 
 @section('title', 'Contact Us')
 
+@section('style')
+<link rel='stylesheet' href="{{ asset('front/leaflet/leaflet.css') }}" crossorigin='' />
+@endsection
+
 @section('hero')
 
 <div class="hero-2 overlay" style="background-image: url('front/images/Contact-us.png');">
@@ -31,7 +35,7 @@
                 </div>
             </div>
 
-            <div class="col-6">
+            <div class="col-lg-6 col-md-6 col-sm-12">
                 @if (Session::has('success'))
                 <div class="row justify-content-center text-center">
                     <button type="text" class="btn text-success" id="" disabled>
@@ -111,10 +115,8 @@
 
                 </form>
             </div>
-            <div class="col-6 justify-center">
-                <a href="https://maps.app.goo.gl/nJbScjAffHx7gmaY8" target="_blank"><img src="{{ asset('front/images/Map.png') }}" alt="Branches Map"
-                    class="img-fluid d-flex align-content-center justify-content-center">
-                </a>
+            <div class="col-lg-6 col-md-6 col-sm-12 justify-center">
+                <div id='map' style="height: 100%; width: 100%;"></div>
             </div>
         </div>
 
@@ -123,4 +125,62 @@
 </div>
 </div>
 
+@endsection
+
+
+@section('script')
+<script src="{{ asset('front/leaflet/leaflet.js') }}" crossorigin=''></script>
+<script>
+    let map, markers = [];
+    /* ----------------------------- Initialize Map ----------------------------- */
+    function initMap() {
+        map = L.map('map', {
+            center: {
+                lat: 24.831633091238768,
+                lng: 46.67522527099766,
+            },
+            zoom: 3
+        });
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        map.on('click', mapClicked);
+        initMarkers();
+    }
+    initMap();
+
+    /* --------------------------- Initialize Markers --------------------------- */
+    function initMarkers() {
+        const initialMarkers = <?php echo json_encode($initialMarkers); ?>;
+
+        for (let index = 0; index < initialMarkers.length; index++) {
+
+            const data = initialMarkers[index];
+            const marker = generateMarker(data, index);
+            marker.addTo(map).bindTooltip(`<b>${data.name}</b>`);
+            map.panTo(data.position);
+            markers.push(marker)
+        }
+    }
+
+    function generateMarker(data, index) {
+        return L.marker(data.position, {
+                draggable: data.draggable
+            })
+            .on('click', (event) => markerClicked(event, index))
+            .on('dragend', (event) => markerDragEnd(event, index));
+    }
+
+    /* ------------------------- Handle Map Click Event ------------------------- */
+    function mapClicked($event) {
+    }
+
+    /* ------------------------ Handle Marker Click Event ----------------------- */
+    function markerClicked($event, index) {
+        window.open("https://maps.google.com/?q=" + $event.latlng.lat + "," + $event.latlng.lng, "_blank")
+    }
+
+</script>
 @endsection

@@ -9855,10 +9855,14 @@ a {
 
 .navbar-main {
     position: fixed;
-    background-color: #000000a0;
+    background-color: #00000080;
     transition: all 0.5s;
 }
 .navbar-scrolled {
     background-color: #000000;
     box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
+.leaflet-top, .leaflet-bottom, .leaflet-pane {
+    z-index: 0 !important;
 }
