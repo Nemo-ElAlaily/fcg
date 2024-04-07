@@ -9093,7 +9093,7 @@ a {
     right: 0;
     left: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.1);
     z-index: 1; }
   .hero-2 > .container {
     position: relative;
@@ -9855,7 +9855,7 @@ a {
 
 .navbar-main {
     position: fixed;
-    background-color: #00000080;
+    background-color: #000000;
     transition: all 0.5s;
 }
 .navbar-scrolled {

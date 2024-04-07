@@ -99,10 +99,8 @@
         window.addEventListener('scroll', () => {
             if (window.scrollY >= 100) {
                 navEl.classList.add('navbar-scrolled');
-                hrtis_logo.src = "{{ asset('front/images/HRTis-Logo-White.png') }}"
             } else if (window.scrollY < 100) {
                 navEl.classList.remove('navbar-scrolled');
-                hrtis_logo.src = "{{ asset('front/images/HRTis-Logo-Gray.png') }}"
             }
         })
     </script>

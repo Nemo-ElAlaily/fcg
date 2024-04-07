@@ -119,50 +119,8 @@
 </div>
 @endif
 
-@if(count($awarded_projects) > 0)
-<div class="section sec-news">
-    <div class="container">
-        <div class="row mb-5">
-            <div class="col-lg-6">
-                <h2 class="heading">Awarded Projects</h2>
-            </div>
-            <div class="col-lg-6">
-                <p>DEC projects have gained recognition from top trackers, magazines, and events as a result of our
-                    pursuit of excellence and commitment to delivering only the finest to our clients. At DEC, we
-                    recognize a group of forward-thinking designers who are determined to tackle the critical challenges
-                    of our time. We are passionate about improving people's lives and serving our clients. Together, we
-                    foster a culture of design excellence that combines the power of creative expression with a clear
-                    sense of purpose, at the intersection of art and science.</p>
-            </div>
-        </div>
-
-        <div class="row">
-            @foreach ($awarded_projects as $index => $project)
-            <div class="col-lg-6 col-md-6 mb-4">
-                <div class="post-entry-1 h-50">
-                    <a href="{{ route('single.project', $project->slug) }}">
-                        <img src="{{ $project -> image_path }}" alt="Image" class="img-fluid w-100"
-                            style="height: 420px;">
-                    </a>
-                    <div class="post-entry-1-contents bg-light h-100">
-                        <span class="meta d-inline-block mb-0">{{ date("F jS, Y", strtotime($project -> created_at)) }}
-                            <span class="mx-2"></span>
-                            <h2 class="mb-3"><a href="{{ route('single.project', $project->slug) }}">{{ $project ->
-                                    title}}</a></h2>
-
-                            <p>{!! $project -> description !!}</p>
-                            <p><a href="{{ route('single.project', $project->slug) }}">Project Details</a></p>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-    </div>
-</div>
-@endif
-
 @if(count($projects) > 0)
-<div class="section sec-news bg-light">
+<div class="section sec-news">
     <div class="container">
         <div class="row mb-5">
             <div class="col-lg-6">
@@ -197,24 +155,70 @@
 </div>
 @endif
 
-
-@if(count($clients) > 0)
-<div class="sec-4 section">
-    <div class="text-center mb-5">
-        <h2 class="heading mb-5 text-center">Our Clients</h2>
-    </div>
-
-    <div class="owl-carousel">
-        @foreach($clients as $index => $client)
-        @if($client -> logo && $client -> logo !== 'default.png')
-
-        <div class="clients-bar">
-            <img src="{{ $client -> logo_path}}" alt="Image" class="img-fluid"
-                style="height: 100px; width: unset; margin: auto;">
+@if(count($awarded_projects) > 0)
+<div class="section sec-news bg-light">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-6">
+                <h2 class="heading">Awarded Projects</h2>
+            </div>
+            <div class="col-lg-6">
+                <p>DEC projects have gained recognition from top trackers, magazines, and events as a result of our
+                    pursuit of excellence and commitment to delivering only the finest to our clients. At DEC, we
+                    recognize a group of forward-thinking designers who are determined to tackle the critical challenges
+                    of our time. We are passionate about improving people's lives and serving our clients. Together, we
+                    foster a culture of design excellence that combines the power of creative expression with a clear
+                    sense of purpose, at the intersection of art and science.</p>
+            </div>
         </div>
 
-        @endif
-        @endforeach
+        <div class="row">
+            @foreach ($awarded_projects as $index => $project)
+            <div class="col-lg-6 col-md-6 mb-4">
+                <div class="post-entry-1 h-50">
+                    <a href="{{ route('single.project', $project->slug) }}">
+                        <img src="{{ $project -> image_path }}" alt="Image" class="img-fluid w-100"
+                            style="height: 420px;">
+                    </a>
+                    <div class="post-entry-1-contents h-100">
+                        <span class="meta d-inline-block mb-0">{{ date("F jS, Y", strtotime($project -> created_at)) }}
+                            <span class="mx-2"></span>
+                            <h2 class="mb-3"><a href="{{ route('single.project', $project->slug) }}">{{ $project ->
+                                    title}}</a></h2>
+
+                            <p>{!! $project -> description !!}</p>
+                            <p><a href="{{ route('single.project', $project->slug) }}">Project Details</a></p>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+@endif
+
+@if(count($clients) > 0)
+<div class="section sec-news">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-12">
+                <h2 class="heading">Our Clients</h2>
+            </div>
+        </div>
+
+        <div class="owl-carousel">
+            @foreach($clients as $index => $client)
+            @if($client -> logo && $client -> logo !== 'default.png')
+
+            <div class="clients-bar">
+                <img src="{{ $client -> logo_path}}" alt="Image" class="img-fluid"
+                    style="height: 100px; width: unset; margin: auto;">
+            </div>
+
+            @endif
+            @endforeach
+        </div>
+
     </div>
 </div>
 @endif
