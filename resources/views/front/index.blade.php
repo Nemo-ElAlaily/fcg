@@ -6,14 +6,14 @@
 
 @if(count($sliders) > 0)
 
-<div id="sliderIndicators" class="carousel slide" data-ride="carousel">
+<div id="sliderIndicators" class="carousel slide" data-ride="carousel" style="height: 100vh;">
     <ol class="carousel-indicators">
         @foreach ($sliders as $index => $slider)
         <li data-target="#sliderIndicators" data-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : ''  }}">
         </li>
         @endforeach
     </ol>
-    <div class="carousel-inner">
+    <div class="carousel-inner slider-top">
         @foreach ($sliders as $index => $slider)
         <div class="carousel-item hero-2 overlay {{ $index == 0 ? ' active' : ''  }}"
             style="background-image: url('{{ $slider -> image_path }}');">
@@ -35,7 +35,7 @@
 
 @else
 
-<div class="hero-2 overlay" style="background-image: url('{{ asset('front/images/img_2.jpg')}}');">'
+<div class="hero-2 overlay slider-top" style="background-image: url('{{ asset('front/images/img_2.jpg')}}');">'
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-5 mx-auto">

@@ -4,7 +4,7 @@
 
 @section('hero')
 
-<div class="hero-2 overlay" style="background-image: url('{{ $categories -> first() -> image_path}}');">
+<div class="hero-2 overlay slider-top" style="background-image: url('{{ $categories -> first() -> image_path}}');">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-5 mx-auto ">

@@ -37,7 +37,8 @@
   --bs-dark: #212529;
   --bs-font-sans-serif: "Roboto", sans-serif;
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0)); }
+  --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+  --slider-top: 78px; }
 
 *,
 *::before,
@@ -9100,7 +9101,11 @@ a {
     z-index: 2; }
   .hero-2, .hero-2 > .container > .row {
     height: 100vh;
-    min-height: 670px; }
+    min-height: 670px;
+    @media (min-width: 1180px) {
+            height: calc(100vh - var(--slider-top));
+        }
+    }
   .hero-2 h1, .hero-2 .h1 {
     font-size: 50px;
     color: #fff;
@@ -9865,4 +9870,10 @@ a {
 
 .leaflet-top, .leaflet-bottom, .leaflet-pane {
     z-index: 0 !important;
+}
+
+.slider-top {
+    @media (min-width: 1180px) {
+        top: var(--slider-top);
+    }
 }

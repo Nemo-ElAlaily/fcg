@@ -30,7 +30,9 @@
 
     @include('front.includes.header')
 
+    <div class="mb-5">
     @yield('hero')
+    </div>
 
     @yield('content')
 
