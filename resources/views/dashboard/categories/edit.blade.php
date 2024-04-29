@@ -22,7 +22,7 @@
             {{ csrf_field() }}
             {{ method_field('put') }}
             <div class="card-body row">
-                <div class="col-md-11">
+                <div class="col-md-6">
                     <div class="row">
 
                         <div class="form-group col-md-12 custom-control custom-switch">
@@ -66,6 +66,35 @@
                 </div>
 
                 <div class="col-md-1"></div>
+
+                <div class="col-md-5 text-center">
+                    <div class="row">
+
+                        <div class="col-md-12 my-4">
+                            <h2 class="text-center setting-general-title">Category Image</h2>
+                        </div>
+
+                        <div class="form-group col-lg-12">
+                            <label for="image">Image</label>
+                            @error('image')
+                            <span class="text-danger mx-1">{{ $message }}</span>
+                            @enderror
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input image" id="image" accept="jpg, png, jpeg, svg"
+                                        name="image">
+                                    <label class="custom-file-label" for="image">Choose Image</label>
+                                </div>
+                                <div class="container">
+                                    <img src="{{ $category -> image_path }}" width="100px"
+                                        class="img-thumbnail image-preview mt-1" alt="Category Image">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
 
                 <div class="">
                     <button type="submit" class="btn btn-primary w-100">Update Category</button>

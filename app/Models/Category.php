@@ -11,6 +11,9 @@ class Category extends Model
     use SoftDeletes;
 
     protected $guarded = [];
+    protected $appends = [
+        'image_path',
+    ];
 
     public function getTitleAttribute($value)
     {
@@ -40,12 +43,6 @@ class Category extends Model
 
     public function getImagePathAttribute()
     {
-        $project = $this -> projects -> whereNotIn ('image', ['default.png', null]) -> last();
-        if ($project) {
-            return asset('uploads/projects/' . $project -> image );
-        } else {
-            return asset('uploads/projects/default.png');
-        }
-
+        return asset('uploads/categories/' . $this -> image );
     } // end of image path
 }

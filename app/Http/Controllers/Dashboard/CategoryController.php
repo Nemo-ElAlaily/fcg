@@ -55,6 +55,14 @@ class CategoryController extends Controller
 
             DB::beginTransaction();
 
+            $image_path = "";
+            if($request -> image){
+                $image_path = uploadImage('uploads/categories/',  $request -> image);
+                $request_data['image'] = $image_path;
+            } else {
+                $request_data['image'] = 'default.png';
+            }
+
             $category =  Category::create($request_data);
 
             DB::commit();
@@ -134,6 +142,17 @@ class CategoryController extends Controller
             $request_data['slug'] = str_replace($characters, '-' , $request['name']);
 
             DB::beginTransaction();
+
+            $imagePath = "";
+            if($request -> image){
+                if ($category -> image != 'default.png') {
+                    Storage::disk('public_uploads')->delete('/categories/' . $category -> image);
+                } // end of inner if
+                $image_path = uploadImage('uploads/categories/',  $request -> image);
+                $request_data['image'] = $image_path;
+            } else {
+                $request_data['image'] = $category -> image;
+            }// end of outer if
 
             $category -> update($request_data);
 
