@@ -9860,7 +9860,7 @@ a {
 
 .navbar-main {
     position: fixed;
-    background-color: #0000004d;
+    background-color: #00000080;
     transition: all 0.5s;
 }
 .navbar-scrolled {
