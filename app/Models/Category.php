@@ -43,6 +43,16 @@ class Category extends Model
 
     public function getImagePathAttribute()
     {
-        return asset('uploads/categories/' . $this -> image );
+        if ($this -> image != 'default.png') {
+            return asset('uploads/categories/' . $this -> image );
+        } else {
+            $project = $this -> projects -> whereNotIn ('image', ['default.png', null]) -> last();
+            if ($project) {
+                return asset('uploads/projects/' . $project -> image );
+            } else {
+                return asset('uploads/categories/default.png');
+            }
+        }
+
     } // end of image path
 }
