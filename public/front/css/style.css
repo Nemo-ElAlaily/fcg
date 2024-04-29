@@ -9094,7 +9094,7 @@ a {
     right: 0;
     left: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.2);
     z-index: 1; }
   .hero-2 > .container {
     position: relative;
@@ -9102,9 +9102,9 @@ a {
   .hero-2, .hero-2 > .container > .row {
     height: 100vh;
     min-height: 670px;
-    @media (min-width: 1180px) {
+    /* @media (min-width: 1180px) {
             height: calc(100vh - var(--slider-top));
-        }
+        } */
     }
   .hero-2 h1, .hero-2 .h1 {
     font-size: 50px;
@@ -9860,7 +9860,7 @@ a {
 
 .navbar-main {
     position: fixed;
-    background-color: #000000;
+    background-color: #0000004d;
     transition: all 0.5s;
 }
 .navbar-scrolled {
@@ -9871,9 +9871,9 @@ a {
 .leaflet-top, .leaflet-bottom, .leaflet-pane {
     z-index: 0 !important;
 }
-
+/*
 .slider-top {
     @media (min-width: 1180px) {
         top: var(--slider-top);
     }
-}
+} */

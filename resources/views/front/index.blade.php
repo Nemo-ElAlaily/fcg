@@ -53,11 +53,15 @@
 <div class="section sec-1">
     <div class="container">
         <div class="row g-0">
-            <div class="col-lg-3">
+            <div class="col-lg-4">
                 <h2 class="heading">Who We Are </h2>
-                <p style="text-align: justify;">Distinguished Experts for Architectural Engineering Company was established 43+ years ago in Jeddah. With a team of premier experts in engineering, project management, and supervision, the company expanded its reach across KSA and into other Arab countries like Egypt, Lebanon, and Libya.<br /><br />
-                    Over time, DEC has emerged as a leading consultancy firm in Saudi Arabia, boasting four branches in Riyadh, Jeddah, Abha, and Dammam. Our projects span a wide spectrum, Architecture & Engineering, Design, Supervision, Project Management, and Facility management.<br /><br />
-                    Our goal is to meet our client's needs while crafting distinctive spaces that reflect our wealth of experience and expertise.</p>
+                <p style="text-align: justify;">Welcome to Distinguished Experts for Architectural Engineering Co. DEC, where innovation meets expertise in architectural engineering solutions. With a legacy spanning over 43 years, we have been at the forefront of shaping the built environment across Saudi Arabia and Middle East, providing unparalleled services in design, engineering, project management, and beyond.</p>
+
+                    <p>At DEC, our dedicated team of professionals combines passion with precision to deliver visionary architectural solutions that exceed expectations. From conceptualization to realization, we strive for excellence in every aspect of our projects, ensuring sustainability, functionality, and aesthetic appeal.</p>
+
+                    <p>With a proven track record of successful projects in diverse sectors such as Architecture & Engineering, Project Management, and Construction Supervision, we have earned a reputation as a trusted partner in transforming ideas into iconic structures. Our commitment to innovation, sustainability, and client satisfaction drives us to continually push the boundaries of architectural engineering.</p>
+
+                    <p>As we embark on this journey together, we invite you to explore the possibilities with DEC. Let's build the future, one landmark at a time.</p>
 
                 <!-- <p><a href="#" class="more-2">Learn more <span class="icon-arrow_forward"></span></a></p> -->
             </div>
