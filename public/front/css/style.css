@@ -9249,7 +9249,7 @@ a {
     border-color: rgba(0, 0, 0, 0.1);
     -webkit-box-shadow: none;
     box-shadow: none;
-    color: #000; }
+    }
 
 .accordion-1 .accordion-collapse {
   border-top: none; }
@@ -9870,6 +9870,9 @@ a {
 
 .leaflet-top, .leaflet-bottom, .leaflet-pane {
     z-index: 0 !important;
+}
+.no-background, .no-background:before, .no-background:after {
+    background-image: none !important;
 }
 /*
 .slider-top {

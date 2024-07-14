@@ -22,13 +22,135 @@
     <div class="container">
 
         <div class="row mb-5 justify-content-between">
-            <div class="col-lg-4 mb-lg-0 mb-4">
+            <div class="col-lg-7 mb-lg-0 mb-4">
                 <img src="{{ $project->image_path }}" alt="Image" class="img-fluid w-100">
             </div>
-            <div class="col-lg-8">
+
+            <div class="col-lg-5 ms-auto">
+                <div class="accordion accordion-flush accordion-1">
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button no-background d-block" type="button" >
+                                <p class="float-start m-0">Area:</p>
+                                <p class="float-end m-0 text-black-50">{{ $project->area }}</p>
+                            </button>
+                        </h2>
+                        <h2 class="accordion-header">
+                            <button class="accordion-button no-background d-block" type="button" >
+                                <p class="float-start m-0">Client:</p>
+                                <p class="float-end m-0 text-black-50">{{ $project->client->name }}</p>
+                            </button>
+                        </h2>
+                        <h2 class="accordion-header">
+                            <button class="accordion-button no-background d-block" type="button" >
+                                <p class="float-start m-0">Location:</p>
+                                <p class="float-end m-0 text-black-50">{{ $project->location }}</p>
+                            </button>
+                        </h2>
+                        <h2 class="accordion-header">
+                            <button class="accordion-button no-background d-block" type="button" >
+                                <p class="float-start m-0">Category:</p>
+                                <p class="float-end m-0 text-black-50">
+                                    <a class="text-black-50" href="{{ route('category.projects', $project->category->slug) }}">{{
+                                        $project->category->name }}</a>
+                                </p>
+                            </button>
+                        </h2>
+
+                        @if ($project->amenities)
+                        <h2 class="accordion-header" id="flush-heading-amenities">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#flush-collapse-amenities"
+                                aria-expanded="false"
+                                aria-controls="flush-collapse-amenities">
+                                Amenities:
+                            </button>
+                        </h2>
+                        <div id="flush-collapse-amenities"
+                            class="accordion-collapse collapse"
+                            aria-labelledby="flush-heading-amenities" data-bs-parent="#amenities">
+                            <div class="accordion-body">
+                                <div class="row justify-content-between">
+                                    <div class="col-md-8">
+                                        <p>{!! $project->amenities !!} </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        @endif
+
+                        @if ($project->extra_info)
+                        <h2 class="accordion-header" id="flush-heading-info">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#flush-collapse-info"
+                                aria-expanded="false"
+                                aria-controls="flush-collapse-info">
+                                Information:
+                            </button>
+                        </h2>
+                        <div id="flush-collapse-info"
+                            class="accordion-collapse collapse"
+                            aria-labelledby="flush-heading-info" data-bs-parent="#amenities">
+                            <div class="accordion-body">
+                                <div class="row justify-content-between">
+                                    <div class="col-md-8">
+                                        <p>{!! $project->extra_info !!} </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        @endif
+
+                        @if ($project->services)
+                        <h2 class="accordion-header" id="flush-heading-services">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#flush-collapse-services"
+                                aria-expanded="false"
+                                aria-controls="flush-collapse-services">
+                                Scope of Services:
+                            </button>
+                        </h2>
+                        <div id="flush-collapse-services"
+                            class="accordion-collapse collapse"
+                            aria-labelledby="flush-heading-services" data-bs-parent="#amenities">
+                            <div class="accordion-body">
+                                <div class="row justify-content-between">
+                                    <div class="col-md-8">
+                                        @foreach ($project->services->sortBy('created_at') as $index => $service)
+                                        <p>{{ $service->name }} </p>
+                                        @endforeach
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        @endif
+
+                        <!-- <div id="flush-collapse-id##"
+                            class="accordion-collapse collapse show"
+                            aria-labelledby="flush-heading-id##" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <div class="row justify-content-between">
+                                    <div class="col-md-8">
+                                        <p>Description</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+
+
+<!--
+            <div class="col-lg-8"> -->
                 <!-- <div class="heading">Description</div>
                     <p>{!! $project->description !!}</a></p> -->
-                <div class="row justify-content-between">
+                <!-- <div class="row justify-content-between">
                     <div class="col-sm-4">
                         <span class="text-black-50 d-block">Scope of Services:</span>
                         <ul>
@@ -79,7 +201,7 @@
                     </div>
                     @endif
                 </div>
-            </div>
+            </div> -->
         </div>
 
     </div>

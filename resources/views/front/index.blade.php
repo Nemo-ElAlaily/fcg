@@ -55,14 +55,7 @@
         <div class="row g-0">
             <div class="col-lg-4">
                 <h2 class="heading">Who We Are </h2>
-                <p style="text-align: justify;">Welcome to Distinguished Experts for Architectural Engineering Co. DEC, where innovation meets expertise in architectural engineering solutions. With a legacy spanning over 43 years, we have been at the forefront of shaping the built environment across Saudi Arabia and Middle East, providing unparalleled services in design, engineering, project management, and beyond.</p>
-
-                    <p>At DEC, our dedicated team of professionals combines passion with precision to deliver visionary architectural solutions that exceed expectations. From conceptualization to realization, we strive for excellence in every aspect of our projects, ensuring sustainability, functionality, and aesthetic appeal.</p>
-
-                    <p>With a proven track record of successful projects in diverse sectors such as Architecture & Engineering, Project Management, and Construction Supervision, we have earned a reputation as a trusted partner in transforming ideas into iconic structures. Our commitment to innovation, sustainability, and client satisfaction drives us to continually push the boundaries of architectural engineering.</p>
-
-                    <p>As we embark on this journey together, we invite you to explore the possibilities with DEC. Let's build the future, one landmark at a time.</p>
-
+                <p style="text-align: justify;">Welcome to Distinguished Experts for Architectural Engineering Co. (DEC), where creativity and precision converge to shape the future of the built environment. For over four decades, DEC has epitomized innovation and excellence in Saudi Arabia and the Middle East. Our team of visionary architects, brilliant engineers, astute urban planners, and inspired interior designers collaborate to create masterpieces that transcend construction, weaving stories into the fabric of our cities. Each project embodies sustainability, innovation, and elegance, from concept to completion. Our design-build philosophy ensures seamless execution, blending creative vision with impeccable craftsmanship. Join DEC on an adventurous journey into uncharted territories of design and engineering, crafting the future one iconic landmark at a time.</p>
                 <!-- <p><a href="#" class="more-2">Learn more <span class="icon-arrow_forward"></span></a></p> -->
             </div>
             <div class="col-lg-7 ms-auto">
@@ -77,11 +70,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
-                <h2 class="heading">Services</h2>
-                <p>Our team of professional architects and engineers is dedicated to delivering client-centered service
-                    through our responsible architectural practice across KSA and the Middle East. Our commitment to
-                    excellence, professionalism, and exceptional service reflects our mission as we work diligently to
-                    bring our clients' ideas and needs to fruition.</p>
+                <h2 class="heading">Services <p class="font-weight-lighter">(An Introduction To The Disciplines)</p></h2>
+                <p style="text-align: justify;">DEC's journey spans over four decades, evolving from a visionary founder to a vibrant team of skilled professionals. Our strength lies in diverse expertise across disciplines such as architecture, urbanism, landscape design, and structural engineering, creating a synergy that fosters innovation and excellence. With branches in Riyadh, Jeddah, Abha (Saudi Arabia), Egypt, and Lebanon, our multidisciplinary approach blends talents to push boundaries in modern design and construction, offering holistic, human-centered solutions to address complex challenges.</p>
             </div>
 
             <div class="col-lg-6 ms-auto">
