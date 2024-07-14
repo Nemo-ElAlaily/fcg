@@ -70,7 +70,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
-                <h2 class="heading">Services <p class="font-weight-lighter">(An Introduction To The Disciplines)</p></h2>
+                <h2 class="heading">Services</h2>
                 <p style="text-align: justify;">DEC's journey spans over four decades, evolving from a visionary founder to a vibrant team of skilled professionals. Our strength lies in diverse expertise across disciplines such as architecture, urbanism, landscape design, and structural engineering, creating a synergy that fosters innovation and excellence. With branches in Riyadh, Jeddah, Abha (Saudi Arabia), Egypt, and Lebanon, our multidisciplinary approach blends talents to push boundaries in modern design and construction, offering holistic, human-centered solutions to address complex challenges.</p>
             </div>
 
@@ -157,7 +157,7 @@
                 <h2 class="heading">Awarded Projects</h2>
             </div>
             <div class="col-lg-6">
-                <p>DEC projects have gained recognition from top trackers, magazines, and events as a result of our
+                <p style="text-align: justify;">DEC projects have gained recognition from top trackers, magazines, and events as a result of our
                     pursuit of excellence and commitment to delivering only the finest to our clients. At DEC, we
                     recognize a group of forward-thinking designers who are determined to tackle the critical challenges
                     of our time. We are passionate about improving people's lives and serving our clients. Together, we

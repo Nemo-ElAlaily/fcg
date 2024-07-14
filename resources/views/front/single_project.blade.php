@@ -129,81 +129,10 @@
                         </div>
                         @endif
 
-                        <!-- <div id="flush-collapse-id##"
-                            class="accordion-collapse collapse show"
-                            aria-labelledby="flush-heading-id##" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">
-                                <div class="row justify-content-between">
-                                    <div class="col-md-8">
-                                        <p>Description</p>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>
-
-
-<!--
-            <div class="col-lg-8"> -->
-                <!-- <div class="heading">Description</div>
-                    <p>{!! $project->description !!}</a></p> -->
-                <!-- <div class="row justify-content-between">
-                    <div class="col-sm-4">
-                        <span class="text-black-50 d-block">Scope of Services:</span>
-                        <ul>
-                            @foreach ($project->services->sortBy('created_at') as $index => $service)
-                            <span class="text-black-50 d-block"> {{ $service->name }} </span>
-                            @endforeach
-                        </ul>
-                    </div>
-                    <div class="col-sm-4 border-left">
-                        <span class="text-black-50 d-block">Area:</span>
-                        <ul>
-                            <span class="text-black-50 d-block"> {{ $project->area }} </span>
-                        </ul>
-                        <span class="text-black-50 d-block">Client:</span>
-                        <ul>
-                            <span class="text-black-50 d-block"> {{ $project->client->name }} </span>
-                        </ul>
-                        <span class="text-black-50 d-block">Location:</span>
-                        <ul>
-                            <span class="text-black-50 d-block"> {{ $project->location }} </span>
-                        </ul>
-                        <span class="text-black-50 d-block">Category:</span>
-                        <ul>
-                            <a href="{{ route('category.projects', $project->category->slug) }}">{{
-                                $project->category->name }}</a>
-                        </ul>
-
-                    </div>
-                    @if ($project->amenities || $project->extra_info)
-                    <div class="col-sm-4 border-left">
-                        @if ($project->amenities)
-                        <div class="row mb-lg-0 mb-4">
-                            <span class="text-black-50 d-block">Amenities:</span>
-                            <ul>
-                                <span class="text-black-50 d-block ml-4"> {!! $project->amenities !!} </span>
-                            </ul>
-                        </div>
-                        @endif
-
-                        @if ($project->extra_info)
-                        <div class="row mb-lg-0 mb-4">
-                            <span class="text-black-50 d-block">Information:</span>
-                            <ul>
-                                <span class="text-black-50 d-block ml-4"> {!! $project->extra_info !!} </span>
-                            </ul>
-                        </div>
-                        @endif
-                    </div>
-                    @endif
-                </div>
-            </div> -->
         </div>
-
     </div>
 </div>
 <div class="section sec-news pt-0">
