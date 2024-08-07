@@ -66,7 +66,7 @@
 </div>
 
 @if(count($services) > 0)
-<div class="sec-3 section bg-light">
+<div class="section sec-news bg-light">
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
