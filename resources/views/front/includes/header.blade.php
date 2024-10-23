@@ -20,7 +20,7 @@
 						<a href="{{ route('categories') }}">Projects</a>
 						<ul class="dropdown">
                             @foreach($project_categories as $index => $category)
-                                @if(count($category->projects) >0 )
+                                @if($category->projects()->count() >0 )
 							    <li><a href="{{ route('category.projects', $category->slug) }}">{{ ucwords($category->name) }}</a></li>
                                 @endif
                             @endforeach

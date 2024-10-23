@@ -50,8 +50,8 @@ class FrontController extends Controller
         $initialMarkers = [
             [
                 'position' => [
-                    'lat' => 24.831633091238768,
-                    'lng' => 46.67522527099766
+                    'lat' => 24.677318871951606,
+                    'lng' => 46.69372109952715
                 ],
                 'draggable' => false,
                 'name' => 'Riyadh, HQ',

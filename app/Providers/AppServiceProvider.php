@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Builder;
 
 use App\Models\Settings\SiteSettings;
 use App\Models\Category;
@@ -31,7 +32,9 @@ class AppServiceProvider extends ServiceProvider
     {
         // Fetch the Site Settings object
         $site_settings = SiteSettings::find(1);
-        $project_categories = Category::where('type', '1')->get();
+        $project_categories = Category::with('projects')->whereHas('projects', function (Builder $query) {
+            $query->where('is_active', '1');
+           })->get();
         $hq = Branch::find(8);
 
         siteSettings();

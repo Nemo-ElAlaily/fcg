@@ -9,10 +9,10 @@
                     <div class="col-12 col-sm-12 col-md-12">
                         <div class="widget">
                             <ul class="list-unstyled">
-                                <li class="my-2">Address: <a style="color: #7a7a7a;" href="https://maps.app.goo.gl/nJbScjAffHx7gmaY8">Riyadh, Al Olaya Dist. Shaddad Ibn Aous, 2nd Floor, Office 7, Al Olaya, Riyadh 12611, KSA</a></li>
+                                <li class="my-2">Address: <a style="color: #7a7a7a;" href="https://maps.app.goo.gl/nJbScjAffHx7gmaY8">Olaya Street- Shaddad Ibn Aous , Taya Center, 2nd Floor, Office 7- Al Olaya Dist., Riyadh, KSA.</a></li>
                                 <li class="my-2">E-mail: {{ $hq -> email}}</li>
                                 <li class="my-2">Telephone: {{ $hq -> phone_no }}</li>
-                                <li class="my-2">Mobile: +966 58 031 9349 - +966 594782001</li>
+                                <li class="my-2">Mobile: <a href="tel:+966536625257">+966 53 6625257</a></li>
                             </ul>
                         </div>
                     </div>
@@ -44,9 +44,9 @@
                                     <div class="widget">
                                         <ul class="list-unstyled links">
                                             @foreach($project_categories as $index => $category)
-                                                @if(count($category->projects) >0 )
+                                                @if($category->projects()->count() >0 )
                                                 <li><a href="{{ route('category.projects', $category->slug) }}">{{ ucwords($category->name) }}</a></li>
-                                                @if($index == 5)
+                                                @if($index == 4)
                                                     @break
                                                 @endif
                                                 @endif
@@ -58,7 +58,7 @@
                                     <div class="widget">
                                         <ul class="list-unstyled links">
                                             @foreach($project_categories as $index => $category)
-                                                @if(count($category->projects) >0 && $index > 5 )
+                                                @if($category->projects()->count() >0 && $index > 4 )
                                                 <li><a href="{{ route('category.projects', $category->slug) }}">{{ ucwords($category->name) }}</a></li>
                                                 @endif
                                             @endforeach
