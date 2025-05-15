@@ -9,7 +9,7 @@
                     <div class="col-12 col-sm-12 col-md-12">
                         <div class="widget">
                             <ul class="list-unstyled">
-                                <li class="my-2">Address: <a style="color: #7a7a7a;" href="https://maps.app.goo.gl/nJbScjAffHx7gmaY8">Olaya Street- Shaddad Ibn Aous , Taya Center, 2nd Floor, Office 7- Al Olaya Dist., Riyadh, KSA.</a></li>
+                                <li class="my-2">Address: <a style="color: #7a7a7a;" href="https://maps.app.goo.gl/nJbScjAffHx7gmaY8">8991 Olaya Str, Taya Business Tower, 2nd Floor, Office 7- Al Olaya Dist., Riyadh, KSA. – N. Add. RHOA8991.</a></li>
                                 <li class="my-2">E-mail: {{ $hq -> email}}</li>
                                 <li class="my-2">Telephone: {{ $hq -> phone_no }}</li>
                                 <li class="my-2">Mobile: <a href="tel:+966536625257">+966 53 6625257</a></li>
