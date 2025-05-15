@@ -38,7 +38,7 @@
 					<p>{!! $site_settings -> vision !!}</p>
 				</div>
 				<div class="col-lg-7">
-                    <img src="{{ $site_settings -> vision_image_path }}" alt="Image" class="img-fluid w-100">
+                    <img src="{{ $site_settings -> vision_image_path }}" alt="Image" class="img-fluid w-100" oncontextmenu="return false;">
 				</div>
 			</div>
 		</div>
@@ -46,7 +46,7 @@
 		<div class="container">
 			<div class="row justify-content-between">
 				<div class="col-lg-7">
-                    <img src="{{ $site_settings -> mission_image_path }}" alt="Image" class="img-fluid w-100">
+                    <img src="{{ $site_settings -> mission_image_path }}" alt="Image" class="img-fluid w-100" oncontextmenu="return false;">
 				</div>
                 <div class="col-lg-4 align-self-center mb-5">
 					<h2 class="heading heading-right mb-4">Our Mission</h2>

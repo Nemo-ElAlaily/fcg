@@ -59,7 +59,7 @@
                 <!-- <p><a href="#" class="more-2">Learn more <span class="icon-arrow_forward"></span></a></p> -->
             </div>
             <div class="col-lg-7 ms-auto">
-                <img src="{{ asset('front')}}/images/we-create.png" alt="Image" class="img-fluid img-r">
+                <img src="{{ asset('front')}}/images/we-create.png" alt="Image" class="img-fluid img-r" oncontextmenu="return false;">
             </div>
         </div>
     </div>
@@ -93,7 +93,7 @@
                             <div class="accordion-body">
                                 <div class="row justify-content-between">
                                     <div class="col-md-4">
-                                        <img src="{{ $service -> image_path }}" alt="Image" class="img-fluid">
+                                        <img src="{{ $service -> image_path }}" alt="Image" class="img-fluid" oncontextmenu="return false;">
                                     </div>
                                     <div class="col-md-8">
                                         <p>{!! $service -> description !!}</p>
@@ -131,7 +131,7 @@
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                 <div class="single-portfolio h-100">
                     <a href="{{ route('single.project', $project -> slug )}}" class="h-100">
-                        <img src="{{ $project -> image_path}}" alt="Image" class="img-fluid h-100">
+                        <img src="{{ $project -> image_path}}" alt="Image" class="img-fluid h-100" oncontextmenu="return false;">
                         <div class="contents">
                             <h3>{{ $project -> title}}</h3>
                             <div class="cat">{{$project -> category ? $project->category->name : '' }}</div>
@@ -172,7 +172,7 @@
                 <div class="post-entry-1 h-50">
                     <a href="{{ route('single.project', $project->slug) }}">
                         <img src="{{ $project -> image_path }}" alt="Image" class="img-fluid w-100"
-                            style="height: 420px;">
+                            style="height: 420px;" oncontextmenu="return false;">
                     </a>
                     <div class="post-entry-1-contents h-100">
                         <span class="meta d-inline-block mb-0">{{ date("F jS, Y", strtotime($project -> created_at)) }}
@@ -206,7 +206,7 @@
 
             <div class="clients-bar">
                 <img src="{{ $client -> logo_path}}" alt="Image" class="img-fluid"
-                    style="height: 100px; width: unset; margin: auto;">
+                    style="height: 100px; width: unset; margin: auto;" oncontextmenu="return false;">
             </div>
 
             @endif

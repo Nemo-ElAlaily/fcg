@@ -11,7 +11,7 @@
 		<div class="container">
 			<div class="site-navigation">
 				<a href="#" class="logo m-0 float-start">
-                    <img alt="logo" src="{{ $site_settings->logo_path }}" style="height: 50px; margin-left: 10px;"/>
+                    <img alt="logo" src="{{ $site_settings->logo_path }}" style="height: 50px; margin-left: 10px;" oncontextmenu="return false;"/>
 				</a>
 
 				<ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-start" style="margin-top: 10px;">
@@ -40,7 +40,7 @@
 				</a>
                 @if($site_settings -> phone)
 				<ul class="site-menu float-end d-none d-md-block">
-					<li><a href="{{ route('index') }}" class="p-0 pt-2"><img alt="HRTis Logo" id="hrtis_logo" src="{{ asset('front/images/HRTis-Logo-White.png') }}" style="height: 50px;"/></a></li>
+					<li><a href="{{ route('index') }}" class="p-0 pt-2"><img alt="HRTis Logo" id="hrtis_logo" src="{{ asset('front/images/HRTis-Logo-White.png') }}" style="height: 50px;" oncontextmenu="return false;"/></a></li>
 				</ul>
                 @endif
 

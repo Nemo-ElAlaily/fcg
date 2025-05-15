@@ -42,7 +42,7 @@
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
                         <div class="single-portfolio">
                             <a href="{{ route('single.project', $project->slug )}}">
-                                <img src="{{ $project -> image_path}}" alt="Image" class="img-fluid" style="height: 291px;">
+                                <img src="{{ $project -> image_path}}" alt="Image" class="img-fluid" style="height: 291px;" oncontextmenu="return false;">
                                 <div class="contents">
                                     <h3>{{ $project -> title}}</h3>
                                     <div class="cat">{{$project -> category ? $project->category->name : '' }}</div>
@@ -70,7 +70,7 @@
             <div class="col-lg-7">
                 <a href="https://www.youtube.com/watch?v=mwtbEGNABWU" class="video-wrap glightbox">
                     <span class="icon-play"></span>
-                    <img src="{{ asset('front/images/img_4.jpg')}}" alt="Image" class="img-fluid">
+                    <img src="{{ asset('front/images/img_4.jpg')}}" alt="Image" class="img-fluid" oncontextmenu="return false;">
                 </a>
             </div>
         </div>

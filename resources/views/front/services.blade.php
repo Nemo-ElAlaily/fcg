@@ -25,7 +25,7 @@
                     <div class="col-lg-4">
                         <div class="d-flex custom-card">
                             <div class="img">
-                                <img src="{{ $service->image_path }}" alt="{{ $service->name }}" class="img-fluid">
+                                <img src="{{ $service->image_path }}" alt="{{ $service->name }}" class="img-fluid" oncontextmenu="return false;">
                             </div>
                             <div class="text">
                                 <h3 class="h6 fw-bold text-black">{{ $service->name }}</h3>
@@ -54,7 +54,7 @@
 
                 <div class="clients-bar">
                     <img src="{{ $client -> logo_path}}" alt="Image" class="img-fluid"
-                        style="height: 100px; width: unset; margin: auto;">
+                        style="height: 100px; width: unset; margin: auto;" oncontextmenu="return false;">
                 </div>
 
                 @endif
@@ -82,7 +82,7 @@
                         <div class="col-lg-4 col-md-6 mb-4">
                             <div class="post-entry-1 h-100">
                                 <a href="{{ route('single.project', $project->slug) }}">
-                                    <img src="{{ $project->image_path }}" alt="Image" class="img-fluid">
+                                    <img src="{{ $project->image_path }}" alt="Image" class="img-fluid" oncontextmenu="return false;">
                                 </a>
                                 <div class="post-entry-1-contents">
                                     <span

@@ -23,7 +23,7 @@
 
         <div class="row mb-5 justify-content-between">
             <div class="col-lg-7 mb-lg-0 mb-4">
-                <img src="{{ $project->image_path }}" alt="Image" class="img-fluid w-100">
+                <img src="{{ $project->image_path }}" alt="Image" class="img-fluid w-100" oncontextmenu="return false;" oncontextmenu="return false;">
             </div>
 
             <div class="col-lg-5 ms-auto">
@@ -150,7 +150,8 @@
                 <div class="py-1">
                     <img src="{{ asset('uploads/projects/gallery/') . '/' . $item }}"
                         alt="{{ $project->title . $index }}" class="img-fluid video-wrap glightbox" data-toggle="modal"
-                        data-target="#exampleModalCenter">
+                        data-target="#exampleModalCenter"
+                        oncontextmenu="return false;">
                 </div>
                 @endif
                 @endforeach
@@ -161,7 +162,8 @@
                 <div class="py-1">
                     <img src="{{ asset('uploads/projects/gallery/') . '/' . $item }}"
                         alt="{{ $project->title . $index }}" class="img-fluid video-wrap glightbox" data-toggle="modal"
-                        data-target="#exampleModalCenter">
+                        data-target="#exampleModalCenter"
+                        oncontextmenu="return false;">
                 </div>
                 @endif
                 @endforeach
@@ -172,7 +174,8 @@
                 <div class="py-1">
                     <img src="{{ asset('uploads/projects/gallery/') . '/' . $item }}"
                         alt="{{ $project->title . $index }}" class="img-fluid video-wrap glightbox" data-toggle="modal"
-                        data-target="#exampleModalCenter">
+                        data-target="#exampleModalCenter"
+                        oncontextmenu="return false;">
                 </div>
                 @endif
                 @endforeach
@@ -183,7 +186,8 @@
                 <div class="py-1">
                     <img src="{{ asset('uploads/projects/gallery/') . '/' . $item }}"
                         alt="{{ $project->title . $index }}" class="img-fluid video-wrap glightbox" data-toggle="modal"
-                        data-target="#exampleModalCenter">
+                        data-target="#exampleModalCenter"
+                        oncontextmenu="return false;">
                 </div>
                 @endif
                 @endforeach
