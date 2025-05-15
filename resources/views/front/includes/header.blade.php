@@ -30,7 +30,7 @@
 					<li><a href="{{ route('services')}}">Services</a></li>
 					<li><a href="{{ route('about')}}">About</a></li>
 					<li><a href="{{ route('contact')}}">Contact Us</a></li>
-					<li><a href="{{ asset('DEC OFFICE PROFIL 2024 Riyadh REV1.pdf')}}" download>Our Portfolio</a></li>
+					<li><a href="{{ asset('DEC OFFICE PROFIL 024-025 Riyadh REV1.pdf')}}" download>Our Portfolio</a></li>
 				</ul>
 
 
