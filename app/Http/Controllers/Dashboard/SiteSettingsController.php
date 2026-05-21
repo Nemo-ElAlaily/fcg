@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreSiteSettingsRequest;
 use App\Http\Requests\UpdateSiteSettingsRequest;
 use App\Models\Settings\SiteSettings;
+use Illuminate\Support\Facades\Cache;
 
 class SiteSettingsController extends Controller
 {
@@ -87,6 +88,7 @@ class SiteSettingsController extends Controller
         $request_data['mission_image'] = $missionImagePath;
         $request_data['vision_image'] = $visionImagePath;
         $site_settings->update($request_data);
+        Cache::forget('site_settings');
 
         session()->flash('success', 'Updated Successfully');
         return redirect()->route('dashboard.settings.site.show', $site_settings->id);

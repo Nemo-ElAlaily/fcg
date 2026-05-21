@@ -119,7 +119,7 @@
                 </div>
 
                 <div class="">
-                    <button type="submit" class="btn btn-primary w-100">Create Branch</button>
+                    <button type="submit" class="btn btn-primary w-100">Update Branch</button>
                 </div>
             </div>
         </form>

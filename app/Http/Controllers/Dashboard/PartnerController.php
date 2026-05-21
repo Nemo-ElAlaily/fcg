@@ -198,7 +198,6 @@ class PartnerController extends Controller
             session()->flash('success', 'Deleted Successfully');
             return redirect()->route('dashboard.partners.index');
         } catch (\Exception $exception) {
-            return $exception;
             session()->flash('error', 'contact admin');
             return redirect()->route('dashboard.partners.index');
         } // end of try -> catch

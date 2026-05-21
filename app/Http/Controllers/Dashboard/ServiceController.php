@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreServiceRequest;
 use App\Http\Requests\UpdateServiceRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use App\Models\Service;
 
 class ServiceController extends Controller
@@ -65,7 +66,10 @@ class ServiceController extends Controller
             }
 
             $service =  Service::create($request_data);
-
+            Cache::forget('front.services');
+            Cache::forget('front.services.limited');
+            Cache::forget('front.latest_projects');
+            Cache::forget('front.clients');
             DB::commit();
 
             session()->flash('success', ('Added Successfully'));
@@ -156,6 +160,10 @@ class ServiceController extends Controller
             }// end of outer if
 
             $service -> update($request_data);
+            Cache::forget('front.services');
+            Cache::forget('front.services.limited');
+            Cache::forget('front.latest_projects');
+            Cache::forget('front.clients');
 
             DB::commit();
 
@@ -191,6 +199,10 @@ class ServiceController extends Controller
             }
 
             $service->delete();
+            Cache::forget('front.services');
+            Cache::forget('front.services.limited');
+            Cache::forget('front.latest_projects');
+            Cache::forget('front.clients');
 
             session()->flash('success', 'Deleted Successfully');
             return redirect()->route('dashboard.services.index');

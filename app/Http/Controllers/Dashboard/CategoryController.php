@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use App\Models\Category;
 
 class CategoryController extends Controller
@@ -64,6 +65,8 @@ class CategoryController extends Controller
             }
 
             $category =  Category::create($request_data);
+            Cache::forget('project_categories');
+            Cache::forget('front.categories');
 
             DB::commit();
 
@@ -155,6 +158,8 @@ class CategoryController extends Controller
             }// end of outer if
 
             $category -> update($request_data);
+            Cache::forget('project_categories');
+            Cache::forget('front.categories');
 
             DB::commit();
 
@@ -186,6 +191,8 @@ class CategoryController extends Controller
 
         try {
             $category->delete();
+            Cache::forget('project_categories');
+            Cache::forget('front.categories');
 
             session()->flash('success', 'Deleted Successfully');
             return redirect()->route('dashboard.categories.index');

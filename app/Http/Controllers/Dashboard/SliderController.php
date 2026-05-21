@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreSliderRequest;
 use App\Http\Requests\UpdateSliderRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use App\Models\Slider;
 
 class SliderController extends Controller
@@ -63,6 +64,7 @@ class SliderController extends Controller
             }
 
             $slider =  Slider::create($request_data);
+            Cache::forget('front.sliders');
 
             DB::commit();
 
@@ -153,6 +155,7 @@ class SliderController extends Controller
             }// end of outer if
 
             $slider -> update($request_data);
+            Cache::forget('front.sliders');
 
             DB::commit();
 
@@ -188,6 +191,7 @@ class SliderController extends Controller
             }
 
             $slider->delete();
+            Cache::forget('front.sliders');
 
             session()->flash('success', 'Deleted Successfully');
             return redirect()->route('dashboard.sliders.index');

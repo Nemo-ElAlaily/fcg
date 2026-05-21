@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
+use Carbon\Carbon;
 use App\Http\Requests\StorePageRequest;
 use App\Http\Requests\UpdatePageRequest;
 use App\Models\Pages\Page;
@@ -28,7 +29,7 @@ class PageController extends Controller
         return view('dashboard.pages.create');
     } // end of create
 
-    public function store(PageCreateRequest $request)
+    public function store(StorePageRequest $request)
     {
         if(!$request -> has('is_active')){
             $request -> request -> add(['is_active' => 0]);
@@ -135,10 +136,10 @@ class PageController extends Controller
         if($request -> banner){
             if ($page -> banner != 'default.png') {
                 Storage::disk('public_uploads')->delete('/pages/banners/' . $page -> banner);
-                $banner = uploadImage('uploads/pages/images/' . Carbon::now() -> year . '/' . Carbon::now() -> month . '/' ,  $request -> image);
-                $request_data['banner'] = Carbon::now() -> year . '/' . Carbon::now() -> month . '/' . $banner;
             } // end of inner if
 
+            $banner = uploadImage('uploads/pages/banners/' . Carbon::now() -> year . '/' . Carbon::now() -> month . '/' ,  $request -> banner);
+            $request_data['banner'] = Carbon::now() -> year . '/' . Carbon::now() -> month . '/' . $banner;
         } else {
             $request_data['banner'] = $page -> banner;
         }// end of outer if

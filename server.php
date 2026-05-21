@@ -7,6 +7,12 @@
  * @author   Taylor Otwell <taylor@laravel.com>
  */
 
+// Suppress deprecation warnings in production
+if (function_exists('error_reporting')) {
+    error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
+    ini_set('display_errors', '0');
+}
+
 $uri = urldecode(
     parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?? ''
 );

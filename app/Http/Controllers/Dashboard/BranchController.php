@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreBranchRequest;
 use App\Http\Requests\UpdateBranchRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use App\Models\Branch;
 
 class BranchController extends Controller
@@ -64,6 +65,7 @@ class BranchController extends Controller
             }
 
             $branch =  Branch::create($request_data);
+            Cache::forget('hq_branch');
 
             DB::commit();
 
@@ -156,6 +158,7 @@ class BranchController extends Controller
             }// end of outer if
 
             $branch -> update($request_data);
+            Cache::forget('hq_branch');
 
             DB::commit();
 
@@ -191,6 +194,7 @@ class BranchController extends Controller
             }
 
             $branch->delete();
+            Cache::forget('hq_branch');
 
             session()->flash('success', 'Deleted Successfully');
             return redirect()->route('dashboard.branches.index');

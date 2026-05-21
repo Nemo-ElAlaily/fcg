@@ -75,7 +75,6 @@ class CertificateController extends Controller
 
         } catch (\Exception $exception) {
             DB::rollback();
-            return $exception;
             session()->flash('error', 'contact admin');
             return redirect()->route('dashboard.certificates.index');
         }// end of try & catch
@@ -163,7 +162,6 @@ class CertificateController extends Controller
 
         } catch (\Exception $exception) {
             DB::rollback();
-            return $exception;
             session()->flash('error', 'Please Contact Admin');
             return redirect()->route('dashboard.certificates.index');
 

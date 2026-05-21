@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use App\Models\Project;
 use App\Models\Category;
 use App\Models\Client;
@@ -25,9 +26,10 @@ class ProjectController extends Controller
      */
     public function index(Request $request)
     {
-        $projects = Project::when($request -> search , function ($query) use ($request) {
-            return $query -> where('title', 'like' , '%' . $request -> search . '%');
-        })->latest()->paginate(ADMIN_PAGINATION_COUNT);
+        $projects = Project::with(['category', 'client'])
+            ->when($request -> search , function ($query) use ($request) {
+                return $query -> where('title', 'like' , '%' . $request -> search . '%');
+            })->latest()->paginate(ADMIN_PAGINATION_COUNT);
         return view('dashboard.projects.index', compact('projects'));
     } // end of index
 
@@ -87,6 +89,10 @@ class ProjectController extends Controller
                 $project->services()->attach($service);
             }
 
+            Cache::forget('project_categories');
+            Cache::forget('front.awarded_projects');
+            Cache::forget('front.home_projects');
+            Cache::forget('front.latest_projects');
             DB::commit();
 
             session()->flash('success', ('Added Successfully'));
@@ -204,6 +210,10 @@ class ProjectController extends Controller
             $project -> update($request_data);
 
             $project->services()->sync($request -> services);
+            Cache::forget('project_categories');
+            Cache::forget('front.awarded_projects');
+            Cache::forget('front.home_projects');
+            Cache::forget('front.latest_projects');
 
             DB::commit();
 
@@ -243,6 +253,10 @@ class ProjectController extends Controller
             } // end of inner if
 
             $project -> delete();
+            Cache::forget('project_categories');
+            Cache::forget('front.awarded_projects');
+            Cache::forget('front.home_projects');
+            Cache::forget('front.latest_projects');
 
             session()->flash('success', 'Project Deleted Successfully');
             return redirect()->route('dashboard.projects.index');

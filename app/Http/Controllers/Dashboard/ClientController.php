@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use App\Models\Client;
 
 class ClientController extends Controller
@@ -64,6 +65,7 @@ class ClientController extends Controller
             }
 
             $client =  Client::create($request_data);
+            Cache::forget('front.clients');
 
             DB::commit();
 
@@ -155,6 +157,7 @@ class ClientController extends Controller
             }// end of outer if
 
             $client -> update($request_data);
+            Cache::forget('front.clients');
 
             DB::commit();
 
@@ -190,6 +193,7 @@ class ClientController extends Controller
             }
 
             $client->delete();
+            Cache::forget('front.clients');
 
             session()->flash('success', 'Deleted Successfully');
             return redirect()->route('dashboard.clients.index');

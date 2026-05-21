@@ -3,6 +3,8 @@
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Config;
 use App\Models\Settings\SiteSettings;
 
 function uploadImage($folder, $image)
@@ -13,7 +15,10 @@ function uploadImage($folder, $image)
 }
 
 function siteSettings(){
-    $site_settings = SiteSettings::find(1);
+    $site_settings = Cache::remember('site_settings', 1440, function () {
+        return SiteSettings::find(1);
+    });
+
     Config::set('services.facebook.client_id', $site_settings->facebook_client_id);
     Config::set('services.facebook.client_secret', $site_settings->facebook_secret_key);
     Config::set('services.facebook.redirect', $site_settings->facebook_redirect);

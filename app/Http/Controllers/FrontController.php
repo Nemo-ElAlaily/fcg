@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
 use App\Models\Service;
 use App\Models\Slider;
 use App\Models\Project;
@@ -16,11 +17,30 @@ class FrontController extends Controller
 {
     public function index()
     {
-        $services = Service::where('is_active', '1')->limit(4)->latest()->get();
-        $awarded_projects = Project::where([['is_awarded', '1'], ['is_active', '1'] ])->limit(3)->latest()->get();
-        $projects = Project::where([['add_to_home', '1'], ['is_active', '1'], ['is_awarded', '0'] ])->limit(6)->latest()->get();
-        $clients = Client::where('is_active', '1')->get();
-        $sliders = Slider::where('is_active', '1')->get();
+        $services = Cache::remember('front.services.limited', 1440, function () {
+            return Service::where('is_active', '1')->limit(4)->latest()->get();
+        });
+
+        $awarded_projects = Cache::remember('front.awarded_projects', 1440, function () {
+            return Project::with(['category', 'client'])
+                ->where([['is_awarded', '1'], ['is_active', '1']])
+                ->limit(3)->latest()->get();
+        });
+
+        $projects = Cache::remember('front.home_projects', 1440, function () {
+            return Project::with(['category', 'client', 'services'])
+                ->where([['add_to_home', '1'], ['is_active', '1'], ['is_awarded', '0']])
+                ->limit(6)->latest()->get();
+        });
+
+        $clients = Cache::remember('front.clients', 1440, function () {
+            return Client::where('is_active', '1')->get();
+        });
+
+        $sliders = Cache::remember('front.sliders', 1440, function () {
+            return Slider::where('is_active', '1')->get();
+        });
+
         return view('front.index', compact('services', 'awarded_projects', 'projects', 'clients', 'sliders'));
     } // end of index
 
@@ -31,16 +51,25 @@ class FrontController extends Controller
 
     public function services()
     {
-        $services = Service::where('is_active', '1')->latest()->get();
-        $latest_projects = Project::where('is_active', '1')->limit(3)->latest()->get();
-        $clients = Client::where('is_active', '1')->get();
+        $services = Cache::remember('front.services', 1440, function () {
+            return Service::where('is_active', '1')->latest()->get();
+        });
+
+        $latest_projects = Cache::remember('front.latest_projects', 1440, function () {
+            return Project::with(['category', 'client'])->where('is_active', '1')->limit(3)->latest()->get();
+        });
+
+        $clients = Cache::remember('front.clients', 1440, function () {
+            return Client::where('is_active', '1')->get();
+        });
+
         return view('front.services', compact('services', 'latest_projects', 'clients'));
     } // end of services
 
     public function serviceProjects($slug)
     {
-        $service = Service::where([['slug', $slug], ['is_active', '1']])->first();
-        $projects = $service->projects()->where([['is_active', '1'], ['image', '!=', 'default.png']])->latest()->paginate(FRONT_PAGINATION_COUNT);
+        $service = Service::where([['slug', $slug], ['is_active', '1']])->firstOrFail();
+        $projects = $service->projects()->with(['category', 'client'])->where([['is_active', '1'], ['image', '!=', 'default.png']])->latest()->paginate(FRONT_PAGINATION_COUNT);
         return view('front.projects', compact('projects'));
     } // end of seriveProjects
 
@@ -116,32 +145,34 @@ class FrontController extends Controller
 
     public function projects()
     {
-        $projects = Project::where('is_active', '1')->orderBy('category_id')->latest()->paginate(FRONT_PAGINATION_COUNT);
+        $projects = Project::with(['category', 'client', 'services'])->where('is_active', '1')->orderBy('category_id')->latest()->paginate(FRONT_PAGINATION_COUNT);
         return view('front.projects', compact('projects'));
     } // end of project
 
     public function awardedProjects()
     {
-        $projects = Project::where([['is_active', '1'], ['is_awarded', '1']])->orderBy('category_id')->latest()->paginate(FRONT_PAGINATION_COUNT);
+        $projects = Project::with(['category', 'client', 'services'])->where([['is_active', '1'], ['is_awarded', '1']])->orderBy('category_id')->latest()->paginate(FRONT_PAGINATION_COUNT);
         return view('front.projects', compact('projects'));
     } // end of awardedProjects
 
     public function categories()
     {
-        $categories = Category::where([['is_active', '1'], ['type', '1']])->get();
+        $categories = Cache::remember('front.categories', 1440, function () {
+            return Category::where([['is_active', '1'], ['type', '1']])->get();
+        });
         return view('front.categories', compact('categories'));
     } // end of catergories
 
     public function categoryProjects($slug)
     {
-        $category = Category::where([['slug', $slug], ['is_active', '1']])->first();
-        $projects = Project::where([['category_id', $category->id], ['is_active', '1']])->latest()->paginate(FRONT_PAGINATION_COUNT);
+        $category = Category::where([['slug', $slug], ['is_active', '1']])->firstOrFail();
+        $projects = Project::with(['category', 'client', 'services'])->where([['category_id', $category->id], ['is_active', '1']])->latest()->paginate(FRONT_PAGINATION_COUNT);
         return view('front.projects', compact('projects'));
     } //end of categoryProjects
 
     public function singleProject($slug)
     {
-        $project = Project::where('slug', $slug)->first();
+        $project = Project::with(['category', 'client', 'services'])->where('slug', $slug)->firstOrFail();
         return view('front.single_project', compact('project'));
     } // end of singleProject
 }
