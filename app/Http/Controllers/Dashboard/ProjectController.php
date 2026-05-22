@@ -89,10 +89,12 @@ class ProjectController extends Controller
                 $project->services()->attach($service);
             }
 
-            Cache::forget('project_categories');
-            Cache::forget('front.awarded_projects');
-            Cache::forget('front.home_projects');
-            Cache::forget('front.latest_projects');
+            event(new \App\Events\CacheInvalidated([
+                config('cache_keys.project_categories'),
+                config('cache_keys.front.awarded_projects'),
+                config('cache_keys.front.home_projects'),
+                config('cache_keys.front.latest_projects'),
+            ]));
             DB::commit();
 
             session()->flash('success', ('Added Successfully'));
@@ -210,10 +212,12 @@ class ProjectController extends Controller
             $project -> update($request_data);
 
             $project->services()->sync($request -> services);
-            Cache::forget('project_categories');
-            Cache::forget('front.awarded_projects');
-            Cache::forget('front.home_projects');
-            Cache::forget('front.latest_projects');
+            event(new \App\Events\CacheInvalidated([
+                config('cache_keys.project_categories'),
+                config('cache_keys.front.awarded_projects'),
+                config('cache_keys.front.home_projects'),
+                config('cache_keys.front.latest_projects'),
+            ]));
 
             DB::commit();
 
@@ -253,10 +257,12 @@ class ProjectController extends Controller
             } // end of inner if
 
             $project -> delete();
-            Cache::forget('project_categories');
-            Cache::forget('front.awarded_projects');
-            Cache::forget('front.home_projects');
-            Cache::forget('front.latest_projects');
+            event(new \App\Events\CacheInvalidated([
+                config('cache_keys.project_categories'),
+                config('cache_keys.front.awarded_projects'),
+                config('cache_keys.front.home_projects'),
+                config('cache_keys.front.latest_projects'),
+            ]));
 
             session()->flash('success', 'Project Deleted Successfully');
             return redirect()->route('dashboard.projects.index');

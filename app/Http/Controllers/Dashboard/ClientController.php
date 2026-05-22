@@ -65,7 +65,9 @@ class ClientController extends Controller
             }
 
             $client =  Client::create($request_data);
-            Cache::forget('front.clients');
+            event(new \App\Events\CacheInvalidated([
+                config('cache_keys.front.clients'),
+            ]));
 
             DB::commit();
 
@@ -157,7 +159,9 @@ class ClientController extends Controller
             }// end of outer if
 
             $client -> update($request_data);
-            Cache::forget('front.clients');
+            event(new \App\Events\CacheInvalidated([
+                config('cache_keys.front.clients'),
+            ]));
 
             DB::commit();
 
@@ -193,7 +197,9 @@ class ClientController extends Controller
             }
 
             $client->delete();
-            Cache::forget('front.clients');
+            event(new \App\Events\CacheInvalidated([
+                config('cache_keys.front.clients'),
+            ]));
 
             session()->flash('success', 'Deleted Successfully');
             return redirect()->route('dashboard.clients.index');

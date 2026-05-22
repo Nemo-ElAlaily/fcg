@@ -49,6 +49,8 @@
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
+                    @include('dashboard.partials._session')
+                    @include('dashboard.partials._errors')
                     @yield('content')
                 </div><!-- /.container-fluid -->
             </section>

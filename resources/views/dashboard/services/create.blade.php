@@ -14,8 +14,6 @@
 
 @section('content')
 
-@include('dashboard.partials._session')
-@include('dashboard.partials._errors')
 
 <!-- left column -->
 <div class="col-md-12">

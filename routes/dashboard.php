@@ -13,8 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-define('ADMIN_PAGINATION_COUNT', 10);
-
+if (! defined('ADMIN_PAGINATION_COUNT')) {
+    define('ADMIN_PAGINATION_COUNT', 10);
+}
 
 // Route::get('/admin', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 

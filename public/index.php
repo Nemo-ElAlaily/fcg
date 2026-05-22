@@ -31,6 +31,11 @@ if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php'))
 |
 */
 
+if (function_exists('error_reporting')) {
+    error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
+    ini_set('display_errors', '0');
+}
+
 require __DIR__.'/../vendor/autoload.php';
 
 /*

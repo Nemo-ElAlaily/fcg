@@ -13,8 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-define('FRONT_PAGINATION_COUNT', 12);
-
+if (! defined('FRONT_PAGINATION_COUNT')) {
+    define('FRONT_PAGINATION_COUNT', 12);
+}
 
 Route::get('/', 'FrontController@index')->name('index');
 Route::get('/about-us', 'FrontController@about')->name('about');

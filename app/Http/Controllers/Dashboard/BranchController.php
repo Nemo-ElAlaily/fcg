@@ -65,7 +65,9 @@ class BranchController extends Controller
             }
 
             $branch =  Branch::create($request_data);
-            Cache::forget('hq_branch');
+            event(new \App\Events\CacheInvalidated([
+                config('cache_keys.hq_branch'),
+            ]));
 
             DB::commit();
 
@@ -158,7 +160,9 @@ class BranchController extends Controller
             }// end of outer if
 
             $branch -> update($request_data);
-            Cache::forget('hq_branch');
+            event(new \App\Events\CacheInvalidated([
+                config('cache_keys.hq_branch'),
+            ]));
 
             DB::commit();
 
@@ -194,7 +198,9 @@ class BranchController extends Controller
             }
 
             $branch->delete();
-            Cache::forget('hq_branch');
+            event(new \App\Events\CacheInvalidated([
+                config('cache_keys.hq_branch'),
+            ]));
 
             session()->flash('success', 'Deleted Successfully');
             return redirect()->route('dashboard.branches.index');

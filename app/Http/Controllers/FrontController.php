@@ -17,27 +17,27 @@ class FrontController extends Controller
 {
     public function index()
     {
-        $services = Cache::remember('front.services.limited', 1440, function () {
+        $services = Cache::remember(config('cache_keys.front.services_limited'), config('cache_keys.ttl_minutes'), function () {
             return Service::where('is_active', '1')->limit(4)->latest()->get();
         });
 
-        $awarded_projects = Cache::remember('front.awarded_projects', 1440, function () {
+        $awarded_projects = Cache::remember(config('cache_keys.front.awarded_projects'), config('cache_keys.ttl_minutes'), function () {
             return Project::with(['category', 'client'])
                 ->where([['is_awarded', '1'], ['is_active', '1']])
                 ->limit(3)->latest()->get();
         });
 
-        $projects = Cache::remember('front.home_projects', 1440, function () {
+        $projects = Cache::remember(config('cache_keys.front.home_projects'), config('cache_keys.ttl_minutes'), function () {
             return Project::with(['category', 'client', 'services'])
                 ->where([['add_to_home', '1'], ['is_active', '1'], ['is_awarded', '0']])
                 ->limit(6)->latest()->get();
         });
 
-        $clients = Cache::remember('front.clients', 1440, function () {
+        $clients = Cache::remember(config('cache_keys.front.clients'), config('cache_keys.ttl_minutes'), function () {
             return Client::where('is_active', '1')->get();
         });
 
-        $sliders = Cache::remember('front.sliders', 1440, function () {
+        $sliders = Cache::remember(config('cache_keys.front.sliders'), config('cache_keys.ttl_minutes'), function () {
             return Slider::where('is_active', '1')->get();
         });
 
@@ -51,15 +51,15 @@ class FrontController extends Controller
 
     public function services()
     {
-        $services = Cache::remember('front.services', 1440, function () {
+        $services = Cache::remember(config('cache_keys.front.services'), config('cache_keys.ttl_minutes'), function () {
             return Service::where('is_active', '1')->latest()->get();
         });
 
-        $latest_projects = Cache::remember('front.latest_projects', 1440, function () {
+        $latest_projects = Cache::remember(config('cache_keys.front.latest_projects'), config('cache_keys.ttl_minutes'), function () {
             return Project::with(['category', 'client'])->where('is_active', '1')->limit(3)->latest()->get();
         });
 
-        $clients = Cache::remember('front.clients', 1440, function () {
+        $clients = Cache::remember(config('cache_keys.front.clients'), config('cache_keys.ttl_minutes'), function () {
             return Client::where('is_active', '1')->get();
         });
 
@@ -157,7 +157,7 @@ class FrontController extends Controller
 
     public function categories()
     {
-        $categories = Cache::remember('front.categories', 1440, function () {
+        $categories = Cache::remember(config('cache_keys.front.categories'), config('cache_keys.ttl_minutes'), function () {
             return Category::where([['is_active', '1'], ['type', '1']])->get();
         });
         return view('front.categories', compact('categories'));

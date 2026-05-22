@@ -39,6 +39,7 @@
         }
     },
     "scripts": {
+        "test": "php -d error_reporting=6143 -d display_errors=0 ./vendor/bin/phpunit --configuration phpunit.xml --colors=never",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"

@@ -1,9 +1,12 @@
 @if (Session::has('success'))
-
-<div class="row mt-3">
-    <button type="text" class="text-sm  col-md-6 col-md-offset-3  btn successDelivered" id="type-error">{{
-        Session::get('success') }}
-    </button>
-</div>
-
+    <div class="row mt-3">
+        <div class="col-12">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ Session::get('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
 @endif

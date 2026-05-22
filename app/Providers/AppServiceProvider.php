@@ -33,11 +33,40 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // Cache site-wide settings and navigation data for 24 hours
-        $site_settings = Cache::remember('site_settings', 1440, function () {
+        $site_settings = Cache::remember(config('cache_keys.site_settings'), config('cache_keys.ttl_minutes'), function () {
             return SiteSettings::find(1);
         });
 
-        $project_categories = Cache::remember('project_categories', 1440, function () {
+        if (!$site_settings) {
+            $site_settings = new SiteSettings([
+                'title' => '',
+                'welcome_phrase' => '',
+                'address' => '',
+                'city' => '',
+                'phone' => '',
+                'country' => '',
+                'meta_title' => '',
+                'meta_description' => '',
+                'meta_keyword' => '',
+                'logo' => 'default.png',
+                'favicon' => 'favicon.png',
+                'story' => '',
+                'mission' => '',
+                'vision' => '',
+                'story_image' => 'default.png',
+                'mission_image' => 'default.png',
+                'vision_image' => 'default.png',
+                'google_analytics' => '',
+                'google_client_id' => '',
+                'google_secret_key' => '',
+                'google_redirect' => '',
+                'facebook_client_id' => '',
+                'facebook_secret_key' => '',
+                'facebook_redirect' => '',
+            ]);
+        }
+
+        $project_categories = Cache::remember(config('cache_keys.project_categories'), config('cache_keys.ttl_minutes'), function () {
             return Category::with(['projects' => function ($query) {
                 $query->where('is_active', '1');
             }])->whereHas('projects', function (Builder $query) {
@@ -45,11 +74,11 @@ class AppServiceProvider extends ServiceProvider
             })->where('type', '1')->get();
         });
 
-        $hq = Cache::remember('hq_branch', 1440, function () {
+        $hq = Cache::remember(config('cache_keys.hq_branch'), config('cache_keys.ttl_minutes'), function () {
             return Branch::find(8);
         });
 
-        siteSettings();
+        setSiteSettingsConfig($site_settings);
 
         View::share([
             'site_settings' =>  $site_settings,

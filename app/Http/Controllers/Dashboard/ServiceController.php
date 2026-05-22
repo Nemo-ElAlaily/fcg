@@ -66,10 +66,12 @@ class ServiceController extends Controller
             }
 
             $service =  Service::create($request_data);
-            Cache::forget('front.services');
-            Cache::forget('front.services.limited');
-            Cache::forget('front.latest_projects');
-            Cache::forget('front.clients');
+            event(new \App\Events\CacheInvalidated([
+                config('cache_keys.front.services'),
+                config('cache_keys.front.services_limited'),
+                config('cache_keys.front.latest_projects'),
+                config('cache_keys.front.clients'),
+            ]));
             DB::commit();
 
             session()->flash('success', ('Added Successfully'));
@@ -160,10 +162,12 @@ class ServiceController extends Controller
             }// end of outer if
 
             $service -> update($request_data);
-            Cache::forget('front.services');
-            Cache::forget('front.services.limited');
-            Cache::forget('front.latest_projects');
-            Cache::forget('front.clients');
+            event(new \App\Events\CacheInvalidated([
+                config('cache_keys.front.services'),
+                config('cache_keys.front.services_limited'),
+                config('cache_keys.front.latest_projects'),
+                config('cache_keys.front.clients'),
+            ]));
 
             DB::commit();
 
@@ -199,10 +203,12 @@ class ServiceController extends Controller
             }
 
             $service->delete();
-            Cache::forget('front.services');
-            Cache::forget('front.services.limited');
-            Cache::forget('front.latest_projects');
-            Cache::forget('front.clients');
+            event(new \App\Events\CacheInvalidated([
+                config('cache_keys.front.services'),
+                config('cache_keys.front.services_limited'),
+                config('cache_keys.front.latest_projects'),
+                config('cache_keys.front.clients'),
+            ]));
 
             session()->flash('success', 'Deleted Successfully');
             return redirect()->route('dashboard.services.index');

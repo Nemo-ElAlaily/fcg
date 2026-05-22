@@ -65,8 +65,10 @@ class CategoryController extends Controller
             }
 
             $category =  Category::create($request_data);
-            Cache::forget('project_categories');
-            Cache::forget('front.categories');
+            event(new \App\Events\CacheInvalidated([
+                config('cache_keys.project_categories'),
+                config('cache_keys.front.categories'),
+            ]));
 
             DB::commit();
 
@@ -158,8 +160,10 @@ class CategoryController extends Controller
             }// end of outer if
 
             $category -> update($request_data);
-            Cache::forget('project_categories');
-            Cache::forget('front.categories');
+            event(new \App\Events\CacheInvalidated([
+                config('cache_keys.project_categories'),
+                config('cache_keys.front.categories'),
+            ]));
 
             DB::commit();
 
@@ -191,8 +195,10 @@ class CategoryController extends Controller
 
         try {
             $category->delete();
-            Cache::forget('project_categories');
-            Cache::forget('front.categories');
+            event(new \App\Events\CacheInvalidated([
+                config('cache_keys.project_categories'),
+                config('cache_keys.front.categories'),
+            ]));
 
             session()->flash('success', 'Deleted Successfully');
             return redirect()->route('dashboard.categories.index');

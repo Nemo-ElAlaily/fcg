@@ -64,7 +64,9 @@ class SliderController extends Controller
             }
 
             $slider =  Slider::create($request_data);
-            Cache::forget('front.sliders');
+            event(new \App\Events\CacheInvalidated([
+                config('cache_keys.front.sliders'),
+            ]));
 
             DB::commit();
 
@@ -155,7 +157,9 @@ class SliderController extends Controller
             }// end of outer if
 
             $slider -> update($request_data);
-            Cache::forget('front.sliders');
+            event(new \App\Events\CacheInvalidated([
+                config('cache_keys.front.sliders'),
+            ]));
 
             DB::commit();
 
@@ -191,7 +195,9 @@ class SliderController extends Controller
             }
 
             $slider->delete();
-            Cache::forget('front.sliders');
+            event(new \App\Events\CacheInvalidated([
+                config('cache_keys.front.sliders'),
+            ]));
 
             session()->flash('success', 'Deleted Successfully');
             return redirect()->route('dashboard.sliders.index');
