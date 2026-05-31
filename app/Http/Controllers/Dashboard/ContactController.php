@@ -15,7 +15,7 @@ class ContactController extends Controller
     {
         $forms = Contact::when($request -> search , function ($query) use ($request) {
             return $query -> where('name', 'like' , '%' . $request -> search . '%');
-        })->latest()->paginate(ADMIN_PAGINATION_COUNT);
+        })->latest()->paginate(defined('ADMIN_PAGINATION_COUNT') ? ADMIN_PAGINATION_COUNT : 10);
         return view('dashboard.contact.index', compact('forms'));
     }
 

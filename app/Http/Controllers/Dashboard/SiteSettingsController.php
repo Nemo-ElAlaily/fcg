@@ -23,7 +23,7 @@ class SiteSettingsController extends Controller
         $site_settings = SiteSettings::findorFail($id);
         $request_data = $request->except(['_token', '_method']);
         $logoPath = "";
-        if($request->logo){
+        if($request->hasFile('logo')){
             if ($site_settings -> logo != 'default.png') {
                 Storage::disk('public_uploads')->delete('/site/' . $site_settings -> logo);
             } // end of inner if
@@ -33,7 +33,7 @@ class SiteSettingsController extends Controller
         }// end of outer if
 
         $faviconPath = "";
-        if($request->favicon){
+        if($request->hasFile('favicon')){
             if ($site_settings -> favicon != 'favicon.png') {
                 Storage::disk('public_uploads')->delete('/site/' . $site_settings -> favicon);
             } // end of inner if
@@ -43,7 +43,7 @@ class SiteSettingsController extends Controller
         }// end of outer if
 
         $storyImagePath = "";
-        if($request->story_image){
+        if($request->hasFile('story_image')){
             if ($site_settings -> story_image != 'default.png') {
                 Storage::disk('public_uploads')->delete('/site/' . $site_settings -> story_image);
             } // end of inner if
@@ -53,7 +53,7 @@ class SiteSettingsController extends Controller
         }// end of outer if
 
         $missionImagePath = "";
-        if($request->mission_image){
+        if($request->hasFile('mission_image')){
             if ($site_settings -> mission_image != 'default.png') {
                 Storage::disk('public_uploads')->delete('/site/' . $site_settings -> mission_image);
             } // end of inner if
@@ -63,13 +63,23 @@ class SiteSettingsController extends Controller
         }// end of outer if
 
         $visionImagePath = "";
-        if($request->vision_image){
+        if($request->hasFile('vision_image')){
             if ($site_settings -> vision_image != 'default.png') {
                 Storage::disk('public_uploads')->delete('/site/' . $site_settings -> vision_image);
             } // end of inner if
             $visionImagePath = uploadImage('uploads/site/',  $request -> vision_image);
         } else {
             $visionImagePath = $site_settings -> vision_image;
+        }// end of outer if
+
+        $portfolioFilePath = "";
+        if($request->hasFile('portfolio_file')){
+            if ($site_settings->portfolio_file) {
+                Storage::disk('public_uploads')->delete('/site/' . $site_settings->portfolio_file);
+            } // end of inner if
+            $portfolioFilePath = uploadImage('uploads/site/',  $request->portfolio_file);
+        } else {
+            $portfolioFilePath = $site_settings->portfolio_file;
         }// end of outer if
 
         $request_data['google_analytics']=$request->google_analytics;
@@ -87,6 +97,7 @@ class SiteSettingsController extends Controller
         $request_data['story_image'] = $storyImagePath;
         $request_data['mission_image'] = $missionImagePath;
         $request_data['vision_image'] = $visionImagePath;
+        $request_data['portfolio_file'] = $portfolioFilePath;
         $site_settings->update($request_data);
         event(new \App\Events\CacheInvalidated([
             config('cache_keys.site_settings'),

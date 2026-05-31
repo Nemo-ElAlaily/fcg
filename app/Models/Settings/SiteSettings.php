@@ -29,6 +29,7 @@ class SiteSettings extends Model
         'mission_image',
         'vision_image',
         'favicon',
+        'portfolio_file',
         'google_analytics',
         'google_client_id',
         'google_secret_key',
@@ -44,6 +45,7 @@ class SiteSettings extends Model
         'story_image_path',
         'mission_image_path',
         'vision_image_path',
+        'portfolio_file_path',
     ];
 
     public function getLogoPathAttribute()
@@ -70,5 +72,10 @@ class SiteSettings extends Model
     {
         return asset('uploads/site/' . $this -> vision_image );
     } // end of vision
+
+    public function getPortfolioFilePathAttribute()
+    {
+        return $this->portfolio_file ? asset('uploads/site/' . $this->portfolio_file) : null;
+    } // end of portfolio file
 
 } // end of model

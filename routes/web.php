@@ -22,12 +22,13 @@ Route::get('/about-us', 'FrontController@about')->name('about');
 Route::get('/services', 'FrontController@services')->name('services');
 Route::get('/service-projects/{slug}', 'FrontController@serviceProjects')->name('service.projects');
 Route::get('/contact-us', 'FrontController@contact')->name('contact');
-Route::post('/contact-us', 'FrontController@postContact')->name('post.contact');
+Route::post('/contact-us', 'FrontController@postContact')->middleware('throttle:10,60')->name('post.contact');
 Route::get('/all-projects', 'FrontController@projects')->name('projects');
 Route::get('/awarded-projects', 'FrontController@awardedProjects')->name('awarded.projects');
 Route::get('/all-categories', 'FrontController@categories')->name('categories');
 Route::get('/projects/{slug}', 'FrontController@categoryProjects')->name('category.projects');
 Route::get('/all-projects/{slug}/', 'FrontController@singleProject')->name('single.project');
+Route::get('/download-portfolio', 'FrontController@downloadPortfolio')->name('download.portfolio');
 
 
 Auth::routes();

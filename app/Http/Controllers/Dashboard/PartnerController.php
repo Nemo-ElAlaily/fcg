@@ -58,7 +58,7 @@ class PartnerController extends Controller
             DB::beginTransaction();
 
             $image_path = "";
-            if($request -> logo){
+            if($request->hasFile('logo')){
                 $logo_path = uploadImage('uploads/partners/',  $request -> logo);
                 $request_data['logo'] = $logo_path;
             } else {
@@ -148,7 +148,7 @@ class PartnerController extends Controller
             DB::beginTransaction();
 
             $imagePath = "";
-            if($request -> logo){
+            if($request->hasFile('logo')){
                 if ($partner -> logo != 'default.png') {
                     Storage::disk('public_uploads')->delete('/partners/' . $partner -> logo);
                 } // end of inner if

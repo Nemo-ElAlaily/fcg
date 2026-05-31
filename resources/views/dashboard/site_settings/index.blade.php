@@ -126,6 +126,27 @@
                             </div>
                         </div>
 
+                        <div class="form-group col-lg-12">
+                            <label for="portfolio_file">Portfolio File (PDF)</label>
+                            @error('portfolio_file')
+                            <span class="text-danger mx-1">{{ $message }}</span>
+                            @enderror
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" name="portfolio_file" class="custom-file-input" id="portfolio_file"
+                                        accept=".pdf">
+                                    <label class="custom-file-label" for="portfolio_file">Choose Portfolio PDF</label>
+                                </div>
+                                @if($site_settings->portfolio_file)
+                                <div class="container mt-2">
+                                    <a href="{{ $site_settings->portfolio_file_path }}" target="_blank" class="btn btn-sm btn-info">
+                                        <i class="fa fa-file-pdf"></i> View Current Portfolio
+                                    </a>
+                                    <small class="d-block text-muted mt-1">{{ $site_settings->portfolio_file }}</small>
+                                </div>
+                                @endif
+                            </div>
+                        </div>
 
 
                     </div>

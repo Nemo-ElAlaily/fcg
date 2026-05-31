@@ -57,7 +57,7 @@ class BranchController extends Controller
             DB::beginTransaction();
 
             $image_path = "";
-            if($request -> image){
+            if($request->hasFile('image')){
                 $image_path = uploadImage('uploads/branches/',  $request -> image);
                 $request_data['image'] = $image_path;
             } else {
@@ -149,7 +149,7 @@ class BranchController extends Controller
             DB::beginTransaction();
 
             $imagePath = "";
-            if($request -> image){
+            if($request->hasFile('image')){
                 if ($branch -> image != 'default.png') {
                     Storage::disk('public_uploads')->delete('/branches/' . $branch -> image);
                 } // end of inner if

@@ -56,7 +56,7 @@ class SliderController extends Controller
             DB::beginTransaction();
 
             $image_path = "";
-            if($request -> image){
+            if($request->hasFile('image')){
                 $image_path = uploadImage('uploads/sliders/',  $request -> image);
                 $request_data['image'] = $image_path;
             } else {
@@ -146,7 +146,7 @@ class SliderController extends Controller
             DB::beginTransaction();
 
             $imagePath = "";
-            if($request -> image){
+            if($request->hasFile('image')){
                 if ($slider -> image != 'default.png') {
                     Storage::disk('public_uploads')->delete('/sliders/' . $slider -> image);
                 } // end of inner if

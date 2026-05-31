@@ -30,7 +30,9 @@
 					<li><a href="{{ route('services')}}">Services</a></li>
 					<li><a href="{{ route('about')}}">About</a></li>
 					<li><a href="{{ route('contact')}}">Contact Us</a></li>
-					<li><a href="{{ asset('DEC OFFICE PROFIL 2026 Riyadh R01.pdf')}}" download>Our Portfolio</a></li>
+					@if($site_settings->portfolio_file)
+					<li><a href="{{ route('download.portfolio') }}">Our Portfolio</a></li>
+					@endif
 				</ul>
 
 

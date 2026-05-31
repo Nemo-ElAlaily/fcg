@@ -56,7 +56,7 @@ class ProjectManagementOfficeController extends Controller
             DB::beginTransaction();
 
             $image_path = "";
-            if($request -> image){
+            if($request->hasFile('image')){
                 $image_path = uploadImage('uploads/offices/',  $request -> image);
                 $request_data['image'] = $image_path;
             } else {
@@ -144,7 +144,7 @@ class ProjectManagementOfficeController extends Controller
             DB::beginTransaction();
 
             $imagePath = "";
-            if($request -> image){
+            if($request->hasFile('image')){
                 if ($office -> image != 'default.png') {
                     Storage::disk('public_uploads')->delete('/offices/' . $office -> image);
                 } // end of inner if

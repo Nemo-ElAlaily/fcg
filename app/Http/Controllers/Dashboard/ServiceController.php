@@ -58,7 +58,7 @@ class ServiceController extends Controller
             DB::beginTransaction();
 
             $image_path = "";
-            if($request -> image){
+            if($request->hasFile('image')){
                 $image_path = uploadImage('uploads/services/',  $request -> image);
                 $request_data['image'] = $image_path;
             } else {
@@ -151,7 +151,7 @@ class ServiceController extends Controller
             DB::beginTransaction();
 
             $imagePath = "";
-            if($request -> image){
+            if($request->hasFile('image')){
                 if ($service -> image != 'default.png') {
                     Storage::disk('public_uploads')->delete('/services/' . $service -> image);
                 } // end of inner if

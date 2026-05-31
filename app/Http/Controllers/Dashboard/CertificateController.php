@@ -57,7 +57,7 @@ class CertificateController extends Controller
             DB::beginTransaction();
 
             $image_path = "";
-            if($request -> image){
+            if($request->hasFile('image')){
                 $image_path = uploadImage('uploads/certificates/',  $request -> image);
                 $request_data['image'] = $image_path;
             } else {
@@ -143,7 +143,7 @@ class CertificateController extends Controller
             DB::beginTransaction();
 
             $imagePath = "";
-            if($request -> image){
+            if($request->hasFile('image')){
                 if ($certificate -> image != 'default.png') {
                     Storage::disk('public_uploads')->delete('/certificates/' . $certificate -> image);
                 } // end of inner if

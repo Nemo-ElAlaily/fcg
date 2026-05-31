@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Service;
 use App\Models\Slider;
 use App\Models\Project;
 use App\Models\Category;
 use App\Models\Client;
 use App\Models\Contact;
+use App\Models\Settings\SiteSettings;
 
 
 class FrontController extends Controller
@@ -175,4 +177,37 @@ class FrontController extends Controller
         $project = Project::with(['category', 'client', 'services'])->where('slug', $slug)->firstOrFail();
         return view('front.single_project', compact('project'));
     } // end of singleProject
+
+    public function downloadPortfolio()
+    {
+        $siteSettings = SiteSettings::find(1);
+
+        if (!$siteSettings || !$siteSettings->portfolio_file) {
+            // Fallback to hardcoded file in public root if no file is set in settings
+            $fallbackPath = public_path('DEC OFFICE PROFIL 2026 Riyadh R01.pdf');
+            if (file_exists($fallbackPath)) {
+                return response()->download($fallbackPath, 'DEC OFFICE PROFIL.pdf', [
+                    'Content-Type' => 'application/pdf',
+                ]);
+            }
+            abort(404, 'Portfolio file not found');
+        }
+
+        $filePath = public_path('uploads/site/' . $siteSettings->portfolio_file);
+
+        if (!file_exists($filePath)) {
+            // Try fallback to public root
+            $fallbackPath = public_path('DEC OFFICE PROFIL 2026 Riyadh R01.pdf');
+            if (file_exists($fallbackPath)) {
+                return response()->download($fallbackPath, 'DEC OFFICE PROFIL.pdf', [
+                    'Content-Type' => 'application/pdf',
+                ]);
+            }
+            abort(404, 'Portfolio file does not exist on server');
+        }
+
+        return response()->download($filePath, 'DEC OFFICE PROFIL.pdf', [
+            'Content-Type' => 'application/pdf',
+        ]);
+    } // end of downloadPortfolio
 }

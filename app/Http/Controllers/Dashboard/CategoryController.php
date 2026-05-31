@@ -57,7 +57,7 @@ class CategoryController extends Controller
             DB::beginTransaction();
 
             $image_path = "";
-            if($request -> image){
+            if($request->hasFile('image')){
                 $image_path = uploadImage('uploads/categories/',  $request -> image);
                 $request_data['image'] = $image_path;
             } else {
@@ -149,7 +149,7 @@ class CategoryController extends Controller
             DB::beginTransaction();
 
             $imagePath = "";
-            if($request -> image){
+            if($request->hasFile('image')){
                 if ($category -> image != 'default.png') {
                     Storage::disk('public_uploads')->delete('/categories/' . $category -> image);
                 } // end of inner if

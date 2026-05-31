@@ -40,6 +40,12 @@
     },
     "scripts": {
         "test": "php -d error_reporting=6143 -d display_errors=0 ./vendor/bin/phpunit --configuration phpunit.xml --colors=never",
+        "deploy:cache": [
+            "@php artisan optimize:clear --ansi",
+            "@php artisan config:cache --ansi",
+            "@php artisan route:cache --ansi",
+            "@php artisan view:cache --ansi"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"

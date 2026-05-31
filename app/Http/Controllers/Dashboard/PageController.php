@@ -58,7 +58,7 @@ class PageController extends Controller
         $request_data = $request->except(['_token', '_method']);
 
         $image_path = "";
-        if($request -> image){
+        if($request->hasFile('image')){
             $image_path = uploadImage('uploads/pages/images/' . Carbon::now() -> year . '/' . Carbon::now() -> month . '/' ,  $request -> image);
             $request_data['image'] = Carbon::now() -> year . '/' . Carbon::now() -> month . '/' . $image_path;
         } else {
@@ -66,7 +66,7 @@ class PageController extends Controller
         }
 
         $banner = "";
-        if($request -> banner){
+        if($request->hasFile('banner')){
             $banner = uploadImage('uploads/pages/banners/' . Carbon::now() -> year . '/' . Carbon::now() -> month . '/' ,  $request -> banner);
             $request_data['banner'] = Carbon::now() -> year . '/' . Carbon::now() -> month . '/' . $banner;
         } else {
@@ -121,7 +121,7 @@ class PageController extends Controller
         $request_data = $request->except(['_token', '_method']);
 
         $imagePath = "";
-        if($request -> image){
+        if($request->hasFile('image')){
             if ($page -> image != 'default.png') {
                 Storage::disk('public_uploads')->delete('/pages/images/' . $page -> image);
                 $image_path = uploadImage('uploads/pages/images/' . Carbon::now() -> year . '/' . Carbon::now() -> month . '/' ,  $request -> image);
@@ -133,7 +133,7 @@ class PageController extends Controller
         }// end of outer if
 
         $banner = "";
-        if($request -> banner){
+        if($request->hasFile('banner')){
             if ($page -> banner != 'default.png') {
                 Storage::disk('public_uploads')->delete('/pages/banners/' . $page -> banner);
             } // end of inner if

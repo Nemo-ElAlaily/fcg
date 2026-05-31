@@ -12,6 +12,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\View;
+use Throwable;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,6 +33,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Paginator::useBootstrap();
+
+        // Skip DB-backed shared view data for console commands (route:list, config:cache, etc.).
+        if ($this->app->runningInConsole()) {
+            return;
+        }
+
+        try {
         // Cache site-wide settings and navigation data for 24 hours
         $site_settings = Cache::remember(config('cache_keys.site_settings'), config('cache_keys.ttl_minutes'), function () {
             return SiteSettings::find(1);
@@ -56,6 +65,7 @@ class AppServiceProvider extends ServiceProvider
                 'story_image' => 'default.png',
                 'mission_image' => 'default.png',
                 'vision_image' => 'default.png',
+                'portfolio_file' => null,
                 'google_analytics' => '',
                 'google_client_id' => '',
                 'google_secret_key' => '',
@@ -85,7 +95,44 @@ class AppServiceProvider extends ServiceProvider
             'project_categories' =>  $project_categories,
             'hq' => $hq,
         ]);
+        } catch (Throwable $exception) {
+            report($exception);
 
-        Paginator::useBootstrap();
+            $fallbackSiteSettings = new SiteSettings([
+                'title' => '',
+                'welcome_phrase' => '',
+                'address' => '',
+                'city' => '',
+                'phone' => '',
+                'country' => '',
+                'meta_title' => '',
+                'meta_description' => '',
+                'meta_keyword' => '',
+                'logo' => 'default.png',
+                'favicon' => 'favicon.png',
+                'story' => '',
+                'mission' => '',
+                'vision' => '',
+                'story_image' => 'default.png',
+                'mission_image' => 'default.png',
+                'vision_image' => 'default.png',
+                'portfolio_file' => null,
+                'google_analytics' => '',
+                'google_client_id' => '',
+                'google_secret_key' => '',
+                'google_redirect' => '',
+                'facebook_client_id' => '',
+                'facebook_secret_key' => '',
+                'facebook_redirect' => '',
+            ]);
+
+            setSiteSettingsConfig($fallbackSiteSettings);
+
+            View::share([
+                'site_settings' => $fallbackSiteSettings,
+                'project_categories' => collect(),
+                'hq' => null,
+            ]);
+        }
     }
 }
