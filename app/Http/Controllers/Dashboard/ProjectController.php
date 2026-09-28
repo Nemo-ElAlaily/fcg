@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 use App\Http\Requests\StoreProjectRequest;
+use App\Jobs\OptimizeImage;
 use App\Http\Requests\UpdateProjectRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -29,7 +30,7 @@ class ProjectController extends Controller
         $projects = Project::with(['category', 'client'])
             ->when($request -> search , function ($query) use ($request) {
                 return $query -> where('title', 'like' , '%' . $request -> search . '%');
-            })->latest()->paginate(ADMIN_PAGINATION_COUNT);
+            })->latest()->paginate(defined('ADMIN_PAGINATION_COUNT') ? ADMIN_PAGINATION_COUNT : 10);
         return view('dashboard.projects.index', compact('projects'));
     } // end of index
 
@@ -69,6 +70,7 @@ class ProjectController extends Controller
             $image_path = "";
             if($request->hasFile('image')){
                 $image = uploadImage('uploads/projects/',  $request -> image);
+                OptimizeImage::dispatch(public_path('uploads/projects/' . $image))->onQueue('images');
                 $request_data['image'] = $image;
             } else {
                 $request_data['image'] = 'default.png';
@@ -78,6 +80,7 @@ class ProjectController extends Controller
                 $gallery_arr = [];
                 foreach ( $request -> gallery as $index => $item){
                     $image_path = uploadImage('uploads/projects/gallery/',  $item);
+                    OptimizeImage::dispatch(public_path('uploads/projects/gallery/' . $image_path))->onQueue('images');
                     $gallery_arr += [$index => $image_path,];
                 }
                 $request_data['gallery'] = json_encode($gallery_arr);
@@ -171,42 +174,44 @@ class ProjectController extends Controller
             $request->has('is_active') ? $request->request->add(['is_active' => 1]) : $request->request->add(['is_active' => 0]);
             $request->has('is_awarded') ? $request->request->add(['is_awarded' => 1]) : $request->request->add(['is_awarded' => 0]);
             $request->has('add_to_home') ? $request->request->add(['add_to_home' => 1]) : $request->request->add(['add_to_home' => 0]);
-            $request_data = $request -> except(['_token', '_method', 'image', 'gallery', 'services']);
+            $request_data = $request -> except(['_token', '_method', 'image', 'gallery', 'old_gallery', 'gallery_present', 'services']);
 
             $request_data['slug'] = str_replace($characters, '-' , $request['title']);
 
             DB::beginTransaction();
 
-            if($request -> file('image') || $request -> file('gallery')) {
-                $imagePath = "";
-                if($request -> file('image')){
-                    if ($project -> image != 'default.png') {
-                        Storage::disk('public_uploads')->delete('/projects/' . $project -> image);
-                    } // end of inner if
-                    $image_path = uploadImage('uploads/projects/',  $request -> image);
-                    $request_data['image'] = $image_path;
-                } else {
-                    $request_data['image'] = $project -> image;
-                }// end of outer if
+            if($request -> file('image')){
+                if ($project -> image != 'default.png') {
+                    Storage::disk('public_uploads')->delete('/projects/' . $project -> image);
+                } // end of inner if
+                $image_path = uploadImage('uploads/projects/',  $request -> image);
+                OptimizeImage::dispatch(public_path('uploads/projects/' . $image_path))->onQueue('images');
+                $request_data['image'] = $image_path;
+            }
 
-                if($request -> file('gallery')){
+            // The edit form always submits `gallery_present`; kept images come back as `old_gallery[]`
+            // (their keys in the stored JSON), new uploads as `gallery[]` files.
+            if($request->has('gallery_present')){
+                $existing = $project->gallery ? json_decode($project->gallery, true) : [];
+                $kept_ids = array_map('strval', (array) $request->input('old_gallery', []));
+                $gallery_arr = [];
 
-                    if ($project -> gallery != null) {
-                        foreach (json_decode($project->gallery, true) as $index => $item) {
-                            Storage::disk('public_uploads')->delete('/projects/gallery/' . $item);
-                        }
-                        $project->update(['gallery' => null]);
-                    } // end of inner if
-
-
-                    $gallery_arr = [];
-                    foreach ($request -> file('gallery') as $index => $item){
-                        $gallery_arr += [ $index => $item ->hashName(),];
-                        $image_path = uploadImage('uploads/projects/gallery/',  $item);
-                        $gallery_arr += [$index => $image_path,];
+                foreach ($existing as $index => $item) {
+                    if (in_array((string) $index, $kept_ids, true)) {
+                        $gallery_arr[$index] = $item;
+                    } else {
+                        Storage::disk('public_uploads')->delete('/projects/gallery/' . $item);
                     }
-                    $request_data['gallery'] = json_encode($gallery_arr);
                 }
+
+                $next_index = $existing ? max(array_map('intval', array_keys($existing))) + 1 : 0;
+                foreach ((array) $request->file('gallery') as $item){
+                    $image_path = uploadImage('uploads/projects/gallery/',  $item);
+                    OptimizeImage::dispatch(public_path('uploads/projects/gallery/' . $image_path))->onQueue('images');
+                    $gallery_arr[$next_index++] = $image_path;
+                }
+
+                $request_data['gallery'] = $gallery_arr ? json_encode($gallery_arr) : null;
             }
 
             $project -> update($request_data);

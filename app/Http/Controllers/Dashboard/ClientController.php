@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 use App\Http\Requests\StoreClientRequest;
+use App\Jobs\OptimizeImage;
 use App\Http\Requests\UpdateClientRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -24,7 +25,7 @@ class ClientController extends Controller
     {
         $clients = Client::when($request -> search , function ($query) use ($request) {
             return $query -> where('name', 'like' , '%' . $request -> search . '%');
-        })->latest()->paginate(ADMIN_PAGINATION_COUNT);
+        })->latest()->paginate(defined('ADMIN_PAGINATION_COUNT') ? ADMIN_PAGINATION_COUNT : 10);
         return view('dashboard.clients.index', compact('clients'));
     } // end of index
 
@@ -59,6 +60,7 @@ class ClientController extends Controller
             $image_path = "";
             if($request->hasFile('logo')){
                 $logo_path = uploadImage('uploads/clients/',  $request -> logo);
+                OptimizeImage::dispatch(public_path('uploads/clients/' . $logo_path))->onQueue('images');
                 $request_data['logo'] = $logo_path;
             } else {
                 $request_data['logo'] = 'default.png';
@@ -153,6 +155,7 @@ class ClientController extends Controller
                     Storage::disk('public_uploads')->delete('/clients/' . $client -> logo);
                 } // end of inner if
                 $logo_path = uploadImage('uploads/clients/',  $request -> logo);
+                OptimizeImage::dispatch(public_path('uploads/clients/' . $logo_path))->onQueue('images');
                 $request_data['logo'] = $logo_path;
             } else {
                 $request_data['logo'] = $client -> logo;

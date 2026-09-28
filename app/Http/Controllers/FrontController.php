@@ -71,7 +71,7 @@ class FrontController extends Controller
     public function serviceProjects($slug)
     {
         $service = Service::where([['slug', $slug], ['is_active', '1']])->firstOrFail();
-        $projects = $service->projects()->with(['category', 'client'])->where([['is_active', '1'], ['image', '!=', 'default.png']])->latest()->paginate(FRONT_PAGINATION_COUNT);
+        $projects = $service->projects()->with(['category', 'client'])->where([['is_active', '1'], ['image', '!=', 'default.png']])->latest()->paginate(defined('FRONT_PAGINATION_COUNT') ? FRONT_PAGINATION_COUNT : 12);
         return view('front.projects', compact('projects'));
     } // end of seriveProjects
 
@@ -147,13 +147,13 @@ class FrontController extends Controller
 
     public function projects()
     {
-        $projects = Project::with(['category', 'client', 'services'])->where('is_active', '1')->orderBy('category_id')->latest()->paginate(FRONT_PAGINATION_COUNT);
+        $projects = Project::with(['category', 'client', 'services'])->where('is_active', '1')->orderBy('category_id')->latest()->paginate(defined('FRONT_PAGINATION_COUNT') ? FRONT_PAGINATION_COUNT : 12);
         return view('front.projects', compact('projects'));
     } // end of project
 
     public function awardedProjects()
     {
-        $projects = Project::with(['category', 'client', 'services'])->where([['is_active', '1'], ['is_awarded', '1']])->orderBy('category_id')->latest()->paginate(FRONT_PAGINATION_COUNT);
+        $projects = Project::with(['category', 'client', 'services'])->where([['is_active', '1'], ['is_awarded', '1']])->orderBy('category_id')->latest()->paginate(defined('FRONT_PAGINATION_COUNT') ? FRONT_PAGINATION_COUNT : 12);
         return view('front.projects', compact('projects'));
     } // end of awardedProjects
 
@@ -168,7 +168,7 @@ class FrontController extends Controller
     public function categoryProjects($slug)
     {
         $category = Category::where([['slug', $slug], ['is_active', '1']])->firstOrFail();
-        $projects = Project::with(['category', 'client', 'services'])->where([['category_id', $category->id], ['is_active', '1']])->latest()->paginate(FRONT_PAGINATION_COUNT);
+        $projects = Project::with(['category', 'client', 'services'])->where([['category_id', $category->id], ['is_active', '1']])->latest()->paginate(defined('FRONT_PAGINATION_COUNT') ? FRONT_PAGINATION_COUNT : 12);
         return view('front.projects', compact('projects'));
     } //end of categoryProjects
 

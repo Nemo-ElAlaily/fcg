@@ -39,7 +39,7 @@
                         <h2 class="accordion-header">
                             <button class="accordion-button no-background d-block" type="button" >
                                 <p class="float-start m-0">Client:</p>
-                                <p class="float-end m-0 text-black-50">{{ $project->client->name }}</p>
+                                <p class="float-end m-0 text-black-50">{{ optional($project->client)->name ?? 'N/A' }}</p>
                             </button>
                         </h2>
                         <h2 class="accordion-header">
@@ -52,8 +52,11 @@
                             <button class="accordion-button no-background d-block" type="button" >
                                 <p class="float-start m-0">Category:</p>
                                 <p class="float-end m-0 text-black-50">
-                                    <a class="text-black-50" href="{{ route('category.projects', $project->category->slug) }}">{{
-                                        $project->category->name }}</a>
+                                    @if($project->category)
+                                        <a class="text-black-50" href="{{ route('category.projects', $project->category->slug) }}">{{ $project->category->name }}</a>
+                                    @else
+                                        N/A
+                                    @endif
                                 </p>
                             </button>
                         </h2>
@@ -143,10 +146,12 @@
             </div>
         </div>
 
+        @php $gallery_items = array_values(json_decode($project->gallery, true) ?: []); @endphp
         <div class="flex row">
+            @for ($col = 0; $col < 4; $col++)
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 p-1">
-                @foreach (json_decode($project->gallery, true) as $index => $item)
-                @if ($index % 4 == 0)
+                @foreach ($gallery_items as $index => $item)
+                @if ($index % 4 == $col)
                 <div class="py-1">
                     <img src="{{ asset('uploads/projects/gallery/') . '/' . $item }}"
                         alt="{{ $project->title . $index }}" class="img-fluid video-wrap glightbox" data-toggle="modal"
@@ -156,42 +161,7 @@
                 @endif
                 @endforeach
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 p-1">
-                @foreach (json_decode($project->gallery, true) as $index => $item)
-                @if ($index % 4 == 1)
-                <div class="py-1">
-                    <img src="{{ asset('uploads/projects/gallery/') . '/' . $item }}"
-                        alt="{{ $project->title . $index }}" class="img-fluid video-wrap glightbox" data-toggle="modal"
-                        data-target="#exampleModalCenter"
-                        oncontextmenu="return false;">
-                </div>
-                @endif
-                @endforeach
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 p-1">
-                @foreach (json_decode($project->gallery, true) as $index => $item)
-                @if ($index % 4 == 2)
-                <div class="py-1">
-                    <img src="{{ asset('uploads/projects/gallery/') . '/' . $item }}"
-                        alt="{{ $project->title . $index }}" class="img-fluid video-wrap glightbox" data-toggle="modal"
-                        data-target="#exampleModalCenter"
-                        oncontextmenu="return false;">
-                </div>
-                @endif
-                @endforeach
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 p-1">
-                @foreach (json_decode($project->gallery, true) as $index => $item)
-                @if ($index % 4 == 3)
-                <div class="py-1">
-                    <img src="{{ asset('uploads/projects/gallery/') . '/' . $item }}"
-                        alt="{{ $project->title . $index }}" class="img-fluid video-wrap glightbox" data-toggle="modal"
-                        data-target="#exampleModalCenter"
-                        oncontextmenu="return false;">
-                </div>
-                @endif
-                @endforeach
-            </div>
+            @endfor
         </div>
     </div>
 </div>

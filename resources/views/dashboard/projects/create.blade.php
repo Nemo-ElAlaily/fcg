@@ -255,7 +255,6 @@
 
 @section('script')
 <script src="{{ asset('adminLTE/plugins/summernote/summernote-bs4.min.js') }}"></script>
-<script src="{{ asset('admin/js/image-uploader.min.js') }}"></script>
 
 <script>
 
