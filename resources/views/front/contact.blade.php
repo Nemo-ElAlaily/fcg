@@ -57,6 +57,15 @@
                     {{ csrf_field() }}
                     {{ method_field('post') }}
 
+                    {{-- Anti-spam honeypot: hidden from humans, bots tend to fill it. Leave empty. --}}
+                    <div aria-hidden="true" style="position:absolute; left:-9999px; top:-9999px; height:0; width:0; overflow:hidden;">
+                        <label for="website">Website</label>
+                        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" value="">
+                    </div>
+
+                    {{-- Anti-spam time-trap: encrypted render timestamp, verified server-side. --}}
+                    <input type="hidden" name="_ts" value="{{ encrypt(now()->timestamp) }}">
+
                     <div class="col-md-6 col-lg-6">
                         <div class="mb-3">
                             <label for="name" class="ps-3 mb-2">Name</label>

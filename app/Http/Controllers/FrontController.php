@@ -119,16 +119,37 @@ class FrontController extends Controller
 
     public function postContact(Request $request)
     {
+        // --- Anti-spam checks (silently drop bots so they can't tune their payload) ---
+
+        // 1. Honeypot: a hidden field real users never see. If it's filled, it's a bot.
+        if ($request->filled('website')) {
+            session()->flash('success', ('Thank You for contacting us, we will reach to you ASAP'));
+            return redirect()->route('contact');
+        }
+
+        // 2. Time-trap: reject submissions that arrive implausibly fast (or with a
+        //    missing/forged timestamp). Humans take more than a few seconds to fill a form.
+        try {
+            $renderedAt = (int) decrypt($request->input('_ts'));
+            $elapsed = now()->timestamp - $renderedAt;
+        } catch (\Exception $e) {
+            $elapsed = -1; // undecryptable / missing timestamp => treat as bot
+        }
+        if ($elapsed < 3) {
+            session()->flash('success', ('Thank You for contacting us, we will reach to you ASAP'));
+            return redirect()->route('contact');
+        }
+
         $validated = $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
-            'subject' => 'required',
-            'message' => 'required',
+            'name' => 'required|string|min:2|max:255',
+            'email' => 'required|email:rfc|max:255',
+            'phone' => 'required|string|min:5|max:30',
+            'subject' => 'required|string|min:2|max:255',
+            'message' => 'required|string|min:10|max:5000',
         ]);
 
         try {
-            $request_data = $request -> except(['_token', '_method']);
+            $request_data = $request -> except(['_token', '_method', 'website', '_ts']);
             DB::beginTransaction();
 
             $contact =  Contact::create($request_data);
