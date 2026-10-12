@@ -35,8 +35,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrap();
 
-        // Skip DB-backed shared view data for console commands (route:list, config:cache, etc.).
-        if ($this->app->runningInConsole()) {
+        // Skip DB-backed shared view data for console commands (route:list, config:cache, etc.),
+        // but keep it during tests so views that use the shared $site_settings can render.
+        if ($this->app->runningInConsole() && !$this->app->environment('testing')) {
             return;
         }
 
