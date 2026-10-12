@@ -12,6 +12,7 @@ use App\Http\Requests\UpdateServiceRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use App\Models\Service;
+use App\Jobs\OptimizeImage;
 
 class ServiceController extends Controller
 {
@@ -24,7 +25,7 @@ class ServiceController extends Controller
     {
         $services = Service::when($request -> search , function ($query) use ($request) {
             return $query -> where('name', 'like' , '%' . $request -> search . '%');
-        })->latest()->paginate(ADMIN_PAGINATION_COUNT);
+        })->latest()->paginate(defined('ADMIN_PAGINATION_COUNT') ? ADMIN_PAGINATION_COUNT : 10);
 
         return view('dashboard.services.index', compact('services'));
     } // end of index
@@ -54,6 +55,7 @@ class ServiceController extends Controller
             $request->has('is_active') ? $request->request->add(['is_active' => 1]) : $request->request->add(['is_active' => 0]);
             $request_data = $request -> except(['_token', '_method', 'image']);
             $request_data['slug'] = str_replace($characters, '-' , $request['name']);
+            $request_data = $this->purifyHtmlFields($request_data, ['description']);
 
             DB::beginTransaction();
 
@@ -61,6 +63,8 @@ class ServiceController extends Controller
             if($request->hasFile('image')){
                 $image_path = uploadImage('uploads/services/',  $request -> image);
                 $request_data['image'] = $image_path;
+                // Dispatch image optimization job
+                OptimizeImage::dispatch(public_path('uploads/services/' . $image_path))->onQueue('images');
             } else {
                 $request_data['image'] = 'default.png';
             }
@@ -147,6 +151,7 @@ class ServiceController extends Controller
             $request_data = $request -> except(['_token', '_method', 'image']);
 
             $request_data['slug'] = str_replace($characters, '-' , $request['name']);
+            $request_data = $this->purifyHtmlFields($request_data, ['description']);
 
             DB::beginTransaction();
 
@@ -157,6 +162,8 @@ class ServiceController extends Controller
                 } // end of inner if
                 $image_path = uploadImage('uploads/services/',  $request -> image);
                 $request_data['image'] = $image_path;
+                // Dispatch image optimization job
+                OptimizeImage::dispatch(public_path('uploads/services/' . $image_path))->onQueue('images');
             } else {
                 $request_data['image'] = $service -> image;
             }// end of outer if

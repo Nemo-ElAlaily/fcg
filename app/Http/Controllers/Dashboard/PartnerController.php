@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 use App\Http\Requests\StorePartnerRequest;
+use App\Jobs\OptimizeImage;
 use App\Http\Requests\UpdatePartnerRequest;
 use Illuminate\Http\Request;
 use App\Models\Partner;
@@ -24,7 +25,7 @@ class PartnerController extends Controller
     {
         $partners = Partner::when($request -> search , function ($query) use ($request) {
             return $query -> where('name', 'like' , '%' . $request -> search . '%');
-        })->latest()->paginate(ADMIN_PAGINATION_COUNT);
+        })->latest()->paginate(defined('ADMIN_PAGINATION_COUNT') ? ADMIN_PAGINATION_COUNT : 10);
         return view('dashboard.partners.index', compact('partners'));
     } // end of index
 
@@ -60,6 +61,7 @@ class PartnerController extends Controller
             $image_path = "";
             if($request->hasFile('logo')){
                 $logo_path = uploadImage('uploads/partners/',  $request -> logo);
+                OptimizeImage::dispatch(public_path('uploads/partners/' . $logo_path))->onQueue('images');
                 $request_data['logo'] = $logo_path;
             } else {
                 $request_data['logo'] = 'default.png';
@@ -153,6 +155,7 @@ class PartnerController extends Controller
                     Storage::disk('public_uploads')->delete('/partners/' . $partner -> logo);
                 } // end of inner if
                 $logo_path = uploadImage('uploads/partners/',  $request -> logo);
+                OptimizeImage::dispatch(public_path('uploads/partners/' . $logo_path))->onQueue('images');
                 $request_data['logo'] = $logo_path;
             } else {
                 $request_data['logo'] = $partner -> logo;

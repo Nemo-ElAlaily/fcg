@@ -56,11 +56,15 @@ class Project extends Model
 
     public function getGalleryItemsAttribute()
     {
+        $items = [];
+
         if($this -> gallery != null){
             foreach (json_decode( $this -> gallery, true) as $index => $item){
-                echo '{id: ' . $index . ' , src: "' . asset('uploads/projects/gallery/') . '/'. $item . '"},';
+                $items[] = ['id' => $index, 'src' => asset('uploads/projects/gallery/') . '/' . $item];
             }
         }
+
+        return $items;
     } // end of getGalleryItemsAttribute
 
 } // end of model

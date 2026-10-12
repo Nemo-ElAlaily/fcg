@@ -5,7 +5,7 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^7.3|^8.2",
         "doctrine/dbal": "^3.7",
         "enyo/dropzone": "^5.9",
         "fruitcake/laravel-cors": "^2.0",
@@ -13,7 +13,8 @@
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "laravel/ui": "^3.4"
+        "laravel/ui": "^3.4",
+        "mews/purifier": "^3.4"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -68,7 +69,10 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "platform": {
+            "php": "8.2.0"
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true

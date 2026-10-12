@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 use App\Http\Requests\StoreProjectManagementOfficeRequest;
+use App\Jobs\OptimizeImage;
 use App\Http\Requests\UpdateProjectManagementOfficeRequest;
 use Illuminate\Http\Request;
 use App\Models\ProjectManagementOffice;
@@ -23,7 +24,7 @@ class ProjectManagementOfficeController extends Controller
     {
         $offices = ProjectManagementOffice::when($request -> search , function ($query) use ($request) {
             return $query -> where('title', 'like' , '%' . $request -> search . '%');
-        })->latest()->paginate(ADMIN_PAGINATION_COUNT);
+        })->latest()->paginate(defined('ADMIN_PAGINATION_COUNT') ? ADMIN_PAGINATION_COUNT : 10);
         return view('dashboard.pmo.index', compact('offices'));
     } // end of index
 
@@ -52,12 +53,14 @@ class ProjectManagementOfficeController extends Controller
             $request->has('is_active') ? $request->request->add(['is_active' => 1]) : $request->request->add(['is_active' => 0]);
             $request_data = $request -> except(['_token', '_method', 'image']);
             $request_data['slug'] = str_replace($characters, '-' , $request['name']);
+            $request_data = $this->purifyHtmlFields($request_data, ['description']);
 
             DB::beginTransaction();
 
             $image_path = "";
             if($request->hasFile('image')){
                 $image_path = uploadImage('uploads/offices/',  $request -> image);
+                OptimizeImage::dispatch(public_path('uploads/offices/' . $image_path))->onQueue('images');
                 $request_data['image'] = $image_path;
             } else {
                 $request_data['image'] = 'default.png';
@@ -140,6 +143,7 @@ class ProjectManagementOfficeController extends Controller
             $request_data = $request -> except(['_token', '_method', 'image']);
 
             $request_data['slug'] = str_replace($characters, '-' , $request['name']);
+            $request_data = $this->purifyHtmlFields($request_data, ['description']);
 
             DB::beginTransaction();
 
@@ -149,6 +153,7 @@ class ProjectManagementOfficeController extends Controller
                     Storage::disk('public_uploads')->delete('/offices/' . $office -> image);
                 } // end of inner if
                 $image_path = uploadImage('uploads/offices/',  $request -> image);
+                OptimizeImage::dispatch(public_path('uploads/offices/' . $image_path))->onQueue('images');
                 $request_data['image'] = $image_path;
             } else {
                 $request_data['image'] = $office -> image;

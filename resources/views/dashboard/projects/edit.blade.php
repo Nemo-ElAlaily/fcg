@@ -34,6 +34,7 @@
 
                 {{ csrf_field() }}
                 {{ method_field('put') }}
+                <input type="hidden" name="gallery_present" value="1">
 
                 <div class="row">
 
@@ -250,7 +251,6 @@
 
 @section('script')
 <script src="{{ asset('adminLTE/plugins/summernote/summernote-bs4.min.js') }}"></script>
-<script src="{{ asset('admin/js/image-uploader.min.js') }}"></script>
 
 <script>
 
@@ -267,12 +267,12 @@
         });
     })
 
-    let preloaded = [ {{ $project -> gallery_items }}, ];
+    let preloaded = @json($project -> gallery_items);
 
     $('.gallery').imageUploader({
         preloaded: preloaded,
         imagesInputName: 'gallery',
-        preloadedInputName: 'gallery'
+        preloadedInputName: 'old_gallery'
     });
 
 </script>

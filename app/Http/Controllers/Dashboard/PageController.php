@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
 use Carbon\Carbon;
+use App\Jobs\OptimizeImage;
 use App\Http\Requests\StorePageRequest;
 use App\Http\Requests\UpdatePageRequest;
 use App\Models\Pages\Page;
@@ -14,7 +15,7 @@ class PageController extends Controller
 {
     public function index()
     {
-        $pages = Page::paginate(ADMIN_PAGINATION_COUNT);
+        $pages = Page::paginate(defined('ADMIN_PAGINATION_COUNT') ? ADMIN_PAGINATION_COUNT : 10);
         return view('dashboard.pages.index', compact('pages'));
     } // end of index
 
@@ -60,6 +61,7 @@ class PageController extends Controller
         $image_path = "";
         if($request->hasFile('image')){
             $image_path = uploadImage('uploads/pages/images/' . Carbon::now() -> year . '/' . Carbon::now() -> month . '/' ,  $request -> image);
+            OptimizeImage::dispatch(public_path('uploads/pages/images/' . Carbon::now() -> year . '/' . Carbon::now() -> month . '/' . $image_path))->onQueue('images');
             $request_data['image'] = Carbon::now() -> year . '/' . Carbon::now() -> month . '/' . $image_path;
         } else {
             $request_data['image'] = 'default.png';
@@ -68,6 +70,7 @@ class PageController extends Controller
         $banner = "";
         if($request->hasFile('banner')){
             $banner = uploadImage('uploads/pages/banners/' . Carbon::now() -> year . '/' . Carbon::now() -> month . '/' ,  $request -> banner);
+            OptimizeImage::dispatch(public_path('uploads/pages/banners/' . Carbon::now() -> year . '/' . Carbon::now() -> month . '/' . $banner))->onQueue('images');
             $request_data['banner'] = Carbon::now() -> year . '/' . Carbon::now() -> month . '/' . $banner;
         } else {
             $request_data['banner'] = 'default.png';
@@ -125,6 +128,7 @@ class PageController extends Controller
             if ($page -> image != 'default.png') {
                 Storage::disk('public_uploads')->delete('/pages/images/' . $page -> image);
                 $image_path = uploadImage('uploads/pages/images/' . Carbon::now() -> year . '/' . Carbon::now() -> month . '/' ,  $request -> image);
+                OptimizeImage::dispatch(public_path('uploads/pages/images/' . Carbon::now() -> year . '/' . Carbon::now() -> month . '/' . $image_path))->onQueue('images');
                 $request_data['image'] = Carbon::now() -> year . '/' . Carbon::now() -> month . '/' . $image_path;
             } // end of inner if
 
@@ -139,6 +143,7 @@ class PageController extends Controller
             } // end of inner if
 
             $banner = uploadImage('uploads/pages/banners/' . Carbon::now() -> year . '/' . Carbon::now() -> month . '/' ,  $request -> banner);
+            OptimizeImage::dispatch(public_path('uploads/pages/banners/' . Carbon::now() -> year . '/' . Carbon::now() -> month . '/' . $banner))->onQueue('images');
             $request_data['banner'] = Carbon::now() -> year . '/' . Carbon::now() -> month . '/' . $banner;
         } else {
             $request_data['banner'] = $page -> banner;

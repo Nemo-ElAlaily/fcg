@@ -10,7 +10,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{ optional(Auth::user())->avatar_path ?? asset('adminLTE/dist/img/user.png') }}" class="img-circle elevation-2" alt="User Image">
+                <img src="{{ optional(Auth::user())->avatar_path ?? asset('adminLTE/dist/img/avatar.png') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
                 <a href="#" class="d-block">{{ optional(Auth::user())->full_name ?? 'Guest' }}</a>
@@ -24,7 +24,7 @@
                 <!-- Add icons to the links using the .nav-icon class
                     with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a href="{{ route('dashboard.index')}}" class="nav-link {{ Route::currentRouteName() == 'admin.index' ? 'active' : '' }}">
+                    <a href="{{ route('dashboard.index')}}" class="nav-link {{ Route::is('dashboard.index') ? 'active' : '' }}">
                         <i class="fas fa-tachometer-alt nav-icon"></i>
                         <p>Dashboard</p>
                     </a>
@@ -33,23 +33,23 @@
 
                 <li class="nav-item">
                     <a href="{{ route('dashboard.settings.site.show', 1) }}"
-                        class="nav-link {{ Route::currentRouteName() == 'admin.settings.site.show' ? 'active' : '' }}">
+                        class="nav-link {{ Route::is('dashboard.settings.site.*') ? 'active' : '' }}">
                         <i class="fas fa-cogs nav-icon"></i>
                         <p>Site Settings</p>
                     </a>
                 </li>
 
-                <!-- <li class="nav-item">
+                <li class="nav-item">
                     <a href="{{ route('dashboard.pages.index') }}"
-                        class="nav-link {{ Route::currentRouteName() == 'admin.pages.index' ? 'active' : '' }}">
+                        class="nav-link {{ Route::is('dashboard.pages.*') ? 'active' : '' }}">
                         <i class="fa fa-newspaper nav-icon"></i>
                         <p>Pages</p>
                     </a>
-                </li> -->
+                </li>
 
                 <li class="nav-item">
                     <a href="{{ route('dashboard.branches.index') }}"
-                        class="nav-link {{ Route::currentRouteName() == 'admin.branches.index' ? 'active' : '' }}">
+                        class="nav-link {{ Route::is('dashboard.branches.*') ? 'active' : '' }}">
                         <i class="fa fa-code-branch nav-icon"></i>
                         <p>Branches</p>
                     </a>
@@ -57,7 +57,7 @@
 
                 <li class="nav-item">
                     <a href="{{ route('dashboard.categories.index') }}"
-                        class="nav-link {{ Route::currentRouteName() == 'admin.categories.index' ? 'active' : '' }}">
+                        class="nav-link {{ Route::is('dashboard.categories.*') ? 'active' : '' }}">
                         <i class="fa fa-hashtag nav-icon"></i>
                         <p>Categories</p>
                     </a>
@@ -65,7 +65,7 @@
 
                 <li class="nav-item">
                     <a href="{{ route('dashboard.certificates.index') }}"
-                        class="nav-link {{ Route::currentRouteName() == 'admin.certificates.index' ? 'active' : '' }}">
+                        class="nav-link {{ Route::is('dashboard.certificates.*') ? 'active' : '' }}">
                         <i class="fa fa-certificate nav-icon"></i>
                         <p>Certificates</p>
                     </a>
@@ -73,7 +73,7 @@
 
                 <li class="nav-item">
                     <a href="{{ route('dashboard.clients.index') }}"
-                        class="nav-link {{ Route::currentRouteName() == 'admin.clients.index' ? 'active' : '' }}">
+                        class="nav-link {{ Route::is('dashboard.clients.*') ? 'active' : '' }}">
                         <i class="fa fa-mug-hot nav-icon"></i>
                         <p>Clients</p>
                     </a>
@@ -81,7 +81,7 @@
 
                 <li class="nav-item">
                     <a href="{{ route('dashboard.partners.index') }}"
-                        class="nav-link {{ Route::currentRouteName() == 'admin.partners.index' ? 'active' : '' }}">
+                        class="nav-link {{ Route::is('dashboard.partners.*') ? 'active' : '' }}">
                         <i class="fa fa-handshake nav-icon"></i>
                         <p>Partners</p>
                     </a>
@@ -89,7 +89,7 @@
 
                 <li class="nav-item">
                     <a href="{{ route('dashboard.offices.index') }}"
-                        class="nav-link {{ Route::currentRouteName() == 'admin.offices.index' ? 'active' : '' }}">
+                        class="nav-link {{ Route::is('dashboard.offices.*') ? 'active' : '' }}">
                         <i class="fa fa-briefcase nav-icon"></i>
                         <p>PM Offices</p>
                     </a>
@@ -97,7 +97,7 @@
 
                 <li class="nav-item">
                     <a href="{{ route('dashboard.projects.index') }}"
-                        class="nav-link {{ Route::currentRouteName() == 'admin.projects.index' ? 'active' : '' }}">
+                        class="nav-link {{ Route::is('dashboard.projects.*') ? 'active' : '' }}">
                         <i class="fa fa-project-diagram nav-icon"></i>
                         <p>Projects</p>
                     </a>
@@ -105,7 +105,7 @@
 
                 <li class="nav-item">
                     <a href="{{ route('dashboard.services.index') }}"
-                        class="nav-link {{ Route::currentRouteName() == 'admin.services.index' ? 'active' : '' }}">
+                        class="nav-link {{ Route::is('dashboard.services.*') ? 'active' : '' }}">
                         <i class="fa fa-bell nav-icon"></i>
                         <p>Services</p>
                     </a>
@@ -113,7 +113,7 @@
 
                 <li class="nav-item">
                     <a href="{{ route('dashboard.sliders.index') }}"
-                        class="nav-link {{ Route::currentRouteName() == 'admin.sliders.index' ? 'active' : '' }}">
+                        class="nav-link {{ Route::is('dashboard.sliders.*') ? 'active' : '' }}">
                         <i class="fa fa-image nav-icon"></i>
                         <p>Sliders</p>
                     </a>
@@ -121,7 +121,7 @@
 
                 <li class="nav-item">
                     <a href="{{ route('dashboard.contact.index') }}"
-                        class="nav-link {{ Route::currentRouteName() == 'admin.contact.index' ? 'active' : '' }}">
+                        class="nav-link {{ Route::is('dashboard.contact.*') ? 'active' : '' }}">
                         <i class="fa fa-phone nav-icon"></i>
                         <p>Contact Forms</p>
                     </a>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
 use App\Http\Requests\StoreSiteSettingsRequest;
+use App\Jobs\OptimizeImage;
 use App\Http\Requests\UpdateSiteSettingsRequest;
 use App\Models\Settings\SiteSettings;
 use Illuminate\Support\Facades\Cache;
@@ -22,12 +23,14 @@ class SiteSettingsController extends Controller
     {
         $site_settings = SiteSettings::findorFail($id);
         $request_data = $request->except(['_token', '_method']);
+        $request_data = $this->purifyHtmlFields($request_data, ['story', 'mission', 'vision']);
         $logoPath = "";
         if($request->hasFile('logo')){
             if ($site_settings -> logo != 'default.png') {
                 Storage::disk('public_uploads')->delete('/site/' . $site_settings -> logo);
             } // end of inner if
             $logoPath = uploadImage('uploads/site/',  $request -> logo);
+            OptimizeImage::dispatch(public_path('uploads/site/' . $logoPath))->onQueue('images');
         } else {
             $logoPath = $site_settings -> logo;
         }// end of outer if
@@ -38,6 +41,7 @@ class SiteSettingsController extends Controller
                 Storage::disk('public_uploads')->delete('/site/' . $site_settings -> favicon);
             } // end of inner if
             $faviconPath = uploadImage('uploads/site/',  $request -> favicon);
+            OptimizeImage::dispatch(public_path('uploads/site/' . $faviconPath))->onQueue('images');
         } else {
             $faviconPath = $site_settings -> favicon;
         }// end of outer if
@@ -48,6 +52,7 @@ class SiteSettingsController extends Controller
                 Storage::disk('public_uploads')->delete('/site/' . $site_settings -> story_image);
             } // end of inner if
             $storyImagePath = uploadImage('uploads/site/',  $request -> story_image);
+            OptimizeImage::dispatch(public_path('uploads/site/' . $storyImagePath))->onQueue('images');
         } else {
             $storyImagePath = $site_settings -> story_image;
         }// end of outer if
@@ -58,6 +63,7 @@ class SiteSettingsController extends Controller
                 Storage::disk('public_uploads')->delete('/site/' . $site_settings -> mission_image);
             } // end of inner if
             $missionImagePath = uploadImage('uploads/site/',  $request -> mission_image);
+            OptimizeImage::dispatch(public_path('uploads/site/' . $missionImagePath))->onQueue('images');
         } else {
             $missionImagePath = $site_settings -> mission_image;
         }// end of outer if
@@ -68,6 +74,7 @@ class SiteSettingsController extends Controller
                 Storage::disk('public_uploads')->delete('/site/' . $site_settings -> vision_image);
             } // end of inner if
             $visionImagePath = uploadImage('uploads/site/',  $request -> vision_image);
+            OptimizeImage::dispatch(public_path('uploads/site/' . $visionImagePath))->onQueue('images');
         } else {
             $visionImagePath = $site_settings -> vision_image;
         }// end of outer if

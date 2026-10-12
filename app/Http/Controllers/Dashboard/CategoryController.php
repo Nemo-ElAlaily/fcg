@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 use App\Http\Requests\StoreCategoryRequest;
+use App\Jobs\OptimizeImage;
 use App\Http\Requests\UpdateCategoryRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -24,7 +25,7 @@ class CategoryController extends Controller
     {
         $categories = Category::when($request -> search , function ($query) use ($request) {
             return $query -> where('name', 'like' , '%' . $request -> search . '%');
-        })->latest()->paginate(ADMIN_PAGINATION_COUNT);
+        })->latest()->paginate(defined('ADMIN_PAGINATION_COUNT') ? ADMIN_PAGINATION_COUNT : 10);
         return view('dashboard.categories.index', compact('categories'));
     }
 
@@ -59,6 +60,7 @@ class CategoryController extends Controller
             $image_path = "";
             if($request->hasFile('image')){
                 $image_path = uploadImage('uploads/categories/',  $request -> image);
+                OptimizeImage::dispatch(public_path('uploads/categories/' . $image_path))->onQueue('images');
                 $request_data['image'] = $image_path;
             } else {
                 $request_data['image'] = 'default.png';
@@ -154,6 +156,7 @@ class CategoryController extends Controller
                     Storage::disk('public_uploads')->delete('/categories/' . $category -> image);
                 } // end of inner if
                 $image_path = uploadImage('uploads/categories/',  $request -> image);
+                OptimizeImage::dispatch(public_path('uploads/categories/' . $image_path))->onQueue('images');
                 $request_data['image'] = $image_path;
             } else {
                 $request_data['image'] = $category -> image;

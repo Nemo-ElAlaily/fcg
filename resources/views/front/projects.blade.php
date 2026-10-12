@@ -4,13 +4,13 @@
 
 @section('hero')
 
-<div class="hero-2 overlay slider-top" style="background-image: url('{{ $projects -> first() -> category -> image_path}}');">
+<div class="hero-2 overlay slider-top" style="background-image: url('{{ optional(optional($projects->first())->category)->image_path ?? asset('front/images/Services.png') }}');">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-5 mx-auto ">
                 <h1 class="mb-5 text-center"><span>
                 @if (Route::currentRouteName() == 'category.projects')
-                    {{ $projects -> first() ->category->name }} Projects
+                    {{ optional(optional($projects->first())->category)->name ?? 'Category' }} Projects
                 @elseif(Route::currentRouteName() == 'awarded.projects')
                     Awarded Projects
                 @elseif(Route::currentRouteName() == 'projects')

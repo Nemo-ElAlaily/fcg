@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $site_settings->title }} - @yield('title')</title>
 
-    <link rel="icon" href="{{ asset('uploads/site/favicon.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('/public/uploads/site/favicon.png') }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ $site_settings->favicon_path }}" type="image/x-icon">
 
     @include('dashboard.includes.css')

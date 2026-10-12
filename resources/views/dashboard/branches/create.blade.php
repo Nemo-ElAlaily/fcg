@@ -106,7 +106,7 @@
                                     <label class="custom-file-label" for="image">Choose Image</label>
                                 </div>
                                 <div class="container">
-                                    <img src="{{ asset('uploads/branches/default.png') }}" width="100px"
+                                    <img src="{{ asset('uploads/default.png') }}" width="100px"
                                         class="img-thumbnail image-preview mt-1" alt="branch Image">
                                 </div>
 
