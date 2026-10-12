@@ -64,6 +64,7 @@ class ProjectController extends Controller
             $request->has('add_to_home') ? $request->request->add(['add_to_home' => 1]) : $request->request->add(['add_to_home' => 0]);
             $request_data = $request -> except(['_token', '_method', 'image', 'gallery', 'services']);
             $request_data['slug'] = str_replace($characters, '-' , $request['title']);
+            $request_data = $this->purifyHtmlFields($request_data, ['description', 'amenities', 'extra_info']);
 
             DB::beginTransaction();
 
@@ -177,6 +178,7 @@ class ProjectController extends Controller
             $request_data = $request -> except(['_token', '_method', 'image', 'gallery', 'old_gallery', 'gallery_present', 'services']);
 
             $request_data['slug'] = str_replace($characters, '-' , $request['title']);
+            $request_data = $this->purifyHtmlFields($request_data, ['description', 'amenities', 'extra_info']);
 
             DB::beginTransaction();
 

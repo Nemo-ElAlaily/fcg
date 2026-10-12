@@ -23,6 +23,7 @@ class SiteSettingsController extends Controller
     {
         $site_settings = SiteSettings::findorFail($id);
         $request_data = $request->except(['_token', '_method']);
+        $request_data = $this->purifyHtmlFields($request_data, ['story', 'mission', 'vision']);
         $logoPath = "";
         if($request->hasFile('logo')){
             if ($site_settings -> logo != 'default.png') {

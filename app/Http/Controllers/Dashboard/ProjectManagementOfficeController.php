@@ -53,6 +53,7 @@ class ProjectManagementOfficeController extends Controller
             $request->has('is_active') ? $request->request->add(['is_active' => 1]) : $request->request->add(['is_active' => 0]);
             $request_data = $request -> except(['_token', '_method', 'image']);
             $request_data['slug'] = str_replace($characters, '-' , $request['name']);
+            $request_data = $this->purifyHtmlFields($request_data, ['description']);
 
             DB::beginTransaction();
 
@@ -142,6 +143,7 @@ class ProjectManagementOfficeController extends Controller
             $request_data = $request -> except(['_token', '_method', 'image']);
 
             $request_data['slug'] = str_replace($characters, '-' , $request['name']);
+            $request_data = $this->purifyHtmlFields($request_data, ['description']);
 
             DB::beginTransaction();
 

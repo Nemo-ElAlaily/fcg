@@ -116,4 +116,40 @@
     }); // end of ready
 </script>
 
+<!-- Base64-encode Summernote fields on submit to bypass the ModSecurity WAF. -->
+<!-- The DecodeBase64Fields middleware restores them server-side before HTMLPurifier runs. -->
+<script>
+    $(function () {
+        $('form').on('submit', function () {
+            var $form = $(this);
+            var encoded = [];
+
+            $form.find('textarea').each(function () {
+                var $ta = $(this);
+
+                // Only fields Summernote has initialized (it inserts a .note-editor sibling).
+                if ($ta.next('.note-editor').length === 0) return;
+
+                var name = $ta.attr('name');
+                if (!name) return;
+
+                try { $ta.val($ta.summernote('code')); } catch (e) {}
+
+                var raw = $ta.val() || '';
+                // UTF-8 safe Base64 (pairs with PHP base64_decode on the server).
+                $ta.val(btoa(unescape(encodeURIComponent(raw))));
+                encoded.push(name);
+            });
+
+            if (encoded.length) {
+                var $marker = $form.find('input[name="_b64_fields"]');
+                if ($marker.length === 0) {
+                    $marker = $('<input type="hidden" name="_b64_fields">').appendTo($form);
+                }
+                $marker.val(encoded.join(','));
+            }
+        });
+    });
+</script>
+
 
