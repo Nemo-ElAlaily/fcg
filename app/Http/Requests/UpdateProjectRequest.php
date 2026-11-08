@@ -39,8 +39,8 @@ class UpdateProjectRequest extends FormRequest
             'client_id'   => ['nullable', 'exists:clients,id'],
             'services'    => ['required', 'array'],
             'services.*'  => ['exists:services,id'],
-            'image'       => ['nullable', 'image', 'max:2048'], // KB; matches PHP upload_max_filesize (2M)
-            'gallery.*'   => ['nullable', 'image', 'max:2048'],
+            'image'       => ['nullable', 'image', 'max:10240'], // KB (10M); keep under PHP upload_max_filesize
+            'gallery.*'   => ['nullable', 'image', 'max:10240'],
         ];
     }
 }
