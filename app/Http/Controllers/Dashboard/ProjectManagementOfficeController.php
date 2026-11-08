@@ -113,7 +113,7 @@ class ProjectManagementOfficeController extends Controller
             return view('dashboard.pmo.edit', compact('office'));
 
         } catch (\Exception $exception) {
-            session()->flash('error', 'Please Contact Admin');
+            session()->flash('error', 'Please Contact Admin' . $exception);
             return redirect()->route('dashboard.offices.index');
 
         } // end of try & catch
@@ -168,7 +168,7 @@ class ProjectManagementOfficeController extends Controller
 
         } catch (\Exception $exception) {
             DB::rollback();
-            session()->flash('error', 'Please Contact Admin');
+            session()->flash('error', 'Please Contact Admin' . $exception);
             return redirect()->route('dashboard.offices.index');
 
         } // end of try & catch

@@ -117,7 +117,7 @@ class CategoryController extends Controller
             return view('dashboard.categories.edit', compact('category'));
 
         } catch (\Exception $exception) {
-            session()->flash('error', 'Please Contact Admin');
+            session()->flash('error', 'Please Contact Admin' . $exception);
             return redirect()->route('dashboard.categories.index');
 
         } // end of try & catch
@@ -175,7 +175,7 @@ class CategoryController extends Controller
 
         } catch (\Exception $exception) {
             DB::rollback();
-            session()->flash('error', 'Please Contact Admin');
+            session()->flash('error', 'Please Contact Admin' . $exception);
             return redirect()->route('dashboard.categories.index');
 
         } // end of try & catch

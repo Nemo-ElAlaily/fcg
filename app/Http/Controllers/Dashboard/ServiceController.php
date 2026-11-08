@@ -121,7 +121,7 @@ class ServiceController extends Controller
             return view('dashboard.services.edit', compact('service'));
 
         } catch (\Exception $exception) {
-            session()->flash('error', 'Please Contact Admin');
+            session()->flash('error', 'Please Contact Admin' . $exception);
             return redirect()->route('dashboard.services.index');
 
         } // end of try & catch
@@ -183,7 +183,7 @@ class ServiceController extends Controller
 
         } catch (\Exception $exception) {
             DB::rollback();
-            session()->flash('error', 'Please Contact Admin');
+            session()->flash('error', 'Please Contact Admin' . $exception);
             return redirect()->route('dashboard.services.index');
 
         } // end of try & catch

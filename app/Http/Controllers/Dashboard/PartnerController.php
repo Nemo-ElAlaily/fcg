@@ -116,7 +116,7 @@ class PartnerController extends Controller
             return view('dashboard.partners.edit', compact(['partner', 'categories']));
 
         } catch (\Exception $exception) {
-            session()->flash('error', 'Please Contact Admin');
+            session()->flash('error', 'Please Contact Admin' . $exception);
             return redirect()->route('dashboard.partners.index');
 
         } // end of try & catch
@@ -170,7 +170,7 @@ class PartnerController extends Controller
 
         } catch (\Exception $exception) {
             DB::rollback();
-            session()->flash('error', 'Please Contact Admin');
+            session()->flash('error', 'Please Contact Admin' . $exception);
             return redirect()->route('dashboard.partners.index');
 
         } // end of try & catch
