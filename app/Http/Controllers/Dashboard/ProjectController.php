@@ -105,6 +105,7 @@ class ProjectController extends Controller
             return redirect()->route('dashboard.projects.index');
 
         } catch (\Exception $exception) {
+            report($exception);
             DB::rollback();
             session()->flash('error', 'Please Contact System Admin');
             return redirect()->route('dashboard.projects.index');
@@ -182,7 +183,7 @@ class ProjectController extends Controller
 
             DB::beginTransaction();
 
-            if($request -> file('image')){
+            if($request -> hasFile('image')){
                 if ($project -> image != 'default.png') {
                     Storage::disk('public_uploads')->delete('/projects/' . $project -> image);
                 } // end of inner if
@@ -232,6 +233,7 @@ class ProjectController extends Controller
             return redirect()->route('dashboard.projects.index');
 
         } catch (\Exception $exception) {
+            report($exception);
             DB::rollback();
             session()->flash('error', 'Please Contact Admin');
             return redirect()->route('dashboard.projects.index');
@@ -251,6 +253,10 @@ class ProjectController extends Controller
 
             $project = Project::find($id);
 
+            if(!$project){
+                session()->flash('error', 'Does not Exist');
+                return redirect()->route('dashboard.projects.index');
+            }
 
             if($project -> image != 'default.png'){
                 Storage::disk('public_uploads')->delete('/projects/' . $project ->image);
@@ -260,10 +266,10 @@ class ProjectController extends Controller
                 foreach (json_decode($project->gallery, true) as $index => $item) {
                     Storage::disk('public_uploads')->delete('/projects/gallery/' . $item);
                 }
-                $project->update(['gallery' => null]);
             } // end of inner if
 
-            $project -> delete();
+            $project->services()->detach();
+            $project -> forceDelete();
             event(new \App\Events\CacheInvalidated([
                 config('cache_keys.project_categories'),
                 config('cache_keys.front.awarded_projects'),
@@ -275,7 +281,7 @@ class ProjectController extends Controller
             return redirect()->route('dashboard.projects.index');
 
         } catch (\Exception $exception) {
-
+            report($exception);
             session()->flash('error', 'Something Went Wrong, Please Contact Administrator');
             return redirect()->route('dashboard.projects.index');
 

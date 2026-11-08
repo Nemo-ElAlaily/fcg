@@ -14,7 +14,11 @@ class Project extends Model
 {
     use SoftDeletes;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'title', 'description', 'category_id', 'client_id', 'area', 'location',
+        'amenities', 'extra_info', 'image', 'gallery', 'is_awarded', 'add_to_home',
+        'is_active', 'slug',
+    ];
 
     public function getTitleAttribute($value)
     {

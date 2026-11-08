@@ -24,7 +24,13 @@ class StoreProjectRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title'       => ['required', 'string', 'max:255'],
+            'category_id' => ['nullable', 'exists:categories,id'],
+            'client_id'   => ['nullable', 'exists:clients,id'],
+            'services'    => ['required', 'array'],
+            'services.*'  => ['exists:services,id'],
+            'image'       => ['nullable', 'image', 'max:20480'], // KB; rejects oversized/failed uploads cleanly
+            'gallery.*'   => ['nullable', 'image', 'max:20480'],
         ];
     }
 }
