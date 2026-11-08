@@ -116,7 +116,7 @@ class ClientController extends Controller
             return view('dashboard.clients.edit', compact('client'));
 
         } catch (\Exception $exception) {
-            session()->flash('error', 'Please Contact Admin' . $exception->getMessage());
+            session()->flash('error', 'Please Contact Admin: ' . $exception->getMessage());
             return redirect()->route('dashboard.clients.index');
 
         } // end of try & catch
@@ -173,7 +173,7 @@ class ClientController extends Controller
 
         } catch (\Exception $exception) {
             DB::rollback();
-            session()->flash('error', 'Please Contact Admin' . $exception->getMessage());
+            session()->flash('error', 'Please Contact Admin: ' . $exception->getMessage());
             return redirect()->route('dashboard.clients.index');
 
         } // end of try & catch

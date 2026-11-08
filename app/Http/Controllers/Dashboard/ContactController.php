@@ -32,7 +32,7 @@ class ContactController extends Controller
             return view('dashboard.contact.show', compact('form'));
 
         } catch (\Exception $exception) {
-            session()->flash('error', 'Please Contact Admin' . $exception->getMessage());
+            session()->flash('error', 'Please Contact Admin: ' . $exception->getMessage());
             return redirect()->route('dashboard.contact.index');
         } // end of try & catch
     }
@@ -57,7 +57,7 @@ class ContactController extends Controller
             return redirect()->route('dashboard.contact.index');
 
         } catch (\Exception $exception) {
-            session()->flash('error', 'Please Contact Admin' . $exception->getMessage());
+            session()->flash('error', 'Please Contact Admin: ' . $exception->getMessage());
             return redirect()->route('dashboard.contact.index');
         } // end of try & catch
     }

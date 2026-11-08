@@ -120,12 +120,14 @@ class OptimizeImage implements ShouldQueue
             }
 
             if ($saved) {
+                $oldSize = filesize($backup);
+                $newSize = filesize($this->imagePath);
                 unlink($backup);
                 Log::info('Image optimized successfully', [
                     'path' => $this->imagePath,
-                    'old_size' => filesize($backup),
-                    'new_size' => filesize($this->imagePath),
-                    'savings' => round((1 - filesize($this->imagePath) / filesize($backup)) * 100, 2) . '%'
+                    'old_size' => $oldSize,
+                    'new_size' => $newSize,
+                    'savings' => $oldSize ? round((1 - $newSize / $oldSize) * 100, 2) . '%' : 'n/a'
                 ]);
             } else {
                 rename($backup, $this->imagePath);

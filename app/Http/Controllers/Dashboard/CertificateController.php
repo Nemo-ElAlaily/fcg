@@ -113,7 +113,7 @@ class CertificateController extends Controller
             return view('dashboard.certificates.edit', compact('certificate'));
 
         } catch (\Exception $exception) {
-            session()->flash('error', 'Please Contact Admin' . $exception->getMessage());
+            session()->flash('error', 'Please Contact Admin: ' . $exception->getMessage());
             return redirect()->route('dashboard.certificates.index');
 
         } // end of try & catch
@@ -167,7 +167,7 @@ class CertificateController extends Controller
 
         } catch (\Exception $exception) {
             DB::rollback();
-            session()->flash('error', 'Please Contact Admin' . $exception->getMessage());
+            session()->flash('error', 'Please Contact Admin: ' . $exception->getMessage());
             return redirect()->route('dashboard.certificates.index');
 
         } // end of try & catch
