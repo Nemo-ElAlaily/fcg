@@ -117,7 +117,7 @@ class BranchController extends Controller
             return view('dashboard.branches.edit', compact('branch'));
 
         } catch (\Exception $exception) {
-            session()->flash('error', 'Please Contact Admin' . $exception);
+            session()->flash('error', 'Please Contact Admin' . $exception->getMessage());
             return redirect()->route('dashboard.branches.index');
 
         } // end of try & catch
@@ -174,7 +174,7 @@ class BranchController extends Controller
 
         } catch (\Exception $exception) {
             DB::rollback();
-            session()->flash('error', 'Please Contact Admin' . $exception);
+            session()->flash('error', 'Please Contact Admin' . $exception->getMessage());
             return redirect()->route('dashboard.branches.index');
 
         } // end of try & catch

@@ -146,7 +146,7 @@ class ProjectController extends Controller
             return view('dashboard.projects.edit', compact(['project', 'categories', 'clients', 'services']));
 
         } catch (\Exception $exception) {
-            session()->flash('error', 'Please Contact Admin' . $exception);
+            session()->flash('error', 'Please Contact Admin' . $exception->getMessage());
             return redirect()->route('dashboard.projects.index');
 
         } // end of try & catch
@@ -240,7 +240,7 @@ class ProjectController extends Controller
         } catch (\Exception $exception) {
             report($exception);
             DB::rollback();
-            session()->flash('error', 'Please Contact Admin' . $exception);
+            session()->flash('error', 'Please Contact Admin' . $exception->getMessage());
             return redirect()->route('dashboard.projects.index');
 
         } // end of try & catch

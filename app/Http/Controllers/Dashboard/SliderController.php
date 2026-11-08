@@ -115,7 +115,7 @@ class SliderController extends Controller
             return view('dashboard.sliders.edit', compact('slider'));
 
         } catch (\Exception $exception) {
-            session()->flash('error', 'Please Contact Admin' . $exception);
+            session()->flash('error', 'Please Contact Admin' . $exception->getMessage());
             return redirect()->route('dashboard.sliders.index');
 
         } // end of try & catch
@@ -171,7 +171,7 @@ class SliderController extends Controller
 
         } catch (\Exception $exception) {
             DB::rollback();
-            session()->flash('error', 'Please Contact Admin' . $exception);
+            session()->flash('error', 'Please Contact Admin' . $exception->getMessage());
             return redirect()->route('dashboard.sliders.index');
 
         } // end of try & catch
