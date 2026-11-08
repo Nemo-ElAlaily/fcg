@@ -61,7 +61,7 @@
                         <select name="client_id" class="form-control">
                             <option value="all" disabled selected>All Clients</option>
                             @foreach ($clients as $client)
-                            <option value="{{ $client -> id }}" {{ $project->client->id === $client -> id ?  'selected' : ''}}>{{ $client -> name }}</option>
+                            <option value="{{ $client -> id }}" {{ $project->client && $project->client->id === $client -> id ?  'selected' : ''}}>{{ $client -> name }}</option>
                             @endforeach
                         </select>
                     </div>

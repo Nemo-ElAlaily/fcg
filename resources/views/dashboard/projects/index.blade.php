@@ -53,10 +53,6 @@
                         <td>{{ $project->title }}</td>
                         <td>{{ $project->getActive() }}</td>
                         <td>
-                            <a href="{{ route('dashboard.projects.show', $project->id) }}"
-                                class="btn btn-square btn-info btn-sm">
-                                <i class="fa fa-eye fa-lg text-lg"></i>
-                            </a>
                             <a href="{{ route('dashboard.projects.edit', $project->id) }}"
                                 class="btn btn-square btn-sm btn-success"><i class="fa fa-pen"></i></a>
                             <form action="{{ route('dashboard.projects.destroy', $project->id) }}" method="post"

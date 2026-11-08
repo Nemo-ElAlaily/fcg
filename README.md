@@ -1,70 +1,80 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# FCG — Company Portfolio & Dashboard
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A Laravel 8 website for a construction / engineering company: a public marketing site (projects, services, categories, clients, contact) backed by an authenticated admin dashboard for managing all of that content.
 
-## About Laravel
+- **Framework:** Laravel 8 (PHP 8.2)
+- **Admin UI:** AdminLTE 3 + Bootstrap 5, built with Laravel Mix
+- **Rich text:** Summernote (WYSIWYG), sanitized server-side with HTMLPurifier
+- **Background work:** queued image optimization (`database` queue)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Requirements
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- PHP 8.2 (`ext-gd` for image optimization)
+- Composer
+- Node.js + npm
+- MySQL 5.7+ / MariaDB
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Setup
 
-## Learning Laravel
+```bash
+git clone <repo> && cd fcg
+composer install
+npm install
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+cp .env.example .env          # then edit DB_* and set QUEUE_CONNECTION=database
+php artisan key:generate
+php artisan migrate            # add --seed if seeders are present
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-## Testing
+npm run dev                    # build front-end assets (or `npm run watch`)
+php artisan serve
+```
 
-Run the project tests with the repository's configured suppression for deprecated notices:
+Uploaded images are written to `public/uploads/...` (the `public_uploads` disk), so make sure that directory is writable. Create it — and `storage/` — with write permissions for the web-server user.
 
-    composer test
+### Background queue
 
-This uses PHP CLI options that filter out `E_DEPRECATED` and `E_USER_DEPRECATED`, which keeps the vendor deprecation noise out of the test output.
-## Laravel Sponsors
+Image uploads are optimized asynchronously on the `images` queue. The configured queue driver is `database`, so a worker must be running or new/updated images won't be processed:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```bash
+php artisan queue:table && php artisan migrate   # once, if the jobs table doesn't exist
+php artisan queue:work --queue=images,default
+```
 
-### Premium Partners
+## Development
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+| Task | Command |
+|------|---------|
+| Build assets (dev) | `npm run dev` |
+| Rebuild on change | `npm run watch` |
+| Build for production | `npm run prod` |
+| Run the app | `php artisan serve` |
+| Run the queue worker | `php artisan queue:work --queue=images,default` |
 
-## Contributing
+### Testing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+composer test                                        # full suite
+./vendor/bin/phpunit --filter test_method_name       # a single test
+```
 
-## Code of Conduct
+`composer test` wraps PHPUnit with CLI flags that suppress `E_DEPRECATED` / `E_USER_DEPRECATED` so vendor deprecation notices stay out of the output. Tests run with `APP_ENV=testing` (array cache/session, sync queue — see `phpunit.xml`).
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+> Note: the in-memory SQLite lines in `phpunit.xml` are commented out, so tests run against whatever database your environment is configured with. Point it at a disposable database before running them.
 
-## Security Vulnerabilities
+### After deploying
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+composer deploy:cache          # optimize:clear + config/route/view cache
+```
 
-## License
+## How it fits together
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- **Routing is split by area.** `routes/web.php` (public, `FrontController`) and `routes/dashboard.php` (admin CRUD under `/dashboard`, guarded by `auth`) are loaded with separate controller namespaces in `RouteServiceProvider`.
+
+- **Heavy caching on the read path.** Every cache key and the 24h TTL live in `config/cache_keys.php`. The front-end caches its expensive queries, and `AppServiceProvider` caches site-wide data (settings, navigation categories, HQ branch) and shares it with every view. Admin writes dispatch a `CacheInvalidated` event that clears the affected keys, so edits show up immediately.
+
+- **ModSecurity WAF workaround for rich text.** The host's WAF rejects WYSIWYG HTML as XSS before Laravel sees the request. The dashboard Base64-encodes those fields on submit; the `DecodeBase64Fields` middleware decodes them back, and controllers then sanitize the HTML with HTMLPurifier (allow-list in `config/purifier.php`).
+
+- **Security headers / CSP** are set globally by the `AddSecurityHeaders` middleware. If you add a new CDN, font, or embed to a view, update the matching CSP source list there or the browser will block it.
+
+- **Each admin resource** follows the same shape: Controller + `Store*`/`Update*` form requests + Policy + Factory + Blade views under `resources/views/dashboard/<resource>/`.

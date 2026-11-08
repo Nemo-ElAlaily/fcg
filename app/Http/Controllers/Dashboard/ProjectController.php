@@ -68,7 +68,6 @@ class ProjectController extends Controller
 
             DB::beginTransaction();
 
-            $image_path = "";
             if($request->hasFile('image')){
                 $image = uploadImage('uploads/projects/',  $request -> image);
                 OptimizeImage::dispatch(public_path('uploads/projects/' . $image))->onQueue('images');
@@ -183,9 +182,11 @@ class ProjectController extends Controller
 
             DB::beginTransaction();
 
+            $old_image = null;
             if($request -> hasFile('image')){
+                // Delete the old file only after commit; a rollback must not leave the row pointing at a deleted file.
                 if ($project -> image != 'default.png') {
-                    Storage::disk('public_uploads')->delete('/projects/' . $project -> image);
+                    $old_image = $project -> image;
                 } // end of inner if
                 $image_path = uploadImage('uploads/projects/',  $request -> image);
                 OptimizeImage::dispatch(public_path('uploads/projects/' . $image_path))->onQueue('images');
@@ -228,6 +229,10 @@ class ProjectController extends Controller
             ]));
 
             DB::commit();
+
+            if ($old_image) {
+                Storage::disk('public_uploads')->delete('/projects/' . $old_image);
+            }
 
             session()->flash('success', 'Updated Successfully');
             return redirect()->route('dashboard.projects.index');
