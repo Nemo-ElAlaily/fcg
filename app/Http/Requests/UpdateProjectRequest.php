@@ -34,7 +34,7 @@ class UpdateProjectRequest extends FormRequest
     {
         return [
             'title'       => ['required', 'string', 'max:255'],
-            'slug'        => ['required', Rule::unique('projects', 'slug')->ignore($this->route('project'))],
+            'slug'        => ['required', Rule::unique('projects', 'slug')->ignore($this->route('project'))->whereNull('deleted_at')],
             'category_id' => ['nullable', 'exists:categories,id'],
             'client_id'   => ['nullable', 'exists:clients,id'],
             'services'    => ['required', 'array'],

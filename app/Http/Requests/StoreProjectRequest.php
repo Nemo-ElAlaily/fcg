@@ -34,7 +34,7 @@ class StoreProjectRequest extends FormRequest
     {
         return [
             'title'       => ['required', 'string', 'max:255'],
-            'slug'        => ['required', Rule::unique('projects', 'slug')],
+            'slug'        => ['required', Rule::unique('projects', 'slug')->whereNull('deleted_at')],
             'category_id' => ['nullable', 'exists:categories,id'],
             'client_id'   => ['nullable', 'exists:clients,id'],
             'services'    => ['required', 'array'],
